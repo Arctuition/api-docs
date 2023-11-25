@@ -5,7 +5,7 @@ title: ArcSite API – Easy-to-use CAD App for Sales and Inspection Professional
 #   - shell
 
 toc_footers:
-  - <a href='https://user.arcsite.com/' class="cta">Get Started →</a>
+  - <a href='https://user.arcsiteapp.com/' class="cta">Get Started →</a>
 
 includes:
   - introduction
