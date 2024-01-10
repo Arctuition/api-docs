@@ -42,7 +42,8 @@ curl "https://api.arcsite.com/v1/projects" \
       "name": "Wang",
       "email": "h@arcsite.com",
       "phone": "122122-121"
-    }
+    },
+    "tags": ["tag1", "tag2"]
   }
 ]
 ```
@@ -94,7 +95,8 @@ curl -X POST 'https://api.arcsite.com/v1/projects' \
         "name": "Wang",
         "email": "h@arcsite.com",
         "phone": "122122-121"
-    }
+    },
+    "tags": ["tag1", "tag2"]
 }'
 ```
 
@@ -132,7 +134,8 @@ curl -X POST 'https://api.arcsite.com/v1/projects' \
     "name": "Wang",
     "email": "dev@arctuition.com",
     "phone": "122112"
-  }
+  },
+  "tags": ["tag1", "tag2"]
 }
 ```
 
@@ -232,7 +235,8 @@ curl -X PATCH 'https://api.arcsite.com/v1/projects/<ID>' \
         "name": "Wang",
         "email": "h@arcsite.com",
         "phone": "122122-121"
-    }
+    },
+    "tags": ["tag1", "tag2"]
 }'
 ```
 
@@ -245,16 +249,21 @@ This endpoint updates a project.
 ### Parameters
 
 | Parameter          | Type     | Description                                    |
-| ------------------ | -------- | ---------------------------------------------- |
+| ------------------ | -------- |------------------------------------------------|
 | name               | String   | (required) Name of the project                 |
 | operator           | String   | (required) Who updates the project             |
 | customer           | Customer | (optional) Customer profile of the project     |
 | job_number         | String   | (optional) Job number of the project           |
 | work_site_addreess | Address  | (optional) Worksite address of the project     |
 | sales_rep          | SalesRep | (optional) Sales Representative of the project |
+| tags               | List[String] | (optional) Tags for this project               |
 
 <aside class='notice'>
 <code>operator</code> must be a valid ArcSite username belongs to same organization.
+</aside>
+
+<aside class='notice'>
+If <code>tags</code> is provided, the tags of the project will be replaced by the new provided tags.
 </aside>
 
 ## Get Project
@@ -298,7 +307,8 @@ curl "https://api.arcsite.com/v1/projects/<ID>" \
     "name": "Wang",
     "email": "h@arcsite.com",
     "phone": "122122-121"
-  }
+  },
+  "tags": ["tag1", "tag2"]
 }
 ```
 

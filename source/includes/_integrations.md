@@ -209,7 +209,11 @@ curl -X POST 'https://api.arcsite.com/v1/i360/associate_project' \
     "name": "Wang",
     "email": "dev@arctuition.com",
     "phone": "122112"
-  }
+  },
+  "tags": [
+    "tag1",
+    "tag2"
+  ]
 }
 ```
 
@@ -418,7 +422,11 @@ curl -X POST 'https://api.arcsite.com/v1/zoho_crm/associate_project' \
     "name": "Wang",
     "email": "dev@arctuition.com",
     "phone": "122112"
-  }
+  },
+  "tags": [
+    "tag1",
+    "tag2"
+  ]
 }
 ```
 
@@ -666,7 +674,11 @@ curl -X POST 'https://api.arcsite.com/v1/salesforce/associate_project' \
     "name": "Wang",
     "email": "dev@arctuition.com",
     "phone": "122112"
-  }
+  },
+  "tags": [
+    "tag1",
+    "tag2"
+  ]
 }
 ```
 
