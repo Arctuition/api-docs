@@ -1,0 +1,2530 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>ArcSite API – Easy-to-use CAD App for Sales and Inspection Professionals</title>
+    <link href="images/favicon-e7b35120.ico" rel="icon" type="image/ico" />
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .nn {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .nl {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .ni {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .bp {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .vg {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .vi {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .w {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+  background-color: #272822;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen-b43cc251.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-0bf43469.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-c15a6b1e.js"></script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P3GKRQJ');</script>
+    <!-- End Google Tag Manager -->
+
+  </head>
+
+  <body class="index" data-languages="[]">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P3GKRQJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <a href="https://user.arcsiteapp.com">
+        <img src="images/logo-b8e852c7.png" class="logo" alt="" />
+      </a>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#pagination" class="toc-h1 toc-link" data-title="Pagination">Pagination</a>
+          </li>
+          <li>
+            <a href="#projects" class="toc-h1 toc-link" data-title="Projects">Projects</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-projects" class="toc-h2 toc-link" data-title="Query projects">Query projects</a>
+                  </li>
+                  <li>
+                    <a href="#create-project" class="toc-h2 toc-link" data-title="Create Project">Create Project</a>
+                  </li>
+                  <li>
+                    <a href="#update-project" class="toc-h2 toc-link" data-title="Update Project">Update Project</a>
+                  </li>
+                  <li>
+                    <a href="#get-project" class="toc-h2 toc-link" data-title="Get Project">Get Project</a>
+                  </li>
+                  <li>
+                    <a href="#add-project-collaborators" class="toc-h2 toc-link" data-title="Add Project Collaborators">Add Project Collaborators</a>
+                  </li>
+                  <li>
+                    <a href="#get-project-drawings" class="toc-h2 toc-link" data-title="Get Project Drawings">Get Project Drawings</a>
+                  </li>
+                  <li>
+                    <a href="#import-pdf" class="toc-h2 toc-link" data-title="Import PDF">Import PDF</a>
+                  </li>
+                  <li>
+                    <a href="#archive-project" class="toc-h2 toc-link" data-title="Archive Project">Archive Project</a>
+                  </li>
+                  <li>
+                    <a href="#unarchive-project" class="toc-h2 toc-link" data-title="Unarchive Project">Unarchive Project</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#drawings" class="toc-h1 toc-link" data-title="Drawings">Drawings</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-drawing" class="toc-h2 toc-link" data-title="Get Drawing">Get Drawing</a>
+                  </li>
+                  <li>
+                    <a href="#get-line-items" class="toc-h2 toc-link" data-title="Get Line items">Get Line items</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#products" class="toc-h1 toc-link" data-title="Products">Products</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-products" class="toc-h2 toc-link" data-title="Query products">Query products</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#proposals" class="toc-h1 toc-link" data-title="Proposals">Proposals</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-proposal-templates" class="toc-h2 toc-link" data-title="Query Proposal Templates">Query Proposal Templates</a>
+                  </li>
+                  <li>
+                    <a href="#export-proposal-pdf" class="toc-h2 toc-link" data-title="Export Proposal PDF">Export Proposal PDF</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#built-in-retries" class="toc-h2 toc-link" data-title="Built-in retries">Built-in retries</a>
+                  </li>
+                  <li>
+                    <a href="#project-created" class="toc-h2 toc-link" data-title="Project Created">Project Created</a>
+                  </li>
+                  <li>
+                    <a href="#drawing-created" class="toc-h2 toc-link" data-title="Drawing Created">Drawing Created</a>
+                  </li>
+                  <li>
+                    <a href="#drawing-updated" class="toc-h2 toc-link" data-title="Drawing Updated">Drawing Updated</a>
+                  </li>
+                  <li>
+                    <a href="#proposal-pdf-signed" class="toc-h2 toc-link" data-title="Proposal PDF Signed">Proposal PDF Signed</a>
+                  </li>
+                  <li>
+                    <a href="#proposal-sent" class="toc-h2 toc-link" data-title="Proposal Sent">Proposal Sent</a>
+                  </li>
+                  <li>
+                    <a href="#proposal-approved" class="toc-h2 toc-link" data-title="Proposal Approved">Proposal Approved</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+          <li>
+            <a href="#integrations" class="toc-h1 toc-link" data-title="Integrations">Integrations</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#improveit360-integration" class="toc-h2 toc-link" data-title="Improveit360 Integration">Improveit360 Integration</a>
+                  </li>
+                  <li>
+                    <a href="#zoho-crm-integration" class="toc-h2 toc-link" data-title="Zoho CRM Integration">Zoho CRM Integration</a>
+                  </li>
+                  <li>
+                    <a href="#salesforce-integration" class="toc-h2 toc-link" data-title="Salesforce Integration">Salesforce Integration</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://user.arcsite.com/' class="cta">Get Started →</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<blockquote>
+<p>Base url</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>https://api.arcsite.com/v1
+</code></pre></div>
+<p>Welcome to the ArcSite API 👋</p>
+
+<p>The ArcSite API is organized around <a href="https://en.wikipedia.org/wiki/Representational_State_Transfer">REST</a>. Our API has predictable resource-oriented URLs, accepts <a href="http://www.json.org/">JSON-encoded</a> request bodies, returns <a href="http://www.json.org/">JSON-encoded</a> responses, and uses standard HTTP response codes, authentication, and verbs.</p>
+<h1 id='authentication'>Authentication</h1>
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"https://api.arcsite.com/v1/projects"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer your_api_token"</span>
+</code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>your_api_token</code> with your API token.</p>
+</blockquote>
+
+<p>The ArcSite API uses API tokens to authenticate requests. You can view and manage your API tokens by visiting the <a href="https://user.arcsiteapp.com#/admin">the ArcSite web UI</a>..</p>
+
+<p>Authentication to the API is performed via <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization">HTTP Authorization Header</a>.</p>
+
+<p>All API requests must be made over <a href="https://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a>. Calls made over plain HTTP will fail. API requests without authenciation will also fail.</p>
+
+<p><code>Authorization: Bearer **your_api_token_here**</code></p>
+
+<aside class="notice">
+You must replace <code>your_api_token_here</code> with your API token.
+</aside>
+<h1 id='pagination'>Pagination</h1>
+<p>All list operations will be paginated in similar fashion as the GitHub API. In most cases we will paginate requests returning more than 100 results. You can control pagination with the page and per_page parameters. Pages start at 1 and the first page will be returned if no page is specified.</p>
+
+<aside class='notice'>
+Max <code>per_page</code> is 100.
+</aside>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>per_page</td>
+<td>Integer</td>
+<td>query</td>
+<td>The total number of objects that can be returned. Defaults to 10.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Integer</td>
+<td>query</td>
+<td>The current page offset. Increasing this number will multiply limit. Defaults to 1.</td>
+</tr>
+</tbody></table>
+<h1 id='projects'>Projects</h1><h2 id='query-projects'>Query projects</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/projects"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">36029621652695040</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project 4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T04:19:23"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T04:19:23"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"job_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"144111"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jack"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1441"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"second_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1122"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c@arcsite.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"second_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s@arcsite.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"work_site_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h@arcsite.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122122-121"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Returns a list of projects your organization. The projects are returned in sorted order, with the most recent created project appearing first.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/projects</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>query</td>
+<td>Request a specific page</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>query</td>
+<td>Page size</td>
+</tr>
+</tbody></table>
+<h2 id='create-project'>Create Project</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/projects'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+    "name":"hahaa",
+    "job_number": "144111",
+    "customer": {
+        "name": "Jack",
+        "phone": "1441",
+        "second_phone": "1122",
+        "email": "c@arcsite.com",
+        "second_email": "s@arcsite.com",
+        "address": {
+            "street": "street",
+            "city": "city",
+            "county": "county",
+            "state": "state",
+            "zip_code": "300433"
+        }
+    },
+    "work_site_address": {
+        "street": "street",
+        "city": "city",
+        "county": "county",
+        "state": "state",
+        "zip_code": "300433"
+    },
+    "sales_rep": {
+        "name": "Wang",
+        "email": "h@arcsite.com",
+        "phone": "122122-121"
+    }
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621653386360"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nac"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T03:31:39"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T03:31:39"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"job_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heeloo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200544"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"work_site_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint creates a new project.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/projects</code></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) Name of the project</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>String</td>
+<td>(required) Owner of the project</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>Customer</td>
+<td>(optional) Customer profile of the project</td>
+</tr>
+<tr>
+<td>job_number</td>
+<td>String</td>
+<td>(optional) Job number of the project</td>
+</tr>
+<tr>
+<td>work_site_addreess</td>
+<td>Address</td>
+<td>(optional) Worksite address of the project</td>
+</tr>
+<tr>
+<td>sales_rep</td>
+<td>SalesRep</td>
+<td>(optional) Sales Representative of the project</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>List[String]</td>
+<td>(optional) Tags added to this project</td>
+</tr>
+</tbody></table>
+
+<aside class='notice'>
+<code>owner</code> must be a valid ArcSite username belongs to same organization.
+</aside>
+<h3 id='project-integrations'>Project Integrations</h3>
+<p>ArcSite supports integration with various external platforms. Once Project creation is complete, you can use the standard integration solutions we provide for different platforms to integrate your Project. After integration is completed, your Project will gain additional functionalities to support data synchronization and interactions with third-party platforms. For specific details, you can visit the <a href="#integrations">integration module</a> of OpenAPI.</p>
+<h3 id='project-name-rule'>Project Name Rule</h3>
+<ol>
+<li>Project name must be unique across the same organization.</li>
+<li>Project name cannot contain any of the following characters: <code>:</code> <code>/</code> <code>\</code>.</li>
+<li>Project name cannot starts with <code>.</code></li>
+<li>Project name must be less than or equal to 200 characters.</li>
+</ol>
+<h3 id='customer'>Customer</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(optional) Customer name</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>(optional) Customer phone</td>
+</tr>
+<tr>
+<td>second_phone</td>
+<td>String</td>
+<td>(optional) Customer secondary phone</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>(optional) Customer email</td>
+</tr>
+<tr>
+<td>second_email</td>
+<td>String</td>
+<td>(optional) Customer secondary email</td>
+</tr>
+<tr>
+<td>address</td>
+<td>Address</td>
+<td>(optional) Customer address</td>
+</tr>
+</tbody></table>
+<h3 id='address'>Address</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>street</td>
+<td>String</td>
+<td>(optional) Street name</td>
+</tr>
+<tr>
+<td>city</td>
+<td>String</td>
+<td>(optional) City name</td>
+</tr>
+<tr>
+<td>county</td>
+<td>String</td>
+<td>(optional) County name</td>
+</tr>
+<tr>
+<td>State</td>
+<td>String</td>
+<td>(optional) State name</td>
+</tr>
+<tr>
+<td>zip_code</td>
+<td>String</td>
+<td>(optional) Zip Code</td>
+</tr>
+</tbody></table>
+<h3 id='salerep'>SaleRep</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(optional) Customer name</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>(optional) Customer email</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>(optional) Customer phone</td>
+</tr>
+</tbody></table>
+<h2 id='update-project'>Update Project</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> PATCH <span class="s1">'https://api.arcsite.com/v1/projects/&lt;ID&gt;'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+    "name":"hahaa",
+    "job_number": "144111",
+    "customer": {
+        "name": "Jack",
+        "phone": "1441",
+        "second_phone": "1122",
+        "email": "c@arcsite.com",
+        "second_email": "s@arcsite.com",
+        "address": {
+            "street": "street",
+            "city": "city",
+            "county": "county",
+            "state": "state",
+            "zip_code": "300433"
+        }
+    },
+    "work_site_address": {
+        "street": "street",
+        "city": "city",
+        "county": "county",
+        "state": "state",
+        "zip_code": "300433"
+    },
+    "sales_rep": {
+        "name": "Wang",
+        "email": "h@arcsite.com",
+        "phone": "122122-121"
+    }
+}'</span>
+</code></pre></div>
+<p>This endpoint updates a project.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>PATCH https://api.arcsite.com/v1/projects/&lt;id&gt;</code></p>
+<h3 id='parameters-2'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) Name of the project</td>
+</tr>
+<tr>
+<td>operator</td>
+<td>String</td>
+<td>(required) Who updates the project</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>Customer</td>
+<td>(optional) Customer profile of the project</td>
+</tr>
+<tr>
+<td>job_number</td>
+<td>String</td>
+<td>(optional) Job number of the project</td>
+</tr>
+<tr>
+<td>work_site_addreess</td>
+<td>Address</td>
+<td>(optional) Worksite address of the project</td>
+</tr>
+<tr>
+<td>sales_rep</td>
+<td>SalesRep</td>
+<td>(optional) Sales Representative of the project</td>
+</tr>
+</tbody></table>
+
+<aside class='notice'>
+<code>operator</code> must be a valid ArcSite username belongs to same organization.
+</aside>
+<h2 id='get-project'>Get Project</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/projects/&lt;ID&gt;"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">36029621652695040</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project 4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T04:19:23"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T04:19:23"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"job_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"144111"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jack"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1441"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1122"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c@arcsite.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s@arcsite.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"work_site_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h@arcsite.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122122-121"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Returns project of your organization by project id,</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/projects/&lt;id&gt;</code></p>
+<h2 id='add-project-collaborators'>Add Project Collaborators</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/projects/&lt;ID&gt;/add_collaborators'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+    "collaborators": [
+        {"email": "dev@arctuition.com", "role": "PROJECT_ADMIN"},
+        {"email": "haowe12@arctui1tion.com", "role": "PROJECT_ADMIN"}
+    ]
+  }
+</span></code></pre></div>
+<p>This endpoint adds collaborators to a project. Successfully added collaborators are in <code>success_items</code> field of the response and failed items are in the <code>fail_items</code>. This API is idempotent, so the same collaborator can be added multiple times.</p>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"success_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PROJECT_ADMIN"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"fail_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"haowe12@arctui1tion.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PROJECT_ADMIN"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"haowe12@arctui1tion.com has not been added to your company account yet."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/projects/&lt;id&gt;/add_collaborators</code></p>
+<h3 id='parameters-3'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>collaborators</td>
+<td>List[<a href="#collaborator">Collaborator</a>]</td>
+<td>(required) collaborators to add</td>
+</tr>
+</tbody></table>
+<h3 id='collaborator'>Collaborator</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>(required)</td>
+</tr>
+<tr>
+<td>role</td>
+<td><a href="#role">Role</a></td>
+<td>(required) Project Role</td>
+</tr>
+</tbody></table>
+<h3 id='role'>Role</h3>
+<ol>
+<li><code>PROJECT_ADMIN</code> - Project Admins have full access to the project.</li>
+<li><code>PROJECT_COLLABORATOR</code> - Can create, edit and delete drawings. This role cannot delete project or manage collaborators..</li>
+<li><code>PROJECT_VIEWER</code> - Project Viewers can only view drawings.</li>
+</ol>
+
+<aside class='notice'>
+The collaborator' ArcSite account must be created and add to your organization before adding to the project coloaborator.
+</aside>
+<h2 id='get-project-drawings'>Get Project Drawings</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/projects/&lt;ID&gt;/drawings"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621653385418"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"drawing 1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621653385407"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"drawing 2"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Returns drawings of a project.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/projects/&lt;id&gt;/drawings</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>query</td>
+<td>Request a specific page</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>query</td>
+<td>Page size</td>
+</tr>
+</tbody></table>
+
+<p>Returns drawings of a project.</p>
+<h2 id='import-pdf'>Import PDF</h2>
+<p>Your uploaded PDF will be split to multiple pages, one ArcSite drawing will be created for each page.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># upload a local file.</span>
+curl <span class="nt">--location</span> <span class="s1">'https://api.arcsite.com/v1/projects/&lt;project_id&gt;/import_pdf'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+<span class="nt">--form</span> <span class="s1">'file=@"/&lt;file_path&gt;/&lt;file_name.pdf&gt;"'</span>
+
+<span class="c"># or pass the file url directly.</span>
+
+curl <span class="nt">--location</span> <span class="s1">'https://api.arcsite.com/v1/projects/&lt;project_id&gt;/import_pdf'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+<span class="nt">--form</span> <span class="s1">'file_url="https://file_url.pdf"'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"drawings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621653385418"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621653385407"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/projects/&lt;project_id&gt;/import_pdf</code></p>
+<h3 id='request-payload'>Request Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file</td>
+<td>Body</td>
+<td>The binary pdf file to be uploaded</td>
+</tr>
+<tr>
+<td>file_url</td>
+<td>Body</td>
+<td>The URL of a public accessable pdf file link</td>
+</tr>
+</tbody></table>
+
+<p>Returns list of drawings created.</p>
+
+<aside class='notice'>
+Request content type must be <code>multipart/form-data</code> to upload pdf file.
+Either <code>file</code> or <code>file_url</code> must be provided, but not both.
+</aside>
+<h2 id='archive-project'>Archive Project</h2>
+<p>This endpoint archives a project by project id. The archived project will be hidden from the project list. You can use <a href="#unarchive-project">Unarchive Project</a> to unarchive the project.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/projects/&lt;ID&gt;/archive'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/projects/&lt;ID&gt;/archive</code></p>
+<h2 id='unarchive-project'>Unarchive Project</h2>
+<p>This endpoint unarchive a project by project id.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/projects/&lt;ID&gt;/unarchive'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/projects/&lt;ID&gt;/unarchive</code></p>
+<h1 id='drawings'>Drawings</h1><h2 id='get-drawing'>Get Drawing</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621652695015"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"28123123123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drawing_1_Pre-Survey_Proposal (1)-page_03_test-page_02"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pdf_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d1umxpetlubu85.cloudfront.net/36029346774787878/36029621652694930/40c01b5a-75d5-11ec-8ea1-0242ac170007/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02.pdf?Expires=1642318765&amp;Signature=Lh9XnGwEtt5DdZx4GAdp7J5qbJArHKS~lY39y2OjDsSRzpXPuv6H4x0RxfqYGi6gqrZxv56GMn2MiQXN9cM2VotAMpGWBsjm4cabdpLSXZNuhtqJ4k9~VBr3EyhgGIlIQk2HUlb-~McPlfbGNrbGbzj3P5mpEZ0Ce00OG0WUs3eolPEom9s4v7QNwWRrsyltFvEhZ~T4S8tRDCjyHa50al6GsNCLb5sBX7pW~oem2~GKGYj3a-kDuzCQiKLp4K7Ncc2njmDwVHThI9aSIlggbuejBa~XbWUf2WNgcbUq0~i0-e~yVN212~Qh7vHcXV4XFXQ-7k3zdxfLE8m9il5Ufg__&amp;Key-Pair-Id=APKAIZL6W5TJO2AK7DOQ"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"png_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d1umxpetlubu85.cloudfront.net/36029346774787878/36029621652694930/40c01b5a-75d5-11ec-8ea1-0242ac170007/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02.png"</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Returns drawing of your organization by project drawing id,</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>drawing_version_id</td>
+<td>Optional[String]</td>
+<td>query</td>
+<td>The ID of the drawing version</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the data of the specified version will be returned. If not, the data of the latest version will be returned by default.
+</aside>
+
+<aside class="notice">
+The returned urls will expire in 24 hours.
+</aside>
+
+<aside class="notice">
+The pdf could take some time(often less than 1 minute) to generate if the drawing contains location based photos, the <code>pdf_url</code> could be null before it has been generated.
+</aside>
+<h2 id='get-line-items'>Get Line items</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/line_items"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.26</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19923123"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">exist</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">custom</span><span class="w"> </span><span class="err">price</span><span class="w"> </span><span class="err">items</span><span class="w">
+      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sku1"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w">  </span><span class="err">not</span><span class="w"> </span><span class="err">exist</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">custom</span><span class="w"> </span><span class="err">price</span><span class="w"> </span><span class="err">items</span><span class="w">
+      </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.5</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w">   </span><span class="err">not</span><span class="w"> </span><span class="err">exist</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">custom</span><span class="w"> </span><span class="err">price</span><span class="w"> </span><span class="err">items</span><span class="w">
+      </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FT"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w">   </span><span class="err">not</span><span class="w"> </span><span class="err">exist</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">custom</span><span class="w"> </span><span class="err">price</span><span class="w"> </span><span class="err">items</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">32.57</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">128.98</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"subtotal"</span><span class="p">:</span><span class="w"> </span><span class="mf">131.24</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">-31.24</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"discount_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"discount reduce"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"markup"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"markup_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extra fee"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Get line items by drawing id.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;/line_items</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>drawing_version_id</td>
+<td>Optional[String]</td>
+<td>query</td>
+<td>The ID of the drawing version</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the drawing line items data of the specified version will be returned. If not, the data of the latest version will be returned by default.
+</aside>
+<h3 id='response-schema'>Response Schema</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>line_items</td>
+<td>List[LineItem]</td>
+<td>All product line items</td>
+</tr>
+<tr>
+<td>subtotal</td>
+<td>Number</td>
+<td>The subtotal of all items before discounts and markups</td>
+</tr>
+<tr>
+<td>discount</td>
+<td>Number</td>
+<td>The total amount of discount applied</td>
+</tr>
+<tr>
+<td>discount_description</td>
+<td>String</td>
+<td>Description or reason for the discount</td>
+</tr>
+<tr>
+<td>markup</td>
+<td>Number</td>
+<td>The total amount of markup added</td>
+</tr>
+<tr>
+<td>markup_description</td>
+<td>String</td>
+<td>Description or reason for the markup</td>
+</tr>
+<tr>
+<td>taxes</td>
+<td>List[TaxItem]</td>
+<td>All taxes applied</td>
+</tr>
+<tr>
+<td>drawing_version_id</td>
+<td>String</td>
+<td>The version id of the drawing</td>
+</tr>
+</tbody></table>
+<h3 id='lineitem'>LineItem</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the product</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>The quantity of the product</td>
+</tr>
+<tr>
+<td>total</td>
+<td>Number</td>
+<td>Item total after discounts and markup applied</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Number?</td>
+<td>Item total before discounts and markup applied; not provided for custom price items</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>String</td>
+<td>The stock keeping unit of the product; not provided for custom price items</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>String</td>
+<td>The unit of measurement for the product&#39;s quantity; not provided for custom price items</td>
+</tr>
+<tr>
+<td>product_id</td>
+<td>String</td>
+<td>The ID of the product; not provided for custom price items</td>
+</tr>
+</tbody></table>
+<h3 id='taxitem'>TaxItem</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the tax</td>
+</tr>
+<tr>
+<td>total</td>
+<td>Number</td>
+<td>The total amount of tax</td>
+</tr>
+</tbody></table>
+<h1 id='products'>Products</h1><h2 id='query-products'>Query products</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/products"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product 1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product 1 description"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Returns a list of products your organization. The products are returned in sorted order, with the most recent created product appearing first.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/products</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>query</td>
+<td>Request a specific page</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>query</td>
+<td>Page size</td>
+</tr>
+</tbody></table>
+<h1 id='proposals'>Proposals</h1><h2 id='query-proposal-templates'>Query Proposal Templates</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/proposal_templates"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621652695041"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Proposal Template 1"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Returns a list of proposal templates of your organization.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/proposal_templates</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>query</td>
+<td>Request a specific page</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>query</td>
+<td>Page size</td>
+</tr>
+</tbody></table>
+<h2 id='export-proposal-pdf'>Export Proposal PDF</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/export_proposal_pdf"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d1umxpetlubu85.cloudfront.net/36029346774973628/36029621653386370/36029621653386685/c6f62f3d-db06-42df-8138-91d80e792e5d/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02_test.pdf"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Export Proposal PDF by giving the proposal template id.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/export_proposal_pdf</code></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>template_id</td>
+<td>String</td>
+<td>(required) Template id from <a href="#query-proposal-templates">Query proposal templates</a></td>
+</tr>
+<tr>
+<td>drawing_id</td>
+<td>String</td>
+<td>(required) Drawing id</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The returned url will expire in 24 hours.
+</aside>
+<h1 id='webhooks'>Webhooks</h1>
+<p>Use incoming webhooks to get real-time updates.</p>
+
+<p>ArcSite uses webhooks to notify your application when an event happens in your organization. Webhooks are particularly useful for asynchronous events like new drawing created.</p>
+
+<p>A webhook enables ArcSite to push real-time notifications to your app. ArcSite uses HTTPS to send these notifications to your app as a JSON payload. You can then use these notifications to execute actions in your backend systems.</p>
+
+<p>You can create and manage your webhooks from <a href="https://user.arcsiteapp.com#/admin">the ArcSite web UI</a>.</p>
+
+<p>A of webhook payload contains both <em>event type</em> and <em>payload data</em>.</p>
+
+<blockquote>
+<p>Sample webhook payload</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project.created"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">36029621652695040</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project 4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T04:19:23"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T04:19:23"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"job_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"144111"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jack"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1441"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"second_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1122"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='built-in-retries'>Built-in retries</h2>
+<p>ArcSite webhooks have built-in retry methods for 3xx, 4xx, or 5xx response status codes. If ArcSite doesn’t quickly receive a 2xx response status code for an event, webhooks will retry the event until it receives a 2xx response or up to certain times.</p>
+<h2 id='project-created'>Project Created</h2>
+<p><code>project.created</code> Triggered when a project is created.</p>
+<h3 id='project-created-webhook-payload'>Project Created Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>(required) ID of the project</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) Name of the project</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>Customer</td>
+<td>(optional) Customer profile of the project</td>
+</tr>
+<tr>
+<td>job_number</td>
+<td>String</td>
+<td>(optional) Job number of the project</td>
+</tr>
+<tr>
+<td>work_site_addreess</td>
+<td>Address</td>
+<td>(optional) Worksite address of the project</td>
+</tr>
+<tr>
+<td>sales_rep</td>
+<td>SalesRep</td>
+<td>(optional) Sales Representative of the project</td>
+</tr>
+</tbody></table>
+<h2 id='drawing-created'>Drawing Created</h2>
+<p>The <code>drawing.created</code> webhook will be triggered when a drawing is created by uploading PDF files on the user site or manually uploading some newly created drawing to the cloud from the ArcSite App.</p>
+
+<aside class="notice">
+The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hours. They are not permanent links and should not be used in your system directly. You need to download the files from the urls for your future use.
+
+For drawing created from the user site by uploading PDF files, the <code>png_url</code> will be null.
+
+</aside>
+<h3 id='drawing-created-webhook-payload'>Drawing Created Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>(required) ID of the drawing</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>String</td>
+<td>(required) Project ID of the drawing</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) Name of the drawing</td>
+</tr>
+<tr>
+<td>pdf_url</td>
+<td>String</td>
+<td>(required) Download address of PDF format of the drawing</td>
+</tr>
+<tr>
+<td>png_url</td>
+<td>String</td>
+<td>Download address of PNG format of the drawing</td>
+</tr>
+</tbody></table>
+<h2 id='drawing-updated'>Drawing Updated</h2>
+<p>The <code>drawing.updated</code> webhook is triggered whenever a drawing is manually re-uploaded to the cloud from the ArcSite App after its initial creation.</p>
+
+<aside class="notice">
+The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hours. They are not permanent links and should not be used in your system directly. You need to download the files from the urls for your future use. 
+</aside>
+<h3 id='drawing-updated-webhook-payload'>Drawing Updated Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>(required) ID of the drawing</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>String</td>
+<td>(required) Project ID of the drawing</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) Name of the drawing</td>
+</tr>
+<tr>
+<td>pdf_url</td>
+<td>String</td>
+<td>(required) Download address of PDF format of the drawing</td>
+</tr>
+<tr>
+<td>png_url</td>
+<td>String</td>
+<td>(required) Download address of PNG format of the drawing</td>
+</tr>
+</tbody></table>
+<h2 id='proposal-pdf-signed'>Proposal PDF Signed</h2>
+<p><code>proposal.signed</code> Triggered when a proposal is signed in the app.</p>
+
+<aside class="notice">
+The returned <code>url</code> will expire in 24 hours. It's not a permanent link and should not be used in your system directly. You need to download the file from the url for your future use. 
+</aside>
+<h3 id='proposal-pdf-signed-webhook-payload'>Proposal PDF signed Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project_id</td>
+<td>String</td>
+<td>(required) Project ID of the drawing</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) File name of the signed document</td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>(required) Download address of the signed pdf</td>
+</tr>
+<tr>
+<td>drawing_id</td>
+<td>String</td>
+<td>(required) The associated drawing id of the signed pdf</td>
+</tr>
+<tr>
+<td>drawing_version_id</td>
+<td>String</td>
+<td>(required) The associated drawing version id of the signed pdf</td>
+</tr>
+</tbody></table>
+<h2 id='proposal-sent'>Proposal Sent</h2>
+<p><code>proposal.sent</code> Triggered when a proposal is sent to customer.</p>
+
+<aside class="notice">
+A proposal option is associated with a specific drawing version in Arcsite. If you need to get the line items data of the specified drawing version, you can use the <code>drawing_version_id</code> of the option in the Get line items API.
+</aside>
+<h3 id='proposal-sent-webhook-payload'>Proposal Sent Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project_id</td>
+<td>id</td>
+<td>(required) Approved proposal related project ID</td>
+</tr>
+<tr>
+<td>proposal_id</td>
+<td>id</td>
+<td>(required) Proposal ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) Proposal name</td>
+</tr>
+<tr>
+<td>customer_name</td>
+<td>String</td>
+<td>(required) Proposal customer name</td>
+</tr>
+<tr>
+<td>contact_email</td>
+<td>String</td>
+<td>(required) The sales email</td>
+</tr>
+<tr>
+<td>sales_representative</td>
+<td>String</td>
+<td>(required) The sales name</td>
+</tr>
+<tr>
+<td>proposal_options</td>
+<td>List[ProposalOption]</td>
+<td>(required) The proposal option data list</td>
+</tr>
+</tbody></table>
+<h3 id='proposaloption'>ProposalOption</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) Proposal option name</td>
+</tr>
+<tr>
+<td>drawing_id</td>
+<td>String</td>
+<td>(required) The proposal option associated drawing ID</td>
+</tr>
+<tr>
+<td>drawing_version_id</td>
+<td>String</td>
+<td>(required) The proposal option associated drawing version ID</td>
+</tr>
+<tr>
+<td>total</td>
+<td>String</td>
+<td>(required) The total of the proposal option</td>
+</tr>
+</tbody></table>
+<h2 id='proposal-approved'>Proposal Approved</h2>
+<p><code>proposal.approved</code> Triggered when a proposal is approved by customer.</p>
+<h3 id='proposal-sent-webhook-payload-2'>Proposal Sent Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project_id</td>
+<td>id</td>
+<td>(required) Approved proposal related project ID</td>
+</tr>
+<tr>
+<td>proposal_id</td>
+<td>id</td>
+<td>(required) Proposal ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>(required) Proposal name</td>
+</tr>
+<tr>
+<td>customer_name</td>
+<td>String</td>
+<td>(required) Proposal customer name</td>
+</tr>
+<tr>
+<td>contact_email</td>
+<td>String</td>
+<td>(required) The sales email</td>
+</tr>
+<tr>
+<td>sales_representative</td>
+<td>String</td>
+<td>(required) The sales name</td>
+</tr>
+<tr>
+<td>approved_option</td>
+<td>ProposalOption</td>
+<td>(required) Approved proposal option data</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<p>ArcSite uses HTTP response codes to indicate the success or failure of a request. Codes within the 2xx range are considered as successfully completed requests. Codes within the 4xx and 5xx ranges will indicate that a failure has occurred.</p>
+
+<p>We use the following error codes to manage common failures.</p>
+
+<p>The ArcSite API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API token is wrong.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified resource could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access an API with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests. -- You have sent too many requests in a given amount of time.</td>
+</tr>
+<tr>
+<td>500, 502, 503, 504</td>
+<td>There is an issue with ArcSite. These are rare and we will be messaged when they occur.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id='integrations'>Integrations</h1><h2 id='improveit360-integration'>Improveit360 Integration</h2>
+<p>ArcSite Provides Out-of-the-Box <a href="#basic-standard-integration-for-i360">Basic Standard Integration</a> for essential features. With Basic Standard Integration, it supports auto-pushing Drawing PDFs, creating Sales data in I360 Appointments. No extra custom development is needed.</p>
+
+<p>We also provide Webhooks and APIs for customization. Please check out those <a href="#webhooks-and-apis-for-i360-customization">Webhooks and APIs for customization</a> for more details.</p>
+<h3 id='basic-standard-integration-for-i360'>Basic Standard Integration for I360</h3>
+<p><strong>Integrating I360 into ArcSite</strong></p>
+
+<p>For detailed settings and connection methods, please consult the setup guide:
+<strong><a href="https://support.improveit360.com/hc/en-us/articles/4406541659543-ArcSite-improveit-360-Integration-Setup-Part-One-Customer-Steps">I360 Integration Setup Part One - Customer Steps</a></strong>.</p>
+
+<p><strong>Associating I360 Appointments with ArcSite Projects</strong></p>
+
+<ul>
+<li>Use the <strong><a href="#create-project">ArcSite Project Create API</a></strong> to generate an ArcSite project using information from an I360 appointment.</li>
+<li>Associate an I360 appointment with a specific ArcSite project through <a href="#associate-i360-appointment-with-arcsite-project">Associate I360 Appointment with ArcSite Project</a>.</li>
+</ul>
+
+<aside class='notice'>We recommend using the two APIs above for basic integration. The old Create Project API (<strong>POST https://user.arcsiteapp.com/extapi/projects/create/</strong>) will no longer be supported.
+</aside>
+<h3 id='validating-the-integration'>Validating the Integration</h3>
+<p>Once you&#39;ve successfully created the project and associated with the appointment, you can verify the integration status in ArcSite follow these steps:</p>
+
+<ol>
+<li>Check if the project created via the API appears in the project List. If it&#39;s missing, this indicates a project creation failure.
+<img src="images/i360/project_list_png-4109a943.png" alt="Untitled" /></li>
+<li>Within the ArcSite app, create a drawing within the project and upload it to the Cloud.</li>
+<li>On the ArcSite user site, select the uploaded drawing.</li>
+<li>In the Takeoff &amp; Estimate Tab, ensure the <strong>Send to I360</strong> button is visible.
+<img src="images/i360/send_to_i360_png-0fd254d8.png" alt="Untitled" /></li>
+<li>If the <strong>Send to I360</strong> button appears, it confirms the successful association, allowing the project to push data to associated i360 appointment. If the button is missing, this indicates a project association failure. Please check the <a href="#associate-i360-appointment-with-arcsite-project">associate API</a> for more information.</li>
+</ol>
+<h3 id='connecting-products-between-arcsite-and-i360'>Connecting Products between ArcSite and I360</h3>
+<p>ArcSite supports the connection of one I360 product to an ArcSite product through the <a href="https://user.arcsiteapp.com/admin/product_integration">ArcSite Product Manager</a> web page in user site. Once connected, this connection relationship will be used when ArcSite pushes Line Items data to I360.</p>
+
+<p>To connect products, follow these steps:</p>
+
+<ol>
+<li>Verify that the I360 environment is correctly set up, and the product exists in both I360 and ArcSite.
+<img src="images/i360/connected_i360_env_to_arcsite-be7b07b4.png" alt="Untitled" /></li>
+<li>Navigate to <code>Integrations</code> -&gt; <code>Product Manager</code> to locate the product you wish to connect.
+<img src="images/i360/click_connect_to_product_2-d536716a.png" alt="Untitled" /></li>
+<li>Click the connect button and select the corresponding I360 product.
+<img src="images/i360/select_i360_product_to_connect-0204c449.png" alt="Untitled" /></li>
+<li>After connecting, the product status changes to connected, and the <strong>Connect</strong> button becomes <strong>Update</strong>.
+<img src="images/i360/connected_i360_product-9c6ca6f7.png" alt="Untitled" /></li>
+<li>If you wish to disconnect products, you can click <strong>Update</strong>, followed by the <strong>Disconnect</strong> button.
+<img src="images/i360/disconnect_i360_product-10e613df.png" alt="Untitled" /></li>
+</ol>
+
+<aside class='notice'>Please note that this feature exclusively supports basic products, Product Bundles or Product Groups cannot connect to third-party products. Additionally, a single I360 product can only connect to one product.</aside>
+<h3 id='data-pushing-details'>Data Pushing Details</h3>
+<p>We categorize data pushing into three types based on the data involved:</p>
+<h3 id='automatic-push-for-drawing-pdf-and-proposal-pdfs'>Automatic Push for Drawing PDF and Proposal PDFs</h3>
+<ul>
+<li><p><strong>When to Push</strong>:
+<img src="images/i360/upload_to_cloud_png-da245259.png" alt="Untitled" />
+<img src="images/i360/export_proposal_png-d0f8a2f5.png" alt="Untitled" />
+After user uploads data to ArcSite Cloud in the app, we will trigger out push to I360.</p></li>
+<li><p><strong>How It Works</strong>:
+The latest Drawing PDFs are generated and automatically pushing to I360, replacing any existing files.</p></li>
+<li><p><strong>How to Verify</strong>:
+Check these files in the Attachments section of the associated I360 Appointment.</p></li>
+</ul>
+<h3 id='manual-push-for-proposal-pdf'><strong>Manual Push for Proposal PDF</strong></h3>
+<ul>
+<li><p><strong>When to Push</strong>: Proposal PDF will be triggered:</p>
+
+<ul>
+<li>When user clicks the <code>Export</code> button in the app, a <code>Do you want to push this proposal to I360?</code> pop-up appears, if you select &quot;Yes&quot; it will trigger the push.
+<img src="images/i360/send_propsoal_to_i360-f4afc1c6.jpeg" alt="Did You Sell?" /></li>
+</ul></li>
+<li><p><strong>How It Works</strong>: The proposal PDF is exported and pushing to I360, replacing any existing files.</p></li>
+<li><p><strong>How to Verify</strong>: Check these files in the Attachments section of the associated I360 Appointment.</p></li>
+</ul>
+<h3 id='manual-push-for-line-items-and-pricing'>Manual Push for Line Items and Pricing</h3>
+<ul>
+<li><p><strong>When to push</strong>:
+Product line items and pricing will be triggered:</p>
+
+<ul>
+<li>When user clicks the <code>Export</code> button in the app, a <code>Do you want to push this proposal to I360?</code> pop-up appears, if you select &quot;Yes&quot; it will trigger the push.
+<img src="images/i360/send_propsoal_to_i360-f4afc1c6.jpeg" alt="Did You Sell?" /></li>
+<li>Alternatively, click <code>Send to I360</code> button in the Takeoff &amp; Estimate Tab on the drawing detail page of the user site.
+<img src="images/i360/user_site_push_items-55c7901c.png" alt="Send to I360" /></li>
+</ul></li>
+<li><p><strong>How It Works</strong>:
+ArcSite pushes the corresponding drawing line items data to Sales and Sales Items of the I360 appointment, and updates the status of appointment to <strong><code>Sold</code></strong> then.</p></li>
+<li><p><strong>How to Verify</strong>:
+Check the Sales and Sales Items in the corresponding I360 Appointment.</p></li>
+</ul>
+<h3 id='webhooks-and-apis-for-i360-customization'>Webhooks and APIs for I360 Customization</h3>
+<p>If you need more customized features, ArcSite&#39;s Extended Integration offers specialized Webhooks and APIs for I360.</p>
+
+<ul>
+<li>Add <a href="#proposal-exported-in-app">Proposal Exported in App</a> webhook in user site admin page for custom developments.</li>
+<li>Use the <a href="#connected-i360-product">Connected I360 Product</a> API to fetch the connected I360 Product ID from ArcSite Product ID.</li>
+</ul>
+<h3 id='customization-examples'>Customization Examples:</h3><h3 id='create-a-quote-when-you-don-39-t-sell-the-project'>Create a Quote when you don&#39;t sell the project</h3>
+<p>Let&#39;s say you&#39;ve edited a Drawing and want to auto-generate I360 Quote and Quote Items when you select &quot;No&quot; in &quot;Do you want to push this proposal to I360?&quot; pop-up.</p>
+
+<p><strong>Implementation Steps:</strong></p>
+<div class="highlight"><pre class="highlight plaintext"><code> payload = get_payload_from_webhook()
+ if payload.yes_no is False
+     # extract drawing_id and appointment_id from payload
+     drawing_id = payload.drawing_id
+     appointment_id = payload.appointment_id
+     # Fetch all Line Items info using drawing_id
+     line_items = request_arcsite_drawing_line_items_api(drawing_id)
+     # Generate I360 Quotes
+     # Create I360 Quote Items
+ else
+     # Do nothing, arcsite will push line items data.
+</code></pre></div>
+<ol>
+<li>Complete Basic Integration and subscribe to the <a href="#prompt-after-exporting-proposal-in-app">Proposal Exported in App</a> Webhook.</li>
+<li>ArcSite sends payload data to your webhook URL. You should to extract the <code>yes_no</code> from the payload and <strong>handle the logic like the sample code</strong> right side.</li>
+<li>Extract <code>drawing_id</code> and <code>appointment_id</code> from the payload.</li>
+<li>Fetch all Line items info using the <code>drawng_id</code> via <a href="#get-line-items">Drawing Line Items API</a>.</li>
+<li><strong>Generate an I360 Quote Object</strong>
+
+<ul>
+<li>Name: Use the Drawing Name as the Quote&#39;s Name. </li>
+<li>Total: Use the <code>total</code> from the returned data as the <code>i360__Calculated_Total__c</code> of Quote. </li>
+<li>Tax Rate: Use sum of <code>tax</code> / <code>total</code> from returned data as the <code>i360__Sales_Tax_Rate__c</code> of Quote. </li>
+<li>Appointment ID: <code>appointment_id</code> extracted from the Webhook Payload.</li>
+</ul></li>
+<li><strong>Create I360 Quote Items</strong>
+
+<ul>
+<li>Name: Line item&#39;s <code>name</code></li>
+<li>Quantity: Line item&#39;s <code>quantity</code></li>
+<li>Unit Price: Use line item&#39;s <code>total</code> / <code>quantity</code> as the <code>i360__Unit_Price__c</code> of QuoteItem.</li>
+<li>Product ID: Fetch connected i360 product id using the Line Item&#39;s <code>product_id</code> via <a href="#connected-i360-product">Connected I360 Product</a>.</li>
+</ul></li>
+</ol>
+<h3 id='sold-the-appointment-when-you-sell-the-project'>Sold the appointment when you sell the project</h3>
+<p>Let&#39;s say you want to sell the project in i360 when you select &quot;Yes&quot; in &quot;Do you want to push this proposal to I360?&quot; pop-up.</p>
+
+<p><strong>Implementation Steps:</strong></p>
+<div class="highlight"><pre class="highlight plaintext"><code> payload = get_payload_from_webhook()
+ if payload.yes_no is True
+     # extract appointment_id from payload
+     appointment_id = payload.appointment_id
+     # Update I360 Appointment Status to "Sold"
+ else
+     # Do nothing
+</code></pre></div>
+<ol>
+<li>Complete Basic Integration and subscribe to the <a href="#prompt-after-exporting-proposal-in-app">Proposal Exported in App</a> Webhook.</li>
+<li>ArcSite sends payload data to your webhook URL. You should to extract the <code>yes_no</code> from the payload and <strong>handle the logic like the sample code</strong> right side.</li>
+<li>Extract <code>appointment_id</code> from the payload.</li>
+<li>Modify the I360 Appointment status to <strong>Sold</strong>.</li>
+</ol>
+<h3 id='apis-for-i360'>APIs for I360</h3><h3 id='associate-i360-appointment-with-arcsite-project'>Associate I360 Appointment with ArcSite Project</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/i360/associate_project'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+  "appointment_id": "AXh09668400GJgk",
+  "project_id": "36029621653386360"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621653386360"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nac"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T03:31:39"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T03:31:39"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"job_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heeloo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200544"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"work_site_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint establishes an association between an I360 appointment and an existing ArcSite project.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/i360/associate_project</code></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>appointment_id</td>
+<td>String</td>
+<td>(required) The ID of the appointment in I360.</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>Int</td>
+<td>(required) The ID of the existing ArcSite project.</td>
+</tr>
+</tbody></table>
+
+<aside class='notice'>
+An ArcSite project can only be associated with one Appointment, and attempting to associate it again if it's already associated will result in a failure.
+</aside>
+<h3 id='connected-i360-product'>Connected I360 Product</h3>
+<p>In ArcSite, after setting up the I360 environment, you can connect an I360 Product to an ArcSite product within the ArcSite website.</p>
+
+<p>To retrieve the connected I360 Product ID using an ArcSite product ID, you can utilize this API:</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://api.arcsite.com/v1/i360/connected_product/&lt;arcsite_product_id&gt;'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"connected_product_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AXh09668400GJgk"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint provides the connected I360 product ID.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/i360/connected_product/&lt;arcsite_product_id&gt;</code></p>
+
+<aside class='notice'>
+If a product has not been connected to an I360 Product in ArcSite, it will return a 400 error.
+</aside>
+<h3 id='webhooks-for-i360'>Webhooks for I360</h3><h3 id='prompt-after-exporting-proposal-in-app'>Prompt after exporting proposal in App</h3>
+<p>This webhook is triggered after exporting a Proposal PDF in the ArcSite App and the user chooses “Yes” or “No” when prompted.</p>
+
+<p>This webhook will only be triggered if:</p>
+
+<ul>
+<li>The project is associated with an I360 appointment.</li>
+<li>This webhook has been added.
+<img src="images/i360/sub_webhook_page-eb2be7a6.png" alt="Untitled" /></li>
+<li>And the user exports a proposal PDF in the app.
+<img src="images/i360/export_proposal_png-d0f8a2f5.png" alt="Untitled" /></li>
+<li>The user choose the &quot;Yes&quot; or &quot;No&quot; in the app when prompted.
+<img src="images/i360/send_propsoal_to_i360-f4afc1c6.jpeg" alt="Untitled" /></li>
+</ul>
+<h3 id='prompt-after-exporting-proposal-in-app-webhook-payload'>Prompt after exporting proposal in App Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project_id</td>
+<td>String</td>
+<td>(required) The project id of the project</td>
+</tr>
+<tr>
+<td>drawing_id</td>
+<td>String</td>
+<td>(required) The drawing of the project</td>
+</tr>
+<tr>
+<td>appointment_id</td>
+<td>String</td>
+<td>(required) Associated Appointment ID</td>
+</tr>
+<tr>
+<td>yes_no</td>
+<td>Boolean</td>
+<td>(required) User Selection</td>
+</tr>
+</tbody></table>
+<h2 id='zoho-crm-integration'>Zoho CRM Integration</h2>
+<p>ArcSite Provides Out-of-the-Box <a href="#zoho-crm-basic-standard-integration">Basic Standard Integration</a> for essential features. With Basic Standard Integration, it supports associating Zoho CRM Record with ArcSite project, and pushing proposal PDF from ArcSite to associated record as attachment in Zoho CRM. No extra custom development is needed.</p>
+
+<p>We also provide Webhooks for customization. Please check out those <a href="#webhooks-and-customization-for-zoho-crm">Webhooks and Customization</a> for more details.</p>
+<h3 id='zoho-crm-basic-standard-integration'>Zoho CRM Basic Standard Integration</h3>
+<p><strong>Integrating Zoho CRM into ArcSite</strong></p>
+
+<p>For detailed settings and connection methods, please consult the setup guide: <strong><a href="https://arcsite.notion.site/Connecting-to-Zoho%20CRM-in-ArcSite-6a4ac0dc433d497994bc75a4b2f8982d?pvs=4">Connecting Zoho CRM in ArcSite</a></strong>.</p>
+
+<p><strong>Associating Zoho CRM Records with ArcSite Projects</strong></p>
+
+<ul>
+<li>Use the <strong><a href="#create-project">ArcSite Project Create API</a></strong> to generate an ArcSite Project using information from a Zoho CRM record.</li>
+<li>Associate a Zoho CRM record with a specific ArcSite Project through <a href="#associate-zoho-crm-record-with-arcsite-project">Associate Zoho CRM record with ArcSite Project</a>.</li>
+</ul>
+<h3 id='validating-the-integration-2'>Validating the Integration</h3>
+<p>Once you&#39;ve successfully created the project and associated with the Zoho CRM record, you can verify the integration status in ArcSite follow these steps:</p>
+
+<ol>
+<li>Check if the Project created via the API appears in the Project List. If it&#39;s missing, this indicates a project creation failure.
+<img src="images/i360/project_list_png-4109a943.png" alt="Untitled" /></li>
+<li>Within the ArcSite app, create a Drawing within the Project and upload it to the Cloud.</li>
+<li>On the ArcSite user site, select the uploaded Drawing.</li>
+<li>In the Takeoff &amp; Estimate Tab, ensure the <strong>Send to Zoho CRM</strong> button is visible.
+<img src="images/zoho_crm/send_to_zoho_crm_png-660ebda5.png" alt="Untitled" /></li>
+<li>If the <strong>Send to Zoho CRM</strong> button appears, it confirms the successful association, allowing the Project to push proposal PDF as attachment to associated Zoho CRM record. If the button is missing, this indicates a project association failure. Please check the <a href="#associate-zoho-crm-record-with-arcsite-project">associate API</a> for more information.</li>
+</ol>
+<h3 id='data-pushing-details-2'>Data Pushing Details</h3><h3 id='push-proposal-pdf-file'>Push Proposal PDF file</h3>
+<ul>
+<li><p><strong>When to Push</strong>:
+<img src="images/zoho_crm/do_you_want_push_zoho_crm-0992d9e8.jpeg" alt="Did You Sell?" />
+After user exports the Proposal PDF in the app, we will pop up a dialog to ask user whether to push Proposal PDF file or not.</p></li>
+<li><p><strong>How It Works</strong>:
+If user choose “Yes”, this proposal PDF file will be pushed as a new attachment in the associated Zoho CRM record.</p></li>
+<li><p><strong>How to Verify</strong>:
+Check the file in the Attachments section of the associated Zoho CRM Record.</p></li>
+</ul>
+<h3 id='webhooks-and-customization-for-zoho-crm'>Webhooks and Customization for Zoho CRM</h3>
+<p>You can add webhooks to do some customized logic. Check out <a href="#webhooks-for-zoho-crm">Webhooks for Zoho CRM</a>.</p>
+<h3 id='a-customization-example'>A Customization Example:</h3>
+<p>Let’s say you want to create a Quotes record with product line items in Zoho CRM, when you push Proposal PDF attachment.</p>
+
+<p><strong>Implementation Steps:</strong></p>
+<div class="highlight"><pre class="highlight plaintext"><code>  payload = get_payload_from_webhook()
+  # extract drawing_id, zoho_module_name and zoho_record_id from payload
+  drawing_id = payload.drawing_id
+  zoho_module_name = payload.zoho_module_name
+  zoho_record_id = payload.zoho_record_id
+  if payload.yes_no is False
+     # Do nothing or other logic
+  else
+     # Fetch all Line Items info using drawing_id
+     ine_items = request_arcsite_drawing_line_items_api(drawing_id)
+     # Create Zoho CRM Quotes or other record with the line items data
+</code></pre></div>
+<ol>
+<li>Complete Basic Integration and add the <a href="#prompt-after-exporting-proposal-in-app-for-zoho-crm">Proposal Exported in App</a> Webhook.</li>
+<li>ArcSite sends payload data to your webhook URL. You should to extract the <code>yes_no</code> from the payload and <strong>handle the logic like the sample code</strong> right side.</li>
+<li>Extract <code>Drawing ID</code> and <code>zoho_module</code> and <code>zoho_record_id</code> from the payload.</li>
+<li>Fetch all Line items info using the <code>drawing_id</code> via <a href="#get-line-items">Drawing Line Items API</a>.</li>
+<li><p>Create Quotes record with Drawing Line Items Data</p>
+
+<ul>
+<li>Deal_Name: Use the <code>zoho_module</code> and <code>zoho_record_id</code> to fetch the Deals record name from Zoho CRM.</li>
+<li>Discount: Use the sum of <code>discount</code> and <code>markup</code> from the drawing line items data.</li>
+<li>Tax: Use line items sum of<code>tax</code> as the <code>Tax</code> of Quotes record.</li>
+<li>Quoted_Items: Use the line items data to create the <code>Quoted_Items</code> of Quotes record
+
+<ul>
+<li>Product_Name: Use the <code>name</code> of the line item, you can use the <code>name</code> to fetch the product from Zoho CRM.</li>
+<li>Quantity: Use the <code>quantity</code> of line item</li>
+<li>Price_Book_Name: Use the <code>zoho_product_id</code> fetched before to get or create PriceBook data from Zoho CRM.</li>
+</ul></li>
+</ul></li>
+<li><p>Optionally, modify the record status or add other custom features.</p></li>
+</ol>
+<h3 id='apis-for-zoho-crm'>APIs for Zoho CRM</h3><h3 id='associate-zoho-crm-record-with-arcsite-project'>Associate Zoho CRM Record with ArcSite Project</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/zoho_crm/associate_project'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+  "zoho_module": "Deals",
+  "zoho_record_id": "598254512451545",
+  "project_id": "36029621653386360"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621653386360"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nac"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T03:31:39"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T03:31:39"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"job_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heeloo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200544"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"work_site_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint establishes an association between a Zoho CRM record and an existing ArcSite project.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/zoho_crm/associate_project</code></p>
+<h3 id='parameters-2'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>zoho_module</td>
+<td>String</td>
+<td>(required) The Name of the Record in Zoho CRM, the value should one of Deals, Quotes, Leads and Contacts.</td>
+</tr>
+<tr>
+<td>zoho_record_id</td>
+<td>String</td>
+<td>(required) The ID of the record in Zoho CRM.</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>Int</td>
+<td>(required) The ID of the existing ArcSite project.</td>
+</tr>
+</tbody></table>
+
+<aside class='notice'>
+An ArcSite Project can only be associated with one Zoho CRM record, and attempting to associate it again if it's already associated will result in a failure.
+</aside>
+<h3 id='webhooks-for-zoho-crm'>Webhooks for Zoho CRM</h3><h3 id='prompt-after-exporting-proposal-in-app-for-zoho-crm'>Prompt after exporting proposal in App for Zoho CRM</h3>
+<p>This webhook is triggered after exporting a Proposal PDF in the ArcSite App and the user chooses “Yes” or “No” when prompted.</p>
+
+<p>This webhook will only be triggered if::</p>
+
+<ul>
+<li>The project is associated with a Zoho CRM record.</li>
+<li>This webhook has been added.
+<img src="images/i360/sub_webhook_page-eb2be7a6.png" alt="Untitled" /></li>
+<li>And the user export Proposal PDF.
+<img src="images/zoho_crm/zoho_crm_export_proposal_pdf-c07ed4bc.png" alt="Untitled" /></li>
+<li>The user choose the &quot;Yes&quot; or &quot;No&quot; in the app when prompted.
+<img src="images/zoho_crm/do_you_want_push_zoho_crm-0992d9e8.jpeg" alt="Untitled" /></li>
+</ul>
+<h3 id='prompt-after-exporting-proposal-in-app-webhook-payload-2'>Prompt after exporting proposal in App Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project_id</td>
+<td>String</td>
+<td>(required) The project id of the project</td>
+</tr>
+<tr>
+<td>drawing_id</td>
+<td>String</td>
+<td>(required) The drawing of the project</td>
+</tr>
+<tr>
+<td>zoho_module</td>
+<td>String</td>
+<td>(required) The name of the Zoho CRM module, the value should one of Deals, Quotes, Leads and Contacts.</td>
+</tr>
+<tr>
+<td>zoho_record_id</td>
+<td>Boolean</td>
+<td>(required) The record ID in Zoho CRM</td>
+</tr>
+<tr>
+<td>yes_no</td>
+<td>Boolean</td>
+<td>(required) User Selection</td>
+</tr>
+</tbody></table>
+<h2 id='salesforce-integration'>Salesforce Integration</h2>
+<p>ArcSite Provides Out-of-the-Box <a href="#basic-standard-integration-for-salesforce">Basic Standard Integration</a> for essential features. With Basic Standard Integration, it supports auto-pushing drawing PDFs, proposal PDFs and pricing data to Salesforce.</p>
+
+<p>We also provide Webhooks and APIs for customization. Please check out those <a href="#webhooks-and-apis-for-salesforce-customization">Webhooks and APIs for customization</a> for more details.</p>
+<h3 id='basic-standard-integration-for-salesforce'>Basic Standard Integration for Salesforce</h3>
+<p><strong>Integrating Salesforce into ArcSite</strong></p>
+
+<p>For detailed settings and connection methods, please consult the setup guide:
+<strong><a href="https://www.notion.so/ArcSite-Salesforce-Standard-Integration-72d317bd3f7741dd8cba558003a6b542">ArcSite Salesforce Standard Integration</a></strong>.</p>
+
+<p><strong>Associating Salesforce Opportunity with ArcSite Projects</strong></p>
+
+<ul>
+<li>Use the <strong><a href="#create-project">ArcSite Project Create API</a></strong> to create an ArcSite project using information from a Salesforce opportunity.</li>
+<li>Associate a Salesforce opportunity with a specific ArcSite project through <a href="#associate-salesforce-opportunity-with-arcsite-project">Associate Salesforce Opportunity with ArcSite Project</a>.</li>
+</ul>
+
+<aside class='notice'>We recommend using the two APIs above for basic integration. The old Create Project API (<strong>POST https://user.arcsiteapp.com/extapi/projects/create/</strong>) will no longer be supported.
+</aside>
+<h3 id='validating-the-integration-3'>Validating the Integration</h3>
+<p>Once you&#39;ve successfully created the project and associated with the opportunity, you can verify the integration status in ArcSite follow these steps:</p>
+
+<ol>
+<li>Check if the project created via the API appears in the project List. If it&#39;s missing, this indicates a project creation failure.
+<img src="images/i360/project_list_png-4109a943.png" alt="Untitled" /></li>
+<li>Within the ArcSite app, create a drawing within the project and upload it to the Cloud.</li>
+<li>On the ArcSite user site, select the uploaded drawing.</li>
+<li>In the Takeoff &amp; Estimate Tab, ensure the <strong>Send to Salesforce</strong> button is visible.
+<img src="images/salesforce/send_to_salesforce-efc3f73f.png" alt="Untitled" /></li>
+<li>If the <strong>Send to Salesforce</strong> button appears, it confirms the successful association, allowing the project to push data to associated salesforce opportunity. If the button is missing, this indicates a project association failure. Please check the <a href="#associate-salesforce-opportunity-with-arcsite-project">associate API</a> for more information.</li>
+</ol>
+<h3 id='connecting-products-between-arcsite-and-salesforce'>Connecting Products between ArcSite and Salesforce</h3>
+<p>ArcSite supports the connection of one salesforce product2 to an ArcSite product through the <a href="https://user.arcsiteapp.com/admin/product_integration">ArcSite Product Manager</a> web page in user site. Once connected, this connection relationship will be used when ArcSite pushes Line Items data to Salesforce. </p>
+
+<aside class='notice'>The connection of the product is very important for pushing line items to Salesforce. If there are any unassociated products in the drawing, the push of line items will fail.
+</aside>
+
+<p>To connect products, follow these steps:</p>
+
+<ol>
+<li>Verify that the Salesforce environment is correctly set up, and the product exists in both Salesforce and ArcSite.
+<img src="images/salesforce/connected_to_salesforce-ec80dbee.png" alt="Untitled" /></li>
+<li>Navigate to <code>Integrations</code> -&gt; <code>Product Manager</code> to locate the product you wish to connect.
+<img src="images/salesforce/salesforce_click_connect_product-5ffa338a.png" alt="Untitled" /></li>
+<li>Click the connect button and select the corresponding Salesforce Product2.
+<img src="images/i360/select_i360_product_to_connect-0204c449.png" alt="Untitled" /></li>
+<li>After connecting, the product status changes to connected, and the <strong>Connect</strong> button becomes <strong>Update</strong>.
+<img src="images/i360/connected_i360_product-9c6ca6f7.png" alt="Untitled" /></li>
+<li>If you wish to disconnect products, you can click <strong>Update</strong>, followed by the <strong>Disconnect</strong> button.
+<img src="images/i360/disconnect_i360_product-10e613df.png" alt="Untitled" /></li>
+</ol>
+
+<aside class='notice'>Please note that this feature exclusively supports basic products, Product Bundles or Product Groups cannot connect to third-party products. Additionally, a single Salesforce Product2 can only connect to one product.</aside>
+<h3 id='data-pushing-details-3'>Data Pushing Details</h3>
+<p>We categorize data pushing into three types based on the data involved:</p>
+<h3 id='automatic-push-for-drawing-pdf'>Automatic Push for Drawing PDF</h3>
+<ul>
+<li><p><strong>When to Push</strong>:
+<img src="images/i360/upload_to_cloud_png-da245259.png" alt="Untitled" />
+<img src="images/i360/export_proposal_png-d0f8a2f5.png" alt="Untitled" />
+When user clicks the &quot;Upload to Cloud&quot; button or exports the custom proposal in the app, we will trigger out push to Salesforce.</p></li>
+<li><p><strong>How It Works</strong>:
+The latest Drawing PDFs are generated and automatically pushing to Salesforce, replacing any existing files.</p></li>
+<li><p><strong>How to Verify</strong>:
+Check these files in the ContentDocument section of the associated Salesforce Opportunity.</p></li>
+</ul>
+<h3 id='manual-push-for-proposal-pdf-2'><strong>Manual Push for Proposal PDF</strong></h3>
+<ul>
+<li><strong>When to Push</strong>:
+Proposal PDF will be triggered:
+
+<ul>
+<li>When user clicks the <code>Export</code> button in the app, a <code>Do you want to push this proposal to Salesforce?</code> pop-up appears, if you select &quot;Yes&quot; it will trigger the push.
+<img src="images/salesforce/send_proposal_to_salesforce-6edc2b69.jpeg" alt="Do you want to push this proposal?" /></li>
+</ul></li>
+<li><strong>How It Works</strong>: The proposal PDF is exported and pushing to Salesforce, replacing any existing files.</li>
+<li><strong>How to Verify</strong>: Check these files in the Attachments section of the associated Salesforce Opportunity.</li>
+</ul>
+<h3 id='manual-push-for-line-items-and-pricing-2'>Manual Push for Line Items and Pricing</h3>
+<ul>
+<li><p><strong>When to push</strong>:
+Product line items and pricing will be triggered:</p>
+
+<ul>
+<li>When user clicks the <code>Export</code> button in the app, a <code>Do you want to push this proposal to Salesforce?</code> pop-up appears, if you select &quot;Yes&quot; it will trigger the push.
+<img src="images/salesforce/send_proposal_to_salesforce-6edc2b69.jpeg" alt="Do you want to push this proposal?" /></li>
+<li>Alternatively, click <code>Send to Salesforce</code> button in the Takeoff &amp; Estimate Tab on the drawing detail page of the user site.
+<img src="images/salesforce/send_to_salesforce-efc3f73f.png" alt="Send to Salesforce" /></li>
+</ul></li>
+<li><p><strong>How It Works</strong>:
+ArcSite pushes the corresponding drawing line items data to OpportunityLineItems of the Salesforce opportunity.</p></li>
+<li><p><strong>How to Verify</strong>:
+Check the Products in the corresponding Salesforce opportunity.</p></li>
+</ul>
+<h3 id='webhooks-and-apis-for-salesforce-customization'>Webhooks and APIs for Salesforce Customization</h3>
+<p>If you need more customized features, ArcSite&#39;s Extended Integration offers specialized Webhooks and APIs for Salesforce.</p>
+
+<ul>
+<li>Adding <a href="#prompt-after-exporting-proposal-in-app-for-salesforce">Proposal Exported in App</a> webhook in user site admin page for custom developments.</li>
+<li>Using the <a href="#connected-salesforce-product">Connected Salesforce Product</a> API to fetch the connected Salesforce Product2 ID from ArcSite Product ID.</li>
+</ul>
+<h3 id='customization-examples-2'>Customization Examples:</h3><h3 id='create-a-quote-when-you-don-39-t-sell-the-project-2'>Create a Quote when you don&#39;t sell the project</h3>
+<p>Let&#39;s say you&#39;ve edited a Drawing and want to auto-generate Salesforce Quote when you select &quot;No&quot; in &quot;Do you want to push this proposal to Salesforce?&quot; pop-up.</p>
+
+<p><strong>Implementation Steps:</strong></p>
+<div class="highlight"><pre class="highlight plaintext"><code> payload = get_payload_from_webhook()
+ if payload.yes_no is False
+     # extract drawing_id and salesforce object data from payload
+     drawing_id = payload.drawing_id
+     salesforce_object_type = payload.salesforce_object_type
+     salesforce_object_id = payload.salesforce_object_id
+     # Fetch all Line Items info using drawing_id
+     line_items = request_arcsite_drawing_line_items_api(drawing_id)
+     # Generate Salesforce Quote
+     # Create Salesforce QuoteLineItems
+ else
+     # Do nothing, arcsite will push line items data.
+</code></pre></div>
+<ol>
+<li>Complete Basic Integration and subscribe to the <a href="#prompt-after-exporting-proposal-in-app-for-salesforce">Proposal Exported in App</a> Webhook.</li>
+<li>ArcSite sends payload data to your webhook URL. You should to extract the <code>yes_no</code> from the payload and <strong>handle the logic like the sample code</strong> right side.</li>
+<li>Extract <code>drawing_id</code> and <code>salesforce_object_type</code> and <code>salesforce_object_id</code> from the payload.</li>
+<li>Fetch all Line items info using the <code>drawng_id</code> via <a href="#get-line-items">Drawing Line Items API</a>.</li>
+<li><strong>Generate an Salesforce Quote Object</strong></li>
+</ol>
+
+<ul>
+<li>Name: Use the Drawing Name as the Quote&#39;s Name.</li>
+<li>TotalPrice: Use the <code>total</code> from the returned data as the <code>Total</code> of Quote.</li>
+<li>Tax: Use sum of <code>tax</code> from returned data as the <code>Tax</code> of Quote.</li>
+<li>Discount: Use sum of <code>discount</code> from returned data as the <code>Discount</code> of Quote.</li>
+</ul>
+
+<p>6.<strong>Create Salesforce QuoteLineItems</strong></p>
+
+<ul>
+<li>QuoteId: Use the created Quote&#39;s ID as the <code>QuoteId</code> of QuoteLineItem.</li>
+<li>Quantity: Line item&#39;s <code>Quantity</code></li>
+<li>Unit Price: Use line item&#39;s <code>total</code> / <code>quantity</code> as the <code>UnitPrice</code> of QuoteLineItem.</li>
+<li>PricebookEntryId: Fetch connected Salesforce Product2 ID using the Line Item&#39;s <code>product_id</code> via <a href="#connected-salesforce-product">Connected Salesforce Product</a>, then use the returned Product2 ID to fetch the <code>PricebookEntryId</code> of QuoteLineItem.</li>
+</ul>
+<h3 id='apis-for-salesforce'>APIs for Salesforce</h3><h3 id='associate-salesforce-opportunity-with-arcsite-project'>Associate Salesforce Opportunity with ArcSite Project</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/salesforce/associate_project'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+  "salesforce_object_type": "Opportunity",
+  "salesforce_object_id": "0062v00001J8Z3aAAF",
+  "project_id": "36029621653386360"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36029621653386360"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nac"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T03:31:39"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T03:31:39"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"job_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heeloo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"second_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200544"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"work_site_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint establishes an association between a Salesforce object and an existing ArcSite project.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/salesforce/associate_project</code></p>
+<h3 id='parameters-3'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>salesforce_object_type</td>
+<td>String</td>
+<td>(required) The type of the Object in Salesforce, the value should one of Opportunity and Quote.</td>
+</tr>
+<tr>
+<td>salesforce_object_id</td>
+<td>String</td>
+<td>(required) The ID of the object in Salesforce.</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>Int</td>
+<td>(required) The ID of the existing ArcSite project.</td>
+</tr>
+</tbody></table>
+
+<aside class='notice'>
+An ArcSite project can only be associated with one Salesforce object, and attempting to associate it again if it's already associated will result in a failure.
+Like Opportunity, Quote can also be associated with a Project and has the same functionality.
+</aside>
+<h3 id='connected-salesforce-product'>Connected Salesforce Product</h3>
+<p>In ArcSite, after setting up the Salesforce environment, you can connect a salesforce Product2 to an ArcSite product within the ArcSite website.</p>
+
+<p>To retrieve the connected Salesforce Product2 ID using an ArcSite product ID, you can utilize this API:</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://api.arcsite.com/v1/salesforce/connected_product/&lt;arcsite_product_id&gt;'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"connected_product_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AXh09668400GJgk"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint provides the connected Salesforce Product2 ID.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/salesforce/connected_product/&lt;arcsite_product_id&gt;</code></p>
+
+<aside class='notice'>
+If a product has not been connected to a Salesforce Product2 in ArcSite, it will return a 400 error.
+</aside>
+<h3 id='webhooks-for-salesforce'>Webhooks for Salesforce</h3><h3 id='prompt-after-exporting-proposal-in-app-for-salesforce'>Prompt after exporting proposal in App for Salesforce</h3>
+<p>This webhook is triggered after exporting a Proposal PDF in the ArcSite App and the user chooses “Yes” or “No” when prompted.</p>
+
+<p>This webhook will only be triggered if:</p>
+
+<ul>
+<li>The project is associated with a salesforce opportunity.</li>
+<li>This webhook has been added.
+<img src="images/i360/sub_webhook_page-eb2be7a6.png" alt="Untitled" /></li>
+<li>And the user exports a proposal PDF in the app.
+<img src="images/i360/export_proposal_png-d0f8a2f5.png" alt="Untitled" /></li>
+<li>The user choose the &quot;Yes&quot; or &quot;No&quot; in the app when prompted.
+<img src="images/salesforce/send_proposal_to_salesforce-6edc2b69.jpeg" alt="Untitled" /></li>
+</ul>
+<h3 id='prompt-after-exporting-proposal-in-app-webhook-payload-3'>Prompt after exporting proposal in App Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project_id</td>
+<td>String</td>
+<td>(required) The project id of the project</td>
+</tr>
+<tr>
+<td>drawing_id</td>
+<td>String</td>
+<td>(required) The drawing of the project</td>
+</tr>
+<tr>
+<td>salesforce_object_type</td>
+<td>String</td>
+<td>(required) The type of the Object in Salesforce, the value should one of Opportunity and Quote.</td>
+</tr>
+<tr>
+<td>salesforce_object_id</td>
+<td>String</td>
+<td>(required) The associated salesforce object id</td>
+</tr>
+<tr>
+<td>yes_no</td>
+<td>Boolean</td>
+<td>(required) User Selection</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
