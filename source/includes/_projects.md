@@ -308,6 +308,79 @@ Returns project of your organization by project id,
 
 `GET https://api.arcsite.com/v1/projects/<id>`
 
+## Projects search
+
+```shell
+curl -X PATCH 'https://api.arcsite.com/v1/projects/search' \
+-H 'Authorization: Bearer **your_api_token_here**' \
+-H 'Content-Type: application/json' \
+-d '{
+    "project_name":"Updated project name",
+    "tags": ["Tag 1"]
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 36029621652695040,
+    "name": "Updated project name",
+    "created_at": "2022-01-16T04:19:23",
+    "updated_at": "2022-01-16T04:19:23",
+    "job_number": "144111",
+    "customer": {
+      "name": "Jack",
+      "phone": "1441",
+      "second_phone": "1122",
+      "email": "c@arcsite.com",
+      "second_email": "s@arcsite.com",
+      "address": {
+        "street": "street",
+        "city": "city",
+        "county": "county",
+        "state": "state",
+        "zip_code": "300433"
+      }
+    },
+    "work_site_address": {
+      "street": "street",
+      "city": "city",
+      "county": "county",
+      "state": "state",
+      "zip_code": "300433"
+    },
+    "sales_rep": {
+      "name": "Wang",
+      "email": "h@arcsite.com",
+      "phone": "122122-121"
+    },
+    "tags": [
+      "Tag 1"
+    ]
+  }
+]
+```
+
+Search projects by conditions and returns the list of filtered projects in your organization. The projects are returned in sorted order, with the most recent created project appearing first.
+
+### HTTP Request
+
+`POST https://api.arcsite.com/v1/projects/search`
+
+### Parameters
+
+| Parameter          | Type         | Description                                                         |
+|--------------------|--------------|---------------------------------------------------------------------|
+| project_name       | String       | (optional) To filter projects which contains the project_name value |
+| tags               | List[String] | (optional) To filter projects by the tags list.                     |
+
+<aside class='notice'>
+When there are multiple <tags>tags</tags>, only projects that both have these tags will be returned. <br>For example, if tags are <code>["Tag 1", "Tag 2"]</code>, then the returned Projects will all have both <code>Tag 1</code> and <code>Tag 2</code>.
+</aside>
+
+
 ## Add Project Collaborators
 
 ```shell
