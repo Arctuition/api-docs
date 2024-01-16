@@ -267,7 +267,7 @@
                     <a href="#get-project" class="toc-h2 toc-link" data-title="Get Project">Get Project</a>
                   </li>
                   <li>
-                    <a href="#projects-search" class="toc-h2 toc-link" data-title="Projects search">Projects search</a>
+                    <a href="#search-projects" class="toc-h2 toc-link" data-title="Search Projects">Search Projects</a>
                   </li>
                   <li>
                     <a href="#add-project-collaborators" class="toc-h2 toc-link" data-title="Add Project Collaborators">Add Project Collaborators</a>
@@ -859,7 +859,7 @@ If <code>tags</code> is provided, the tags of the project will be replaced by th
 <p>Returns project of your organization by project id,</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET https://api.arcsite.com/v1/projects/&lt;id&gt;</code></p>
-<h2 id='projects-search'>Projects search</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> PATCH <span class="s1">'https://api.arcsite.com/v1/projects/search'</span> <span class="se">\</span>
+<h2 id='search-projects'>Search Projects</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> PATCH <span class="s1">'https://api.arcsite.com/v1/projects/search'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">-d</span> <span class="s1">'{
@@ -909,7 +909,7 @@ If <code>tags</code> is provided, the tags of the project will be replaced by th
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>Search projects by conditions and returns the list of filtered projects in your organization. The projects are returned in sorted order, with the most recent created project appearing first.</p>
+<p>Searching projects by conditions and returns the list of filtered projects in your organization. The projects are returned in sorted order, with the most recent created project appearing first.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/search</code></p>
 <h3 id='parameters-3'>Parameters</h3>
