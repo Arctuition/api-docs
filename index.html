@@ -267,6 +267,9 @@
                     <a href="#get-project" class="toc-h2 toc-link" data-title="Get Project">Get Project</a>
                   </li>
                   <li>
+                    <a href="#projects-search" class="toc-h2 toc-link" data-title="Projects search">Projects search</a>
+                  </li>
+                  <li>
                     <a href="#add-project-collaborators" class="toc-h2 toc-link" data-title="Add Project Collaborators">Add Project Collaborators</a>
                   </li>
                   <li>
@@ -462,7 +465,8 @@ Max <code>per_page</code> is 100.
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h@arcsite.com"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122122-121"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tag1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tag2"</span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -522,7 +526,8 @@ Max <code>per_page</code> is 100.
         "name": "Wang",
         "email": "h@arcsite.com",
         "phone": "122122-121"
-    }
+    },
+    "tags": ["tag1", "tag2"]
 }'</span>
 </code></pre></div>
 <blockquote>
@@ -559,7 +564,8 @@ Max <code>per_page</code> is 100.
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tag1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tag2"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint creates a new project.</p>
@@ -750,7 +756,8 @@ Max <code>per_page</code> is 100.
         "name": "Wang",
         "email": "h@arcsite.com",
         "phone": "122122-121"
-    }
+    },
+    "tags": ["tag1", "tag2"]
 }'</span>
 </code></pre></div>
 <p>This endpoint updates a project.</p>
@@ -794,10 +801,19 @@ Max <code>per_page</code> is 100.
 <td>SalesRep</td>
 <td>(optional) Sales Representative of the project</td>
 </tr>
+<tr>
+<td>tags</td>
+<td>List[String]</td>
+<td>(optional) Tags for this project</td>
+</tr>
 </tbody></table>
 
 <aside class='notice'>
 <code>operator</code> must be a valid ArcSite username belongs to same organization.
+</aside>
+
+<aside class='notice'>
+If <code>tags</code> is provided, the tags of the project will be replaced by the new provided tags. If the value of tags is set to <code>[]</code>, all existing tags on the project will be removed.
 </aside>
 <h2 id='get-project'>Get Project</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/projects/&lt;ID&gt;"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
@@ -836,12 +852,89 @@ Max <code>per_page</code> is 100.
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h@arcsite.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122122-121"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tag1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tag2"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Returns project of your organization by project id,</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET https://api.arcsite.com/v1/projects/&lt;id&gt;</code></p>
+<h2 id='projects-search'>Projects search</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> PATCH <span class="s1">'https://api.arcsite.com/v1/projects/search'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+    "project_name":"Updated project name",
+    "tags": ["Tag 1"]
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">36029621652695040</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated project name"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T04:19:23"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-16T04:19:23"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"job_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"144111"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jack"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1441"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"second_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1122"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c@arcsite.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"second_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s@arcsite.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"work_site_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"county"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300433"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h@arcsite.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122122-121"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Tag 1"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Search projects by conditions and returns the list of filtered projects in your organization. The projects are returned in sorted order, with the most recent created project appearing first.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/projects/search</code></p>
+<h3 id='parameters-3'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project_name</td>
+<td>String</td>
+<td>(optional) To filter projects which contains the value</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>List[String]</td>
+<td>(optional) To filter projects by the tags list.</td>
+</tr>
+</tbody></table>
+
+<aside class='notice'>
+When there are multiple <tags>tags</tags>, only projects that both have these tags will be returned. <br>For example, if tags are <code>["Tag 1", "Tag 2"]</code>, then the returned Projects will all have both <code>Tag 1</code> and <code>Tag 2</code>.
+</aside>
 <h2 id='add-project-collaborators'>Add Project Collaborators</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/projects/&lt;ID&gt;/add_collaborators'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -874,9 +967,9 @@ Max <code>per_page</code> is 100.
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/&lt;id&gt;/add_collaborators</code></p>
-<h3 id='parameters-3'>Parameters</h3>
+<h3 id='parameters-4'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -937,7 +1030,7 @@ The collaborator' ArcSite account must be created and add to your organization b
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>Returns drawings of a project.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>GET https://api.arcsite.com/v1/projects/&lt;id&gt;/drawings</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
@@ -989,7 +1082,7 @@ curl <span class="nt">--location</span> <span class="s1">'https://api.arcsite.co
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/&lt;project_id&gt;/import_pdf</code></p>
 <h3 id='request-payload'>Request Payload</h3>
 <table><thead>
@@ -1027,7 +1120,7 @@ Either <code>file</code> or <code>file_url</code> must be provided, but not both
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/&lt;ID&gt;/archive</code></p>
 <h2 id='unarchive-project'>Unarchive Project</h2>
 <p>This endpoint unarchive a project by project id.</p>
@@ -1039,7 +1132,7 @@ Either <code>file</code> or <code>file_url</code> must be provided, but not both
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/&lt;ID&gt;/unarchive</code></p>
 <h1 id='drawings'>Drawings</h1><h2 id='get-drawing'>Get Drawing</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
@@ -1939,7 +2032,11 @@ Check the Sales and Sales Items in the corresponding I360 Appointment.</p></li>
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"tag1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tag2"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint establishes an association between an I360 appointment and an existing ArcSite project.</p>
@@ -2151,7 +2248,11 @@ Check the file in the Attachments section of the associated Zoho CRM Record.</p>
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"tag1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tag2"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint establishes an association between a Zoho CRM record and an existing ArcSite project.</p>
@@ -2417,7 +2518,11 @@ Check the Products in the corresponding Salesforce opportunity.</p></li>
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wang"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"tag1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tag2"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint establishes an association between a Salesforce object and an existing ArcSite project.</p>
