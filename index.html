@@ -1146,7 +1146,6 @@ Either <code>file</code> or <code>file_url</code> must be provided, but not both
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drawing_1_Pre-Survey_Proposal (1)-page_03_test-page_02"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"pdf_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d1umxpetlubu85.cloudfront.net/36029346774787878/36029621652694930/40c01b5a-75d5-11ec-8ea1-0242ac170007/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02.pdf?Expires=1642318765&amp;Signature=Lh9XnGwEtt5DdZx4GAdp7J5qbJArHKS~lY39y2OjDsSRzpXPuv6H4x0RxfqYGi6gqrZxv56GMn2MiQXN9cM2VotAMpGWBsjm4cabdpLSXZNuhtqJ4k9~VBr3EyhgGIlIQk2HUlb-~McPlfbGNrbGbzj3P5mpEZ0Ce00OG0WUs3eolPEom9s4v7QNwWRrsyltFvEhZ~T4S8tRDCjyHa50al6GsNCLb5sBX7pW~oem2~GKGYj3a-kDuzCQiKLp4K7Ncc2njmDwVHThI9aSIlggbuejBa~XbWUf2WNgcbUq0~i0-e~yVN212~Qh7vHcXV4XFXQ-7k3zdxfLE8m9il5Ufg__&amp;Key-Pair-Id=APKAIZL6W5TJO2AK7DOQ"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"png_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d1umxpetlubu85.cloudfront.net/36029346774787878/36029621652694930/40c01b5a-75d5-11ec-8ea1-0242ac170007/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02.png"</span><span class="w">
-
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Returns drawing of your organization by project drawing id,</p>
@@ -1323,18 +1322,62 @@ If the <code>drawing_version_id</code> is passed, the drawing line items data of
 </tr>
 <tr>
 <td>sku</td>
-<td>String</td>
+<td>String?</td>
 <td>The stock keeping unit of the product; not provided for custom price items</td>
 </tr>
 <tr>
 <td>unit</td>
-<td>String</td>
+<td>String?</td>
 <td>The unit of measurement for the product&#39;s quantity; not provided for custom price items</td>
 </tr>
 <tr>
 <td>product_id</td>
-<td>String</td>
+<td>String?</td>
 <td>The ID of the product; not provided for custom price items</td>
+</tr>
+<tr>
+<td>price_part_items</td>
+<td>List[PricePartItem]?</td>
+<td>Detail of price part items; not provided for custom price items</td>
+</tr>
+</tbody></table>
+<h3 id='pricepartitem'>PricePartItem</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of price part option</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>String</td>
+<td>The sku of price part option</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Number</td>
+<td>The total price of price part option</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>Number</td>
+<td>The total cost of price part option</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>The total quantity of price part option</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>String</td>
+<td>The final unit of price part option</td>
 </tr>
 </tbody></table>
 <h3 id='taxitem'>TaxItem</h3>
