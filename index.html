@@ -292,8 +292,16 @@
                   <li>
                     <a href="#get-drawing" class="toc-h2 toc-link" data-title="Get Drawing">Get Drawing</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#product-items" class="toc-h1 toc-link" data-title="Product Items">Product Items</a>
+              <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-line-items" class="toc-h2 toc-link" data-title="Get Line items">Get Line items</a>
+                    <a href="#get-proposal-line-items" class="toc-h2 toc-link" data-title="Get Proposal Line items">Get Proposal Line items</a>
+                  </li>
+                  <li>
+                    <a href="#get-takeoff-line-items" class="toc-h2 toc-link" data-title="Get Takeoff Line items">Get Takeoff Line items</a>
                   </li>
               </ul>
           </li>
@@ -1179,7 +1187,25 @@ The returned urls will expire in 24 hours.
 <aside class="notice">
 The pdf could take some time(often less than 1 minute) to generate if the drawing contains location based photos, the <code>pdf_url</code> could be null before it has been generated.
 </aside>
-<h2 id='get-line-items'>Get Line items</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/line_items"</span> <span class="se">\</span>
+<h1 id='product-items'>Product Items</h1>
+<p>You can get product items from a drawing with the following APIs.</p>
+
+<ul>
+<li><a href="#get-proposal-line-items">Proposal Items</a>: Product items can be fetched in the way that we generate Product List of Proposal PDF.</li>
+</ul>
+
+<p><img src="images/export_proposal-06383326.png" alt="Export Proposal" /></p>
+
+<p><img src="images/export_proposal_sample-920284f1.png" alt="Export Proposal Sample" /></p>
+
+<ul>
+<li><a href="#get-takeoff-line-items">Takeoff Items</a>: Product items can be fetched in the way that we generate Takeoff report in Excel format.</li>
+</ul>
+
+<p><img src="images/export_takeoff-18088c04.png" alt="Export Takeoff" /></p>
+
+<p><img src="images/export_takeoff_sample-a27d454d.png" alt="Export Takeoff Sample" /></p>
+<h2 id='get-proposal-line-items'>Get Proposal Line items</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/line_items"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
 </code></pre></div>
 <blockquote>
@@ -1221,9 +1247,9 @@ The pdf could take some time(often less than 1 minute) to generate if the drawin
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Get line items by drawing id.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;/line_items</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1397,6 +1423,204 @@ If the <code>drawing_version_id</code> is passed, the drawing line items data of
 <td>total</td>
 <td>Number</td>
 <td>The total amount of tax</td>
+</tr>
+</tbody></table>
+<h2 id='get-takeoff-line-items'>Get Takeoff Line items</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/takeoff_items"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"takeoff_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"with attributes"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GM-100"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"287386775856064026"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Each"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sequence_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some text"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yesno"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHECKBOX"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"photo"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"https://cdn-files-1-test.arcsite.com/36029346774973628/282299611419718/282299611419728/F4AF22A9-F011-4214-8729-CAF3F1F9D9F6.jpg?Expires=1711452610&amp;Signature=sQz~sNF6xPGRPTvPBKyyXgKlA6jh0VSM6mXVpJ63XgYdCE1gat-nT~ZDXtcm~jEoK46UnUWU1ZlXPAiDx5IPwV25X1-pSb~jbXwdlkcz2jPkZPUN-ZWdaCvbMgTLJRvQw-V2RiUyrF83O5GLhJMVut8lfqsGjN3dgh5AtUc53h05dGRYbW-h-d6ItuSbebOTeZSXr8PCSl~n59wgfMRa5DdEilILGNZvGpM2kMaesHYBTiXfv1Z40Fv9rmRa~TLR~tefuEPDpkJWud4aAw7t1GTCSyaeXKL23fELMu~CTWMKvQ-TOqfBsbtBiEzUkrl67qgzDUD1HGimpZ3qweyf-w__&amp;Key-Pair-Id=APKAIZL6W5TJO2AK7DOQ"</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PHOTO"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"start_date"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-25T09:36:42.031Z"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DATE"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Get takeoff items by drawing id.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;/takeoff_items</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>drawing_version_id</td>
+<td>Optional[String]</td>
+<td>query</td>
+<td>The ID of the drawing version</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the drawing takeoff items data of the specified version will be returned. If not, the data of the latest version will be returned by default.
+</aside>
+<h3 id='response-schema-2'>Response Schema</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>takeoff_items</td>
+<td>List[TakeffItemByProduct]</td>
+<td>Takeoff items group by product</td>
+</tr>
+</tbody></table>
+<h3 id='takeffitembyproduct'>TakeffItemByProduct</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the product</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>The total quantity of the product</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>String</td>
+<td>The unit of measurement for the product&#39;s quantity</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>String</td>
+<td>The stock keeping unit of the product</td>
+</tr>
+<tr>
+<td>product_id</td>
+<td>String</td>
+<td>The ID of the product</td>
+</tr>
+<tr>
+<td>items</td>
+<td>List[TakeoffItem]</td>
+<td>The takeoff items of the product</td>
+</tr>
+</tbody></table>
+<h3 id='takeoffitem'>TakeoffItem</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>For geometric products, we use the quantity shown in the drawing. But for shape or virtual products, the quantity is always just one.</td>
+</tr>
+<tr>
+<td>sequence_number</td>
+<td>String</td>
+<td>Sequence Number for Shape product</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>String</td>
+<td>The input unit defined by the product</td>
+</tr>
+<tr>
+<td>attributes</td>
+<td>List[TakeoffAttribute]</td>
+<td>The attributes of of the item</td>
+</tr>
+</tbody></table>
+<h3 id='takeoffattribute'>TakeoffAttribute</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>The type of the attribute. Can be one of &quot;TEXT&quot;, &quot;PHOTO&quot;, &quot;CHECKBOX&quot;, or &quot;DATE&quot;.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>String, List[String], Boolean</td>
+<td>(optional) The value of the attribute. The type of this field depends on the <code>type</code> field:</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>- If <code>type</code> is &quot;TEXT&quot;, <code>value</code> is a string.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>- If <code>type</code> is &quot;PHOTO&quot;, <code>value</code> is a list of photo URLs.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>- If <code>type</code> is &quot;CHECKBOX&quot;, <code>value</code> is a boolean.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>- If <code>type</code> is &quot;DATE&quot;, <code>value</code> is a string in ISO format.</td>
 </tr>
 </tbody></table>
 <h1 id='products'>Products</h1><h2 id='query-products'>Query products</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/products"</span> <span class="se">\</span>
