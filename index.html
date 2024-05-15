@@ -2148,10 +2148,8 @@ A proposal option is associated with a specific drawing version in Arcsite. If y
 </tr>
 </tbody></table>
 <h1 id='integrations'>Integrations</h1><h2 id='improveit360-integration'>Improveit360 Integration</h2>
-<p>ArcSite Provides Out-of-the-Box <a href="#basic-standard-integration-for-i360">Basic Standard Integration</a> for essential features. With Basic Standard Integration, it supports auto-pushing Drawing PDFs, creating Sales data in I360 Appointments. No extra custom development is needed.</p>
-
-<p>We also provide Webhooks and APIs for customization. Please check out those <a href="#webhooks-and-apis-for-i360-customization">Webhooks and APIs for customization</a> for more details.</p>
-<h3 id='basic-standard-integration-for-i360'>Basic Standard Integration for I360</h3>
+<p>ArcSite Provides Out-of-the-Box <a href="#basic-standard-integration-for-i360">Standard Integration</a> for essential features. With Standard Integration, it supports auto-pushing Drawing PDFs, creating Sales data in I360 Appointments. No extra custom development is needed.</p>
+<h3 id='standard-integration-for-i360'>Standard Integration for I360</h3>
 <p><strong>Integrating I360 into ArcSite</strong></p>
 
 <p>For detailed settings and connection methods, please consult the setup guide:
@@ -2237,69 +2235,6 @@ ArcSite pushes the corresponding drawing line items data to Sales and Sales Item
 <li><p><strong>How to Verify</strong>:
 Check the Sales and Sales Items in the corresponding I360 Appointment.</p></li>
 </ul>
-<h3 id='webhooks-and-apis-for-i360-customization'>Webhooks and APIs for I360 Customization</h3>
-<p>If you need more customized features, ArcSite&#39;s Extended Integration offers specialized Webhooks and APIs for I360.</p>
-
-<ul>
-<li>Add <a href="#proposal-exported-in-app">Proposal Exported in App</a> webhook in user site admin page for custom developments.</li>
-<li>Use the <a href="#connected-i360-product">Connected I360 Product</a> API to fetch the connected I360 Product ID from ArcSite Product ID.</li>
-</ul>
-<h3 id='customization-examples'>Customization Examples:</h3><h3 id='create-a-quote-when-you-don-39-t-sell-the-project'>Create a Quote when you don&#39;t sell the project</h3>
-<p>Let&#39;s say you&#39;ve edited a Drawing and want to auto-generate I360 Quote and Quote Items when you select &quot;No&quot; in &quot;Do you want to push this proposal to I360?&quot; pop-up.</p>
-
-<p><strong>Implementation Steps:</strong></p>
-<div class="highlight"><pre class="highlight plaintext"><code> payload = get_payload_from_webhook()
- if payload.yes_no is False
-     # extract drawing_id and appointment_id from payload
-     drawing_id = payload.drawing_id
-     appointment_id = payload.appointment_id
-     # Fetch all Line Items info using drawing_id
-     line_items = request_arcsite_drawing_line_items_api(drawing_id)
-     # Generate I360 Quotes
-     # Create I360 Quote Items
- else
-     # Do nothing, arcsite will push line items data.
-</code></pre></div>
-<ol>
-<li>Complete Basic Integration and subscribe to the <a href="#prompt-after-exporting-proposal-in-app">Proposal Exported in App</a> Webhook.</li>
-<li>ArcSite sends payload data to your webhook URL. You should to extract the <code>yes_no</code> from the payload and <strong>handle the logic like the sample code</strong> right side.</li>
-<li>Extract <code>drawing_id</code> and <code>appointment_id</code> from the payload.</li>
-<li>Fetch all Line items info using the <code>drawng_id</code> via <a href="#get-line-items">Drawing Line Items API</a>.</li>
-<li><strong>Generate an I360 Quote Object</strong>
-
-<ul>
-<li>Name: Use the Drawing Name as the Quote&#39;s Name. </li>
-<li>Total: Use the <code>total</code> from the returned data as the <code>i360__Calculated_Total__c</code> of Quote. </li>
-<li>Tax Rate: Use sum of <code>tax</code> / <code>total</code> from returned data as the <code>i360__Sales_Tax_Rate__c</code> of Quote. </li>
-<li>Appointment ID: <code>appointment_id</code> extracted from the Webhook Payload.</li>
-</ul></li>
-<li><strong>Create I360 Quote Items</strong>
-
-<ul>
-<li>Name: Line item&#39;s <code>name</code></li>
-<li>Quantity: Line item&#39;s <code>quantity</code></li>
-<li>Unit Price: Use line item&#39;s <code>total</code> / <code>quantity</code> as the <code>i360__Unit_Price__c</code> of QuoteItem.</li>
-<li>Product ID: Fetch connected i360 product id using the Line Item&#39;s <code>product_id</code> via <a href="#connected-i360-product">Connected I360 Product</a>.</li>
-</ul></li>
-</ol>
-<h3 id='sold-the-appointment-when-you-sell-the-project'>Sold the appointment when you sell the project</h3>
-<p>Let&#39;s say you want to sell the project in i360 when you select &quot;Yes&quot; in &quot;Do you want to push this proposal to I360?&quot; pop-up.</p>
-
-<p><strong>Implementation Steps:</strong></p>
-<div class="highlight"><pre class="highlight plaintext"><code> payload = get_payload_from_webhook()
- if payload.yes_no is True
-     # extract appointment_id from payload
-     appointment_id = payload.appointment_id
-     # Update I360 Appointment Status to "Sold"
- else
-     # Do nothing
-</code></pre></div>
-<ol>
-<li>Complete Basic Integration and subscribe to the <a href="#prompt-after-exporting-proposal-in-app">Proposal Exported in App</a> Webhook.</li>
-<li>ArcSite sends payload data to your webhook URL. You should to extract the <code>yes_no</code> from the payload and <strong>handle the logic like the sample code</strong> right side.</li>
-<li>Extract <code>appointment_id</code> from the payload.</li>
-<li>Modify the I360 Appointment status to <strong>Sold</strong>.</li>
-</ol>
 <h3 id='apis-for-i360'>APIs for I360</h3><h3 id='associate-i360-appointment-with-arcsite-project'>Associate I360 Appointment with ArcSite Project</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/i360/associate_project'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -2745,7 +2680,7 @@ Check the Products in the corresponding Salesforce opportunity.</p></li>
 <li>Adding <a href="#prompt-after-exporting-proposal-in-app-for-salesforce">Proposal Exported in App</a> webhook in user site admin page for custom developments.</li>
 <li>Using the <a href="#connected-salesforce-product">Connected Salesforce Product</a> API to fetch the connected Salesforce Product2 ID from ArcSite Product ID.</li>
 </ul>
-<h3 id='customization-examples-2'>Customization Examples:</h3><h3 id='create-a-quote-when-you-don-39-t-sell-the-project-2'>Create a Quote when you don&#39;t sell the project</h3>
+<h3 id='customization-examples'>Customization Examples:</h3><h3 id='create-a-quote-when-you-don-39-t-sell-the-project'>Create a Quote when you don&#39;t sell the project</h3>
 <p>Let&#39;s say you&#39;ve edited a Drawing and want to auto-generate Salesforce Quote when you select &quot;No&quot; in &quot;Do you want to push this proposal to Salesforce?&quot; pop-up.</p>
 
 <p><strong>Implementation Steps:</strong></p>
