@@ -1843,6 +1843,43 @@ The returned url will expire in 24 hours.
 <p>To verify the signature, you need to compare the signature in the header of the incoming webhook request with the signature using the secret and the request body.
 The <code>ArcSite-Signature</code> header included in each signed event contains a timestamp and signature that you must verify. The timestamp is prefixed by <code>t=</code>, and the signature is prefixed by a <code>v=</code>.</p>
 
+<blockquote>
+<p>Python Example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">hmac</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">django.views.decorators.csrf</span> <span class="kn">import</span> <span class="n">csrf_exempt</span>
+
+
+<span class="n">SECRET</span> <span class="o">=</span> <span class="s">'your_webhook_secret'</span>
+
+
+<span class="k">def</span> <span class="nf">verify_webhook</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">secret</span><span class="p">):</span>
+    <span class="c1"># Extract timestamp and signature
+</span>    <span class="n">elements</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'='</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">header</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
+    <span class="n">timestamp</span><span class="p">,</span> <span class="n">signature</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="s">'t'</span><span class="p">],</span> <span class="n">elements</span><span class="p">[</span><span class="s">'v'</span><span class="p">]</span>
+    <span class="c1"># Prepare signed payload string
+</span>    <span class="n">signed_payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s">.</span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s">"</span>
+    <span class="c1"># Compute expected signature
+</span>    <span class="n">expected_signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">secret</span><span class="p">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">signed_payload</span><span class="p">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha256</span><span class="p">).</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="c1"># Verify signature
+</span>    <span class="k">return</span> <span class="n">hmac</span><span class="p">.</span><span class="n">compare_digest</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">expected_signature</span><span class="p">)</span>
+
+
+<span class="c1"># Django Example
+</span><span class="o">@</span><span class="n">csrf_exempt</span>
+<span class="k">def</span> <span class="nf">webhook_handler</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'POST'</span><span class="p">:</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">headers</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'ArcSite-Signature'</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">verify_webhook</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">SECRET</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">'Invalid signature or timestamp.'</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="c1"># TODO Process the valid webhook payload here
+</span>        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">'Webhook received successfully.'</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">'Method not allowed.'</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">405</span><span class="p">)</span>
+
+</code></pre></div>
 <p><strong>Step 1: Extract the timestamp and signature from the header</strong></p>
 
 <p>Split the header using the <code>,</code> character as the separator to get a list of elements. Then split each element using the <code>=</code> character as the separator to get a prefix and value pair.
@@ -1864,9 +1901,55 @@ The value for the prefix <code>t</code> corresponds to the timestamp and the pre
 
 <p><strong>Step 4: Compare the signature</strong></p>
 
-<p>Compare the signature in the header to the expected signature. For an equality match, compute the difference between the current timestamp and the received timestamp, then decide if the difference is within your tolerance.
-To protect against timing attacks, use a constant-time-string comparison to compare the expected signature to each of the received signatures.</p>
-<h2 id='project-created'>Project Created</h2>
+<p>Compare the signature in the header to the expected signature.</p>
+
+<blockquote>
+<p>NodeJS Example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">crypto</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">SECRET</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">your_webhook_secret</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">raw</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">*/*</span><span class="dl">"</span> <span class="p">}));</span>
+
+<span class="kd">function</span> <span class="nx">verifyWebhook</span><span class="p">(</span><span class="nx">header</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Extract timestamp and signature</span>
+  <span class="kd">const</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nx">header</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">,</span><span class="dl">"</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">]</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">=</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">acc</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">{});</span>
+  <span class="kd">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">elements</span><span class="p">[</span><span class="dl">"</span><span class="s2">v</span><span class="dl">"</span><span class="p">];</span>
+  <span class="c1">// Prepare signed payload string</span>
+  <span class="kd">const</span> <span class="nx">signedPayload</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">elements</span><span class="p">[</span><span class="dl">"</span><span class="s2">t</span><span class="dl">"</span><span class="p">]}</span><span class="s2">.</span><span class="p">${</span><span class="nx">payload</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+  <span class="c1">// Compute expected signature</span>
+  <span class="kd">const</span> <span class="nx">expectedSignature</span> <span class="o">=</span> <span class="nx">crypto</span>
+    <span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="dl">"</span><span class="s2">sha256</span><span class="dl">"</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">signedPayload</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="dl">"</span><span class="s2">hex</span><span class="dl">"</span><span class="p">);</span>
+  <span class="c1">// Verify signature</span>
+  <span class="k">return</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">timingSafeEqual</span><span class="p">(</span>
+    <span class="nx">Buffer</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">signature</span><span class="p">),</span>
+    <span class="nx">Buffer</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">expectedSignature</span><span class="p">)</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/webhook</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">header</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">"</span><span class="s2">arcsite-signature</span><span class="dl">"</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">payload</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="dl">"</span><span class="s2">utf-8</span><span class="dl">"</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">verifyWebhook</span><span class="p">(</span><span class="nx">header</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="nx">SECRET</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">Invalid signature.</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// TODO Process the valid webhook payload here</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">200</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">Webhook received successfully.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Server is running on port 3000`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><h2 id='project-created'>Project Created</h2>
 <p><code>project.created</code> Triggered when a project is created.</p>
 <h3 id='project-created-webhook-payload'>Project Created Webhook Payload</h3>
 <table><thead>
