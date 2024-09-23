@@ -2439,13 +2439,94 @@ Check the Sales and Sales Items in the corresponding I360 Appointment.</p></li>
 </tr>
 <tr>
 <td>project_id</td>
-<td>Int</td>
+<td>String</td>
 <td>(required) The ID of the existing ArcSite project.</td>
 </tr>
 </tbody></table>
 
 <aside class='notice'>
 An ArcSite project can only be associated with one Appointment, and attempting to associate it again if it's already associated will result in a failure.
+</aside>
+
+<div style="margin-top:20px;">
+</div>
+<h3 id='batch-associate-i360-appointment-with-arcsite-project'>Batch associate I360 Appointment with ArcSite Project</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/i360/batch/associate_project'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+  "items": [
+    {
+      "appointment_id": "AXh09668400GJgk",
+      "project_id": "36029621653386360"
+    },
+    {
+      "appointment_id": "BXh09668400GJgk",
+      "project_id": "36029621653386361"
+    },
+    {
+      "appointment_id": "CXh09668400GJgk",
+      "project_id": "36029621653386362"
+    }
+  ]
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="nl">"success_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"appointment_id"</span><span class="err">:</span><span class="w"> </span><span class="s2">"AXh09668400GJgk"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_id"</span><span class="err">:</span><span class="w"> </span><span class="s2">"36029621653386360"</span><span class="w">
+
+</span><span class="p">],</span><span class="w">
+</span><span class="nl">"fail_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"appointment_id"</span><span class="err">:</span><span class="w"> </span><span class="s2">"BXh09668400GJgk"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_id"</span><span class="err">:</span><span class="w"> </span><span class="s2">"36029621653386361"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="err">:</span><span class="w"> </span><span class="s2">"The project is already associated with an i360 Appointment"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint establishes multiple associations between I360 appointments and existing ArcSite projects.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/i360/batch/associate_project</code></p>
+<h3 id='parameters-2'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>items</td>
+<td>list[AssociateItem]</td>
+<td>array of associate items</td>
+</tr>
+</tbody></table>
+
+<p>AssociateItem </p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>appointment_id</td>
+<td>String</td>
+<td>(required) The ID of the appointment in I360.</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>String</td>
+<td>(required) The ID of the existing ArcSite project.</td>
+</tr>
+</tbody></table>
+
+<aside class='notice'>
+The maximum number of items in a single request is 100.
 </aside>
 <h3 id='connected-i360-product'>Connected I360 Product</h3>
 <p>In ArcSite, after setting up the I360 environment, you can connect an I360 Product to an ArcSite product within the ArcSite website.</p>
@@ -2462,7 +2543,7 @@ An ArcSite project can only be associated with one Appointment, and attempting t
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint provides the connected I360 product ID.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/i360/connected_product/&lt;arcsite_product_id&gt;</code></p>
 
 <aside class='notice'>
@@ -2638,9 +2719,9 @@ Check the file in the Attachments section of the associated Zoho CRM Record.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint establishes an association between a Zoho CRM record and an existing ArcSite project.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/zoho_crm/associate_project</code></p>
-<h3 id='parameters-2'>Parameters</h3>
+<h3 id='parameters-3'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2908,9 +2989,9 @@ Check the Products in the corresponding Salesforce opportunity.</p></li>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint establishes an association between a Salesforce object and an existing ArcSite project.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/salesforce/associate_project</code></p>
-<h3 id='parameters-3'>Parameters</h3>
+<h3 id='parameters-4'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2954,7 +3035,7 @@ Like Opportunity, Quote can also be associated with a Project and has the same f
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint provides the connected Salesforce Product2 ID.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/salesforce/connected_product/&lt;arcsite_product_id&gt;</code></p>
 
 <aside class='notice'>
