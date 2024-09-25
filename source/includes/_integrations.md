@@ -72,7 +72,6 @@ We categorize data pushing into three types based on the data involved:
 - **When to Push**: Proposal PDF will be triggered:
   - When user clicks the `Export` button in the app, a `Do you want to push this proposal to I360?` pop-up appears, if you select "Yes" it will trigger the push.
     ![Did You Sell?](images/i360/send_propsoal_to_i360.jpeg)
-  
 - **How It Works**: The proposal PDF is exported and pushing to I360, replacing any existing files.
 - **How to Verify**: Check these files in the Attachments section of the associated I360 Appointment.
 
@@ -80,6 +79,7 @@ We categorize data pushing into three types based on the data involved:
 
 - **When to push**:
   Product line items and pricing will be triggered:
+
   - When user clicks the `Export` button in the app, a `Do you want to push this proposal to I360?` pop-up appears, if you select "Yes" it will trigger the push.
     ![Did You Sell?](images/i360/send_propsoal_to_i360.jpeg)
   - Alternatively, click `Send to I360` button in the Takeoff & Estimate Tab on the drawing detail page of the user site.
@@ -91,9 +91,7 @@ We categorize data pushing into three types based on the data involved:
 - **How to Verify**:
   Check the Sales and Sales Items in the corresponding I360 Appointment.
 
-
 ### APIs for I360
-
 
 ### Associate I360 Appointment with ArcSite Project
 
@@ -142,10 +140,7 @@ curl -X POST 'https://api.arcsite.com/v1/i360/associate_project' \
     "email": "dev@arctuition.com",
     "phone": "122112"
   },
-  "tags": [
-    "tag1",
-    "tag2"
-  ]
+  "tags": ["tag1", "tag2"]
 }
 ```
 
@@ -160,7 +155,7 @@ This endpoint establishes an association between an I360 appointment and an exis
 | Parameter      | Type   | Description                                        |
 | -------------- | ------ | -------------------------------------------------- |
 | appointment_id | String | (required) The ID of the appointment in I360.      |
-| project_id     | String    | (required) The ID of the existing ArcSite project. |
+| project_id     | String | (required) The ID of the existing ArcSite project. |
 
 <aside class='notice'>
 An ArcSite project can only be associated with one Appointment, and attempting to associate it again if it's already associated will result in a failure.
@@ -170,7 +165,6 @@ An ArcSite project can only be associated with one Appointment, and attempting t
 </div>
 
 ### Batch associate I360 Appointment with ArcSite Project
-
 
 ```shell
 curl -X POST 'https://api.arcsite.com/v1/i360/batch/associate_project' \
@@ -193,7 +187,6 @@ curl -X POST 'https://api.arcsite.com/v1/i360/batch/associate_project' \
   ]
 }'
 ```
-
 
 > The above command returns JSON structured like this:
 
@@ -220,21 +213,20 @@ This endpoint establishes multiple associations between I360 appointments and ex
 
 ### Parameters
 
-| Parameter      | Type   | Description                                        |
-| -------------- | ------ | -------------------------------------------------- |
-| items | list[AssociateItem] | array of associate items     |
+| Parameter | Type                | Description              |
+| --------- | ------------------- | ------------------------ |
+| items     | list[AssociateItem] | array of associate items |
 
-AssociateItem 
+AssociateItem
 
 | Parameter      | Type   | Description                                        |
 | -------------- | ------ | -------------------------------------------------- |
 | appointment_id | String | (required) The ID of the appointment in I360.      |
-| project_id     | String    | (required) The ID of the existing ArcSite project. |
+| project_id     | String | (required) The ID of the existing ArcSite project. |
 
 <aside class='notice'>
 The maximum number of items in a single request is 100.
 </aside>
-
 
 ### Connected I360 Product
 
@@ -284,12 +276,11 @@ This webhook will only be triggered if:
 ### Prompt after exporting proposal in App Webhook Payload
 
 | Parameter      | Type    | Description                              |
-|----------------| ------- |------------------------------------------|
+| -------------- | ------- | ---------------------------------------- |
 | project_id     | String  | (required) The project id of the project |
 | drawing_id     | String  | (required) The drawing of the project    |
 | appointment_id | String  | (required) Associated Appointment ID     |
 | yes_no         | Boolean | (required) User Selection                |
-
 
 ## Zoho CRM Integration
 
@@ -356,13 +347,14 @@ Let’s say you want to create a Quotes record with product line items in Zoho C
      # Fetch all Line Items info using drawing_id
      ine_items = request_arcsite_drawing_line_items_api(drawing_id)
      # Create Zoho CRM Quotes or other record with the line items data
- ```
+```
 
 1. Complete Basic Integration and add the [Proposal Exported in App](#prompt-after-exporting-proposal-in-app-for-zoho-crm) Webhook.
 2. ArcSite sends payload data to your webhook URL. You should to extract the `yes_no` from the payload and **handle the logic like the sample code** right side.
 3. Extract `Drawing ID` and `zoho_module` and `zoho_record_id` from the payload.
 4. Fetch all Line items info using the `drawing_id` via [Drawing Line Items API](#get-line-items).
 5. Create Quotes record with Drawing Line Items Data
+
    - Deal_Name: Use the `zoho_module` and `zoho_record_id` to fetch the Deals record name from Zoho CRM.
    - Discount: Use the sum of `discount` and `markup` from the drawing line items data.
    - Tax: Use line items sum of`tax` as the `Tax` of Quotes record.
@@ -373,9 +365,7 @@ Let’s say you want to create a Quotes record with product line items in Zoho C
 
 6. Optionally, modify the record status or add other custom features.
 
-
 ### APIs for Zoho CRM
-
 
 ### Associate Zoho CRM Record with ArcSite Project
 
@@ -425,10 +415,7 @@ curl -X POST 'https://api.arcsite.com/v1/zoho_crm/associate_project' \
     "email": "dev@arctuition.com",
     "phone": "122112"
   },
-  "tags": [
-    "tag1",
-    "tag2"
-  ]
+  "tags": ["tag1", "tag2"]
 }
 ```
 
@@ -440,16 +427,15 @@ This endpoint establishes an association between a Zoho CRM record and an existi
 
 ### Parameters
 
-| Parameter          | Type   | Description                                                                                               |
-|--------------------| ------ |-----------------------------------------------------------------------------------------------------------|
-| zoho_module | String | (required) The Name of the Record in Zoho CRM, the value should one of Deals, Quotes, Leads and Contacts. |
-| zoho_record_id     | String | (required) The ID of the record in Zoho CRM.                                                              |
-| project_id         | Int    | (required) The ID of the existing ArcSite project.                                                        |
+| Parameter      | Type   | Description                                                                                               |
+| -------------- | ------ | --------------------------------------------------------------------------------------------------------- |
+| zoho_module    | String | (required) The Name of the Record in Zoho CRM, the value should one of Deals, Quotes, Leads and Contacts. |
+| zoho_record_id | String | (required) The ID of the record in Zoho CRM.                                                              |
+| project_id     | Int    | (required) The ID of the existing ArcSite project.                                                        |
 
 <aside class='notice'>
 An ArcSite Project can only be associated with one Zoho CRM record, and attempting to associate it again if it's already associated will result in a failure.
 </aside>
-
 
 ### Webhooks for Zoho CRM
 
@@ -469,15 +455,13 @@ This webhook will only be triggered if::
 
 ### Prompt after exporting proposal in App Webhook Payload
 
-| Parameter          | Type    | Description                                                                                 |
-|--------------------| ------- |---------------------------------------------------------------------------------------------|
-| project_id         | String  | (required) The project id of the project                                                    |
-| drawing_id         | String  | (required) The drawing of the project                                                       |
-| zoho_module | String  | (required) The name of the Zoho CRM module, the value should one of Deals, Quotes, Leads and Contacts. |
-| zoho_record_id     | Boolean | (required) The record ID in Zoho CRM                                                         |
-| yes_no             | Boolean | (required) User Selection                                                                   |
-
-
+| Parameter      | Type    | Description                                                                                            |
+| -------------- | ------- | ------------------------------------------------------------------------------------------------------ |
+| project_id     | String  | (required) The project id of the project                                                               |
+| drawing_id     | String  | (required) The drawing of the project                                                                  |
+| zoho_module    | String  | (required) The name of the Zoho CRM module, the value should one of Deals, Quotes, Leads and Contacts. |
+| zoho_record_id | Boolean | (required) The record ID in Zoho CRM                                                                   |
+| yes_no         | Boolean | (required) User Selection                                                                              |
 
 ## Salesforce Integration
 
@@ -514,7 +498,7 @@ Once you've successfully created the project and associated with the opportunity
 
 ### Connecting Products between ArcSite and Salesforce
 
-ArcSite supports the connection of one salesforce product2 to an ArcSite product through the [ArcSite Product Manager](https://user.arcsiteapp.com/admin/product_integration) web page in user site. Once connected, this connection relationship will be used when ArcSite pushes Line Items data to Salesforce. 
+ArcSite supports the connection of one salesforce product2 to an ArcSite product through the [ArcSite Product Manager](https://user.arcsiteapp.com/admin/product_integration) web page in user site. Once connected, this connection relationship will be used when ArcSite pushes Line Items data to Salesforce.
 
 <aside class='notice'>The connection of the product is very important for pushing line items to Salesforce. If there are any unassociated products in the drawing, the push of line items will fail.
 </aside>
@@ -551,21 +535,20 @@ We categorize data pushing into three types based on the data involved:
 - **How to Verify**:
   Check these files in the ContentDocument section of the associated Salesforce Opportunity.
 
-
 ### **Manual Push for Proposal PDF**
 
 - **When to Push**:
-   Proposal PDF will be triggered:
+  Proposal PDF will be triggered:
   - When user clicks the `Export` button in the app, a `Do you want to push this proposal to Salesforce?` pop-up appears, if you select "Yes" it will trigger the push.
     ![Do you want to push this proposal?](images/salesforce/send_proposal_to_salesforce.jpeg)
 - **How It Works**: The proposal PDF is exported and pushing to Salesforce, replacing any existing files.
 - **How to Verify**: Check these files in the Attachments section of the associated Salesforce Opportunity.
 
-
 ### Manual Push for Line Items and Pricing
 
 - **When to push**:
   Product line items and pricing will be triggered:
+
   - When user clicks the `Export` button in the app, a `Do you want to push this proposal to Salesforce?` pop-up appears, if you select "Yes" it will trigger the push.
     ![Do you want to push this proposal?](images/salesforce/send_proposal_to_salesforce.jpeg)
   - Alternatively, click `Send to Salesforce` button in the Takeoff & Estimate Tab on the drawing detail page of the user site.
@@ -605,7 +588,7 @@ Let's say you've edited a Drawing and want to auto-generate Salesforce Quote whe
      # Create Salesforce QuoteLineItems
  else
      # Do nothing, arcsite will push line items data.
- ```
+```
 
 1. Complete Basic Integration and subscribe to the [Proposal Exported in App](#prompt-after-exporting-proposal-in-app-for-salesforce) Webhook.
 2. ArcSite sends payload data to your webhook URL. You should to extract the `yes_no` from the payload and **handle the logic like the sample code** right side.
@@ -618,16 +601,14 @@ Let's say you've edited a Drawing and want to auto-generate Salesforce Quote whe
 - Tax: Use sum of `tax` from returned data as the `Tax` of Quote.
 - Discount: Use sum of `discount` from returned data as the `Discount` of Quote.
 
-6.**Create Salesforce QuoteLineItems**
+  6.**Create Salesforce QuoteLineItems**
 
 - QuoteId: Use the created Quote's ID as the `QuoteId` of QuoteLineItem.
 - Quantity: Line item's `Quantity`
 - Unit Price: Use line item's `total` / `quantity` as the `UnitPrice` of QuoteLineItem.
 - PricebookEntryId: Fetch connected Salesforce Product2 ID using the Line Item's `product_id` via [Connected Salesforce Product](#connected-salesforce-product), then use the returned Product2 ID to fetch the `PricebookEntryId` of QuoteLineItem.
 
-
 ### APIs for Salesforce
-
 
 ### Associate Salesforce Opportunity with ArcSite Project
 
@@ -677,10 +658,7 @@ curl -X POST 'https://api.arcsite.com/v1/salesforce/associate_project' \
     "email": "dev@arctuition.com",
     "phone": "122112"
   },
-  "tags": [
-    "tag1",
-    "tag2"
-  ]
+  "tags": ["tag1", "tag2"]
 }
 ```
 
@@ -693,7 +671,7 @@ This endpoint establishes an association between a Salesforce object and an exis
 ### Parameters
 
 | Parameter              | Type   | Description                                                                                     |
-|------------------------| ------ |-------------------------------------------------------------------------------------------------|
+| ---------------------- | ------ | ----------------------------------------------------------------------------------------------- |
 | salesforce_object_type | String | (required) The type of the Object in Salesforce, the value should one of Opportunity and Quote. |
 | salesforce_object_id   | String | (required) The ID of the object in Salesforce.                                                  |
 | project_id             | Int    | (required) The ID of the existing ArcSite project.                                              |
@@ -751,7 +729,7 @@ This webhook will only be triggered if:
 ### Prompt after exporting proposal in App Webhook Payload
 
 | Parameter              | Type    | Description                                                                                     |
-|------------------------|---------|-------------------------------------------------------------------------------------------------|
+| ---------------------- | ------- | ----------------------------------------------------------------------------------------------- |
 | project_id             | String  | (required) The project id of the project                                                        |
 | drawing_id             | String  | (required) The drawing of the project                                                           |
 | salesforce_object_type | String  | (required) The type of the Object in Salesforce, the value should one of Opportunity and Quote. |

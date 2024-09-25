@@ -31,10 +31,10 @@ Returns a list of proposal templates of your organization.
 | page      | 1       | query | Request a specific page |
 | per_page  | 10      | query | Page size               |
 
-## Export Proposal PDF
+## Get Proposal
 
 ```shell
-curl "https://api.arcsite.com/v1/export_proposal_pdf" \
+curl "https://api.arcsite.com/v1/proposal/<ID>" \
   -H "Authorization: Bearer **your_api_token_here**"
 ```
 
@@ -42,23 +42,20 @@ curl "https://api.arcsite.com/v1/export_proposal_pdf" \
 
 ```json
 {
-  "url": "https://d1umxpetlubu85.cloudfront.net/36029346774973628/36029621653386370/36029621653386685/c6f62f3d-db06-42df-8138-91d80e792e5d/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02_test.pdf"
+  "id": "36029621652695040",
+  "name": "project 4",
+  "created_at": "2022-01-16T04:19:23",
+  "approved_proposal_pdf_url": "https://api.arcsite.com/v1/proposal/36029621652695040.pdf"
 }
 ```
 
-Export Proposal PDF by giving the proposal template id.
+<aside class="notice">
+The approved_proposal_pdf_url field might be null if the proposal hasn’t been approved yet. For proposals that have been signed, the pdf_url will point to the final signed document.
+
+</aside>
+
+Returns proposal of your organization by proposal id.
 
 ### HTTP Request
 
-`POST https://api.arcsite.com/v1/export_proposal_pdf`
-
-### Parameters
-
-| Parameter   | Type   | Description                                                                       |
-| ----------- | ------ | --------------------------------------------------------------------------------- |
-| template_id | String | (required) Template id from [Query proposal templates](#query-proposal-templates) |
-| drawing_id  | String | (required) Drawing id                                                             |
-
-<aside class="notice">
-The returned url will expire in 24 hours.
-</aside>
+`GET https://api.arcsite.com/v1/proposal/<id>`
