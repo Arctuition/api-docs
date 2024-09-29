@@ -175,14 +175,14 @@ app.listen(3000, () => {
 
 ### Project Created Webhook Payload
 
-| Parameter          | Type     | Description                                    |
-| ------------------ | -------- | ---------------------------------------------- |
-| id                 | String   | (required) ID of the project                   |
-| name               | String   | (required) Name of the project                 |
-| customer           | Customer | (optional) Customer profile of the project     |
-| job_number         | String   | (optional) Job number of the project           |
-| work_site_addreess | Address  | (optional) Worksite address of the project     |
-| sales_rep          | SalesRep | (optional) Sales Representative of the project |
+| Parameter          | Type               | Description                                    |
+| ------------------ |--------------------| ---------------------------------------------- |
+| id                 | String             |  ID of the project                   |
+| name               | String             |  Name of the project                 |
+| customer           | Customer[Optional] |  Customer profile of the project     |
+| job_number         | String[Optional]             |  Job number of the project           |
+| work_site_addreess | Address[Optional]            |  Worksite address of the project     |
+| sales_rep          | SalesRep[Optional]           |  Sales Representative of the project |
 
 ## Drawing Created
 
@@ -199,10 +199,10 @@ For drawing created from the user site by uploading PDF files, the <code>png_url
 
 | Parameter  | Type   | Description                                              |
 | ---------- | ------ | -------------------------------------------------------- |
-| id         | String | (required) ID of the drawing                             |
-| project_id | String | (required) Project ID of the drawing                     |
-| name       | String | (required) Name of the drawing                           |
-| pdf_url    | String | (required) Download address of PDF format of the drawing |
+| id         | String |  ID of the drawing                             |
+| project_id | String |  Project ID of the drawing                     |
+| name       | String |  Name of the drawing                           |
+| pdf_url    | String |  Download address of PDF format of the drawing |
 | png_url    | String | Download address of PNG format of the drawing            |
 
 ## Drawing Updated
@@ -217,11 +217,11 @@ The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hour
 
 | Parameter  | Type   | Description                                              |
 | ---------- | ------ | -------------------------------------------------------- |
-| id         | String | (required) ID of the drawing                             |
-| project_id | String | (required) Project ID of the drawing                     |
-| name       | String | (required) Name of the drawing                           |
-| pdf_url    | String | (required) Download address of PDF format of the drawing |
-| png_url    | String | (required) Download address of PNG format of the drawing |
+| id         | String |  ID of the drawing                             |
+| project_id | String |  Project ID of the drawing                     |
+| name       | String |  Name of the drawing                           |
+| pdf_url    | String |  Download address of PDF format of the drawing |
+| png_url    | String |  Download address of PNG format of the drawing |
 
 ## Proposal PDF Signed
 
@@ -235,11 +235,11 @@ The returned <code>url</code> will expire in 24 hours. It's not a permanent link
 
 | Parameter          | Type   | Description                                                    |
 | ------------------ | ------ | -------------------------------------------------------------- |
-| project_id         | String | (required) Project ID of the drawing                           |
-| name               | String | (required) File name of the signed document                    |
-| url                | String | (required) Download address of the signed pdf                  |
-| drawing_id         | String | (required) The associated drawing id of the signed pdf         |
-| drawing_version_id | String | (required) The associated drawing version id of the signed pdf |
+| project_id         | String |  Project ID of the drawing                           |
+| name               | String |  File name of the signed document                    |
+| url                | String |  Download address of the signed pdf                  |
+| drawing_id         | String |  The associated drawing id of the signed pdf         |
+| drawing_version_id | String |  The associated drawing version id of the signed pdf |
 
 ## Proposal Sent
 
@@ -249,39 +249,44 @@ The returned <code>url</code> will expire in 24 hours. It's not a permanent link
 A proposal option is associated with a specific drawing version in Arcsite. If you need to get the line items data of the specified drawing version, you can use the <code>drawing_version_id</code> of the option in the Get line items API.
 </aside>
 
+<aside class="notice">
+The returned <code>url</code> in proposal options will expire in 24 hours. It's not a permanent link and should not be used in your system directly. You need to download the file from the url for your future use. 
+</aside>
+
 ### Proposal Sent Webhook Payload
 
 | Parameter            | Type                 | Description                                     |
 | -------------------- | -------------------- | ----------------------------------------------- |
-| project_id           | id                   | (required) Approved proposal related project ID |
-| proposal_id          | id                   | (required) Proposal ID                          |
-| name                 | String               | (required) Proposal name                        |
-| customer_name        | String               | (required) Proposal customer name               |
-| contact_email        | String               | (required) The sales email                      |
-| sales_representative | String               | (required) The sales name                       |
-| proposal_options     | List[ProposalOption] | (required) The proposal option data list        |
+| project_id           | id                   |  Approved proposal related project ID |
+| proposal_id          | id                   |  Proposal ID                          |
+| name                 | String               |  Proposal name                        |
+| customer_name        | String               |  Proposal customer name               |
+| contact_email        | String               |  The sales email                      |
+| sales_representative | String               |  The sales name                       |
+| proposal_options     | List[ProposalOption] |  The proposal option data list        |
 
 ### ProposalOption
 
 | Parameter          | Type   | Description                                                  |
-| ------------------ | ------ | ------------------------------------------------------------ |
-| name               | String | (required) Proposal option name                              |
-| drawing_id         | String | (required) The proposal option associated drawing ID         |
-| drawing_version_id | String | (required) The proposal option associated drawing version ID |
-| total              | String | (required) The total of the proposal option                  |
+|--------------------| ------ |--------------------------------------------------------------|
+| name               | String | Proposal option name                              |
+| drawing_id         | String | The proposal option associated drawing ID         |
+| drawing_version_id | String | The proposal option associated drawing version ID |
+| total              | Number | The total of the proposal option                  |
+| pdf_url            | String | Download address of the proposal option pdf file             |
 
 ## Proposal Approved
 
 `proposal.approved` Triggered when a proposal is approved by customer.
 
-### Proposal Sent Webhook Payload
+### Proposal Approved Webhook Payload
 
 | Parameter            | Type           | Description                                     |
 | -------------------- | -------------- | ----------------------------------------------- |
-| project_id           | id             | (required) Approved proposal related project ID |
-| proposal_id          | id             | (required) Proposal ID                          |
-| name                 | String         | (required) Proposal name                        |
-| customer_name        | String         | (required) Proposal customer name               |
-| contact_email        | String         | (required) The sales email                      |
-| sales_representative | String         | (required) The sales name                       |
-| approved_option      | ProposalOption | (required) Approved proposal option data        |
+| project_id           | id             | Approved proposal related project ID |
+| proposal_id          | id             |  Proposal ID                          |
+| name                 | String         |  Proposal name                        |
+| customer_name        | String         |  Proposal customer name               |
+| contact_email        | String         |  The sales email                      |
+| sales_representative | String         |  The sales name                       |
+| approved_option      | ProposalOption |  Approved proposal option data        |
