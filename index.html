@@ -1962,32 +1962,32 @@ The value for the prefix <code>t</code> corresponds to the timestamp and the pre
 <tr>
 <td>id</td>
 <td>String</td>
-<td>(required) ID of the project</td>
+<td>ID of the project</td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
-<td>(required) Name of the project</td>
+<td>Name of the project</td>
 </tr>
 <tr>
 <td>customer</td>
-<td>Customer</td>
-<td>(optional) Customer profile of the project</td>
+<td>Customer[Optional]</td>
+<td>Customer profile of the project</td>
 </tr>
 <tr>
 <td>job_number</td>
-<td>String</td>
-<td>(optional) Job number of the project</td>
+<td>String[Optional]</td>
+<td>Job number of the project</td>
 </tr>
 <tr>
 <td>work_site_addreess</td>
-<td>Address</td>
-<td>(optional) Worksite address of the project</td>
+<td>Address[Optional]</td>
+<td>Worksite address of the project</td>
 </tr>
 <tr>
 <td>sales_rep</td>
-<td>SalesRep</td>
-<td>(optional) Sales Representative of the project</td>
+<td>SalesRep[Optional]</td>
+<td>Sales Representative of the project</td>
 </tr>
 </tbody></table>
 <h2 id='drawing-created'>Drawing Created</h2>
@@ -2010,22 +2010,22 @@ For drawing created from the user site by uploading PDF files, the <code>png_url
 <tr>
 <td>id</td>
 <td>String</td>
-<td>(required) ID of the drawing</td>
+<td>ID of the drawing</td>
 </tr>
 <tr>
 <td>project_id</td>
 <td>String</td>
-<td>(required) Project ID of the drawing</td>
+<td>Project ID of the drawing</td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
-<td>(required) Name of the drawing</td>
+<td>Name of the drawing</td>
 </tr>
 <tr>
 <td>pdf_url</td>
 <td>String</td>
-<td>(required) Download address of PDF format of the drawing</td>
+<td>Download address of PDF format of the drawing</td>
 </tr>
 <tr>
 <td>png_url</td>
@@ -2050,27 +2050,27 @@ The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hour
 <tr>
 <td>id</td>
 <td>String</td>
-<td>(required) ID of the drawing</td>
+<td>ID of the drawing</td>
 </tr>
 <tr>
 <td>project_id</td>
 <td>String</td>
-<td>(required) Project ID of the drawing</td>
+<td>Project ID of the drawing</td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
-<td>(required) Name of the drawing</td>
+<td>Name of the drawing</td>
 </tr>
 <tr>
 <td>pdf_url</td>
 <td>String</td>
-<td>(required) Download address of PDF format of the drawing</td>
+<td>Download address of PDF format of the drawing</td>
 </tr>
 <tr>
 <td>png_url</td>
 <td>String</td>
-<td>(required) Download address of PNG format of the drawing</td>
+<td>Download address of PNG format of the drawing</td>
 </tr>
 </tbody></table>
 <h2 id='proposal-pdf-signed'>Proposal PDF Signed</h2>
@@ -2090,27 +2090,27 @@ The returned <code>url</code> will expire in 24 hours. It's not a permanent link
 <tr>
 <td>project_id</td>
 <td>String</td>
-<td>(required) Project ID of the drawing</td>
+<td>Project ID of the drawing</td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
-<td>(required) File name of the signed document</td>
+<td>File name of the signed document</td>
 </tr>
 <tr>
 <td>url</td>
 <td>String</td>
-<td>(required) Download address of the signed pdf</td>
+<td>Download address of the signed pdf</td>
 </tr>
 <tr>
 <td>drawing_id</td>
 <td>String</td>
-<td>(required) The associated drawing id of the signed pdf</td>
+<td>The associated drawing id of the signed pdf</td>
 </tr>
 <tr>
 <td>drawing_version_id</td>
 <td>String</td>
-<td>(required) The associated drawing version id of the signed pdf</td>
+<td>The associated drawing version id of the signed pdf</td>
 </tr>
 </tbody></table>
 <h2 id='proposal-sent'>Proposal Sent</h2>
@@ -2118,6 +2118,10 @@ The returned <code>url</code> will expire in 24 hours. It's not a permanent link
 
 <aside class="notice">
 A proposal option is associated with a specific drawing version in Arcsite. If you need to get the line items data of the specified drawing version, you can use the <code>drawing_version_id</code> of the option in the Get line items API.
+</aside>
+
+<aside class="notice">
+The returned <code>url</code> in proposal options will expire in 24 hours. It's not a permanent link and should not be used in your system directly. You need to download the file from the url for your future use. 
 </aside>
 <h3 id='proposal-sent-webhook-payload'>Proposal Sent Webhook Payload</h3>
 <table><thead>
@@ -2130,37 +2134,37 @@ A proposal option is associated with a specific drawing version in Arcsite. If y
 <tr>
 <td>project_id</td>
 <td>id</td>
-<td>(required) Approved proposal related project ID</td>
+<td>Approved proposal related project ID</td>
 </tr>
 <tr>
 <td>proposal_id</td>
 <td>id</td>
-<td>(required) Proposal ID</td>
+<td>Proposal ID</td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
-<td>(required) Proposal name</td>
+<td>Proposal name</td>
 </tr>
 <tr>
 <td>customer_name</td>
 <td>String</td>
-<td>(required) Proposal customer name</td>
+<td>Proposal customer name</td>
 </tr>
 <tr>
 <td>contact_email</td>
 <td>String</td>
-<td>(required) The sales email</td>
+<td>The sales email</td>
 </tr>
 <tr>
 <td>sales_representative</td>
 <td>String</td>
-<td>(required) The sales name</td>
+<td>The sales name</td>
 </tr>
 <tr>
 <td>proposal_options</td>
 <td>List[ProposalOption]</td>
-<td>(required) The proposal option data list</td>
+<td>The proposal option data list</td>
 </tr>
 </tbody></table>
 <h3 id='proposaloption'>ProposalOption</h3>
@@ -2174,27 +2178,32 @@ A proposal option is associated with a specific drawing version in Arcsite. If y
 <tr>
 <td>name</td>
 <td>String</td>
-<td>(required) Proposal option name</td>
+<td>Proposal option name</td>
 </tr>
 <tr>
 <td>drawing_id</td>
 <td>String</td>
-<td>(required) The proposal option associated drawing ID</td>
+<td>The proposal option associated drawing ID</td>
 </tr>
 <tr>
 <td>drawing_version_id</td>
 <td>String</td>
-<td>(required) The proposal option associated drawing version ID</td>
+<td>The proposal option associated drawing version ID</td>
 </tr>
 <tr>
 <td>total</td>
+<td>Number</td>
+<td>The total of the proposal option</td>
+</tr>
+<tr>
+<td>pdf_url</td>
 <td>String</td>
-<td>(required) The total of the proposal option</td>
+<td>Download address of the proposal option pdf file</td>
 </tr>
 </tbody></table>
 <h2 id='proposal-approved'>Proposal Approved</h2>
 <p><code>proposal.approved</code> Triggered when a proposal is approved by customer.</p>
-<h3 id='proposal-sent-webhook-payload-2'>Proposal Sent Webhook Payload</h3>
+<h3 id='proposal-approved-webhook-payload'>Proposal Approved Webhook Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2205,37 +2214,37 @@ A proposal option is associated with a specific drawing version in Arcsite. If y
 <tr>
 <td>project_id</td>
 <td>id</td>
-<td>(required) Approved proposal related project ID</td>
+<td>Approved proposal related project ID</td>
 </tr>
 <tr>
 <td>proposal_id</td>
 <td>id</td>
-<td>(required) Proposal ID</td>
+<td>Proposal ID</td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
-<td>(required) Proposal name</td>
+<td>Proposal name</td>
 </tr>
 <tr>
 <td>customer_name</td>
 <td>String</td>
-<td>(required) Proposal customer name</td>
+<td>Proposal customer name</td>
 </tr>
 <tr>
 <td>contact_email</td>
 <td>String</td>
-<td>(required) The sales email</td>
+<td>The sales email</td>
 </tr>
 <tr>
 <td>sales_representative</td>
 <td>String</td>
-<td>(required) The sales name</td>
+<td>The sales name</td>
 </tr>
 <tr>
 <td>approved_option</td>
 <td>ProposalOption</td>
-<td>(required) Approved proposal option data</td>
+<td>Approved proposal option data</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
