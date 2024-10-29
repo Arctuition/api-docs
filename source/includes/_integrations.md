@@ -526,11 +526,10 @@ To connect products, follow these steps:
 2. Navigate to `Integrations` -> `Product Manager` to locate the product you wish to connect.
    ![Untitled](images/salesforce/salesforce_click_connect_product.png)
 3. Click the connect button and select the corresponding Salesforce Product2.
-   ![Untitled](images/i360/select_i360_product_to_connect.png)
+   ![Untitled](images/i360/select_sf_product_to_connect.png)
 4. After connecting, the product status changes to connected, and the **Connect** button becomes **Update**.
-   ![Untitled](images/i360/connected_i360_product.png)
 5. If you wish to disconnect products, you can click **Update**, followed by the **Disconnect** button.
-   ![Untitled](images/i360/disconnect_i360_product.png)
+   ![Untitled](images/i360/disconnect_salesforce_product.png)
 
 <aside class='notice'>Please note that this feature exclusively supports basic products, Product Bundles or Product Groups cannot connect to third-party products. Additionally, a single Salesforce Product2 can only connect to one product.</aside>
 
