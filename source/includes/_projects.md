@@ -158,7 +158,7 @@ This endpoint creates a new project.
 | tags               | List[String] | (optional) Tags added to this project          |
 
 <aside class='notice'>
-<code>owner</code> must be a valid ArcSite username belongs to same organization.
+<code>owner</code> must be a valid ArcSite username/email belongs to same organization.
 </aside>
 
 ### Project Integrations
@@ -259,7 +259,7 @@ This endpoint updates a project.
 | tags               | List[String] | (optional) Tags for this project               |
 
 <aside class='notice'>
-<code>operator</code> must be a valid ArcSite username belongs to same organization.
+<code>operator</code> must be a valid ArcSite username/email belongs to same organization.
 </aside>
 
 <aside class='notice'>
@@ -443,7 +443,7 @@ This endpoint adds collaborators to a project. Successfully added collaborators 
 
 | Parameter | Type          | Description             |
 | --------- | ------------- | ----------------------- |
-| email     | string        | (required)              |
+| email     | string        | (required) The username or email of the collaborator              |
 | role      | [Role](#role) | (required) Project Role |
 
 ### Role
