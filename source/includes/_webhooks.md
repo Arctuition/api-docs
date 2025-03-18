@@ -290,3 +290,34 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | contact_email        | String         | The sales email                      |
 | sales_representative | String         | The sales name                       |
 | approved_option      | ProposalOption | Approved proposal option data        |
+
+## Proposal Status Change
+
+`proposal.status_change` Triggered when a proposal status changes.
+
+### Proposal Status Change Webhook Payload
+
+| Parameter            | Type   | Description                                                                                  |
+| -------------------- | ------ | -------------------------------------------------------------------------------------------- |
+| proposal_id          | id     | Proposal ID                                                                                  |
+| project_id           | id     | Proposal related project ID                                                                  |
+| name                 | String | Proposal name                                                                                |
+| status               | String | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED)                                           |
+| sales_representative | String | The sales name                                                                               |
+| contact_email        | String | The sales email                                                                              |
+| customer_name        | String | Proposal customer name                                                                       |
+| customer_email       | String | Proposal customer email                                                                      |
+| close_note           | String | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST) |
+| total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                   |
+| pdf_url              | String | (optional)Download address of the proposal pdf file (Only present when status is APPROVED)   |
+
+<aside class="notice">
+The status field is an enum with the following values:
+<ul>
+  <li><code>DRAFT</code>: When a new proposal is created</li>
+  <li><code>PENDING</code>: When a proposal is sent to the customer</li>
+  <li><code>VOID</code>: When a proposal is marked as void</li>
+  <li><code>LOST</code>: When a proposal is marked as lost</li>
+  <li><code>APPROVED</code>: When a proposal is approved by the customer</li>
+</ul>
+</aside>
