@@ -175,14 +175,14 @@ app.listen(3000, () => {
 
 ### Project Created Webhook Payload
 
-| Parameter          | Type               | Description                                    |
-| ------------------ |--------------------| ---------------------------------------------- |
-| id                 | String             |  ID of the project                   |
-| name               | String             |  Name of the project                 |
-| customer           | Customer[Optional] |  Customer profile of the project     |
-| job_number         | String[Optional]             |  Job number of the project           |
-| work_site_addreess | Address[Optional]            |  Worksite address of the project     |
-| sales_rep          | SalesRep[Optional]           |  Sales Representative of the project |
+| Parameter          | Type               | Description                         |
+| ------------------ | ------------------ | ----------------------------------- |
+| id                 | String             | ID of the project                   |
+| name               | String             | Name of the project                 |
+| customer           | Customer[Optional] | Customer profile of the project     |
+| job_number         | String[Optional]   | Job number of the project           |
+| work_site_addreess | Address[Optional]  | Worksite address of the project     |
+| sales_rep          | SalesRep[Optional] | Sales Representative of the project |
 
 ## Drawing Created
 
@@ -197,13 +197,13 @@ For drawing created from the user site by uploading PDF files, the <code>png_url
 
 ### Drawing Created Webhook Payload
 
-| Parameter  | Type   | Description                                              |
-| ---------- | ------ | -------------------------------------------------------- |
-| id         | String |  ID of the drawing                             |
-| project_id | String |  Project ID of the drawing                     |
-| name       | String |  Name of the drawing                           |
-| pdf_url    | String |  Download address of PDF format of the drawing |
-| png_url    | String | Download address of PNG format of the drawing            |
+| Parameter  | Type   | Description                                   |
+| ---------- | ------ | --------------------------------------------- |
+| id         | String | ID of the drawing                             |
+| project_id | String | Project ID of the drawing                     |
+| name       | String | Name of the drawing                           |
+| pdf_url    | String | Download address of PDF format of the drawing |
+| png_url    | String | Download address of PNG format of the drawing |
 
 ## Drawing Updated
 
@@ -215,13 +215,13 @@ The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hour
 
 ### Drawing Updated Webhook Payload
 
-| Parameter  | Type   | Description                                              |
-| ---------- | ------ | -------------------------------------------------------- |
-| id         | String |  ID of the drawing                             |
-| project_id | String |  Project ID of the drawing                     |
-| name       | String |  Name of the drawing                           |
-| pdf_url    | String |  Download address of PDF format of the drawing |
-| png_url    | String |  Download address of PNG format of the drawing |
+| Parameter  | Type   | Description                                   |
+| ---------- | ------ | --------------------------------------------- |
+| id         | String | ID of the drawing                             |
+| project_id | String | Project ID of the drawing                     |
+| name       | String | Name of the drawing                           |
+| pdf_url    | String | Download address of PDF format of the drawing |
+| png_url    | String | Download address of PNG format of the drawing |
 
 ## Proposal PDF Signed
 
@@ -233,13 +233,13 @@ The returned <code>url</code> will expire in 24 hours. It's not a permanent link
 
 ### Proposal PDF signed Webhook Payload
 
-| Parameter          | Type   | Description                                                    |
-| ------------------ | ------ | -------------------------------------------------------------- |
-| project_id         | String |  Project ID of the drawing                           |
-| name               | String |  File name of the signed document                    |
-| url                | String |  Download address of the signed pdf                  |
-| drawing_id         | String |  The associated drawing id of the signed pdf         |
-| drawing_version_id | String |  The associated drawing version id of the signed pdf |
+| Parameter          | Type   | Description                                         |
+| ------------------ | ------ | --------------------------------------------------- |
+| project_id         | String | Project ID of the drawing                           |
+| name               | String | File name of the signed document                    |
+| url                | String | Download address of the signed pdf                  |
+| drawing_id         | String | The associated drawing id of the signed pdf         |
+| drawing_version_id | String | The associated drawing version id of the signed pdf |
 
 ## Proposal Sent
 
@@ -255,25 +255,25 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 
 ### Proposal Sent Webhook Payload
 
-| Parameter            | Type                 | Description                                     |
-| -------------------- | -------------------- | ----------------------------------------------- |
-| project_id           | id                   |  Approved proposal related project ID |
-| proposal_id          | id                   |  Proposal ID                          |
-| name                 | String               |  Proposal name                        |
-| customer_name        | String               |  Proposal customer name               |
-| contact_email        | String               |  The sales email                      |
-| sales_representative | String               |  The sales name                       |
-| proposal_options     | List[ProposalOption] |  The proposal option data list        |
+| Parameter            | Type                 | Description                          |
+| -------------------- | -------------------- | ------------------------------------ |
+| project_id           | id                   | Approved proposal related project ID |
+| proposal_id          | id                   | Proposal ID                          |
+| name                 | String               | Proposal name                        |
+| customer_name        | String               | Proposal customer name               |
+| contact_email        | String               | The sales email                      |
+| sales_representative | String               | The sales name                       |
+| proposal_options     | List[ProposalOption] | The proposal option data list        |
 
 ### ProposalOption
 
-| Parameter          | Type   | Description                                                  |
-|--------------------| ------ |--------------------------------------------------------------|
+| Parameter          | Type   | Description                                       |
+| ------------------ | ------ | ------------------------------------------------- |
 | name               | String | Proposal option name                              |
 | drawing_id         | String | The proposal option associated drawing ID         |
 | drawing_version_id | String | The proposal option associated drawing version ID |
 | total              | Number | The total of the proposal option                  |
-| pdf_url            | String | Download address of the proposal option pdf file             |
+| pdf_url            | String | Download address of the proposal option pdf file  |
 
 ## Proposal Approved
 
@@ -281,12 +281,43 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 
 ### Proposal Approved Webhook Payload
 
-| Parameter            | Type           | Description                                     |
-| -------------------- | -------------- | ----------------------------------------------- |
+| Parameter            | Type           | Description                          |
+| -------------------- | -------------- | ------------------------------------ |
 | project_id           | id             | Approved proposal related project ID |
-| proposal_id          | id             |  Proposal ID                          |
-| name                 | String         |  Proposal name                        |
-| customer_name        | String         |  Proposal customer name               |
-| contact_email        | String         |  The sales email                      |
-| sales_representative | String         |  The sales name                       |
-| approved_option      | ProposalOption |  Approved proposal option data        |
+| proposal_id          | id             | Proposal ID                          |
+| name                 | String         | Proposal name                        |
+| customer_name        | String         | Proposal customer name               |
+| contact_email        | String         | The sales email                      |
+| sales_representative | String         | The sales name                       |
+| approved_option      | ProposalOption | Approved proposal option data        |
+
+## Proposal Status Change
+
+`proposal.status_change` Triggered when a proposal status changes.
+
+### Proposal Status Change Webhook Payload
+
+| Parameter            | Type   | Description                                                                                  |
+| -------------------- | ------ | -------------------------------------------------------------------------------------------- |
+| proposal_id          | id     | Proposal ID                                                                                  |
+| project_id           | id     | Proposal related project ID                                                                  |
+| name                 | String | Proposal name                                                                                |
+| status               | String | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED)                                           |
+| sales_representative | String | The sales name                                                                               |
+| contact_email        | String | The sales email                                                                              |
+| customer_name        | String | Proposal customer name                                                                       |
+| customer_email       | String | Proposal customer email                                                                      |
+| close_note           | String | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST) |
+| total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                   |
+| pdf_url              | String | (optional)Download address of the proposal pdf file (Only present when status is APPROVED)   |
+
+<aside class="notice">
+The status field is an enum with the following values:
+<ul>
+  <li><code>DRAFT</code>: When a new proposal is created</li>
+  <li><code>PENDING</code>: When a proposal is sent to the customer</li>
+  <li><code>VOID</code>: When a proposal is marked as void</li>
+  <li><code>LOST</code>: When a proposal is marked as lost</li>
+  <li><code>APPROVED</code>: When a proposal is approved by the customer</li>
+</ul>
+</aside>

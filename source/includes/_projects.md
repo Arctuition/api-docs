@@ -248,14 +248,14 @@ This endpoint updates a project.
 
 ### Parameters
 
-| Parameter          | Type     | Description                                    |
-| ------------------ | -------- |------------------------------------------------|
-| name               | String   | (required) Name of the project                 |
-| operator           | String   | (required) Who updates the project             |
-| customer           | Customer | (optional) Customer profile of the project     |
-| job_number         | String   | (optional) Job number of the project           |
-| work_site_addreess | Address  | (optional) Worksite address of the project     |
-| sales_rep          | SalesRep | (optional) Sales Representative of the project |
+| Parameter          | Type         | Description                                    |
+| ------------------ | ------------ | ---------------------------------------------- |
+| name               | String       | (required) Name of the project                 |
+| operator           | String       | (required) Who updates the project             |
+| customer           | Customer     | (optional) Customer profile of the project     |
+| job_number         | String       | (optional) Job number of the project           |
+| work_site_addreess | Address      | (optional) Worksite address of the project     |
+| sales_rep          | SalesRep     | (optional) Sales Representative of the project |
 | tags               | List[String] | (optional) Tags for this project               |
 
 <aside class='notice'>
@@ -366,9 +366,7 @@ curl -X PATCH 'https://api.arcsite.com/v1/projects/search' \
       "email": "h@arcsite.com",
       "phone": "122122-121"
     },
-    "tags": [
-      "Tag 1"
-    ]
+    "tags": ["Tag 1"]
   }
 ]
 ```
@@ -381,15 +379,14 @@ Searching projects by conditions and returns the list of filtered projects in yo
 
 ### Parameters
 
-| Parameter          | Type         | Description                                                        |
-|--------------------|--------------|--------------------------------------------------------------------|
-| project_name       | String       | (optional) To filter projects which contains the value |
-| tags               | List[String] | (optional) To filter projects by the tags list.                    |
+| Parameter    | Type         | Description                                            |
+| ------------ | ------------ | ------------------------------------------------------ |
+| project_name | String       | (optional) To filter projects which contains the value |
+| tags         | List[String] | (optional) To filter projects by the tags list.        |
 
 <aside class='notice'>
 When there are multiple <tags>tags</tags>, only projects that both have these tags will be returned. <br>For example, if tags are <code>["Tag 1", "Tag 2"]</code>, then the returned Projects will all have both <code>Tag 1</code> and <code>Tag 2</code>.
 </aside>
-
 
 ## Add Project Collaborators
 
@@ -441,10 +438,10 @@ This endpoint adds collaborators to a project. Successfully added collaborators 
 
 ### Collaborator
 
-| Parameter | Type          | Description             |
-| --------- | ------------- | ----------------------- |
-| email     | string        | (required) The username or email of the collaborator              |
-| role      | [Role](#role) | (required) Project Role |
+| Parameter | Type          | Description                                          |
+| --------- | ------------- | ---------------------------------------------------- |
+| email     | string        | (required) The username or email of the collaborator |
+| role      | [Role](#role) | (required) Project Role                              |
 
 ### Role
 
