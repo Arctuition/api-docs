@@ -291,9 +291,9 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | sales_representative | String         | The sales name                       |
 | approved_option      | ProposalOption | Approved proposal option data        |
 
-## Proposal Status Change
+## Proposal Status Changed
 
-`proposal.status_change` Triggered when a proposal status changes.
+`proposal.status_changed` Triggered when a proposal status changes.
 
 ### Proposal Status Change Webhook Payload
 
@@ -318,6 +318,6 @@ The status field is an enum with the following values:
   <li><code>PENDING</code>: When a proposal is sent to the customer</li>
   <li><code>VOID</code>: When a proposal is marked as void</li>
   <li><code>LOST</code>: When a proposal is marked as lost</li>
-  <li><code>APPROVED</code>: When a proposal is approved by the customer</li>
+  <li><code>APPROVED</code>: When a proposal is approved or esigned by the customer</li>
 </ul>
 </aside>
