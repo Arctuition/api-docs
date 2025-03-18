@@ -343,16 +343,16 @@
                     <a href="#drawing-updated" class="toc-h2 toc-link" data-title="Drawing Updated">Drawing Updated</a>
                   </li>
                   <li>
-                    <a href="#proposal-pdf-signed" class="toc-h2 toc-link" data-title="Proposal PDF Signed">Proposal PDF Signed</a>
+                    <a href="#proposal-pdf-signed-deprecated" class="toc-h2 toc-link" data-title="Proposal PDF Signed(Deprecated)">Proposal PDF Signed(Deprecated)</a>
                   </li>
                   <li>
-                    <a href="#proposal-sent" class="toc-h2 toc-link" data-title="Proposal Sent">Proposal Sent</a>
+                    <a href="#proposal-sent-deprecated" class="toc-h2 toc-link" data-title="Proposal Sent(Deprecated)">Proposal Sent(Deprecated)</a>
                   </li>
                   <li>
-                    <a href="#proposal-approved" class="toc-h2 toc-link" data-title="Proposal Approved">Proposal Approved</a>
+                    <a href="#proposal-approved-deprecated" class="toc-h2 toc-link" data-title="Proposal Approved(Deprecated)">Proposal Approved(Deprecated)</a>
                   </li>
                   <li>
-                    <a href="#proposal-status-change" class="toc-h2 toc-link" data-title="Proposal Status Change">Proposal Status Change</a>
+                    <a href="#proposal-status-changed" class="toc-h2 toc-link" data-title="Proposal Status Changed">Proposal Status Changed</a>
                   </li>
               </ul>
           </li>
@@ -2074,7 +2074,7 @@ The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hour
 <td>Download address of PNG format of the drawing</td>
 </tr>
 </tbody></table>
-<h2 id='proposal-pdf-signed'>Proposal PDF Signed</h2>
+<h2 id='proposal-pdf-signed-deprecated'>Proposal PDF Signed(Deprecated)</h2>
 <p><code>proposal.signed</code> Triggered when a proposal is signed in the app.</p>
 
 <aside class="notice">
@@ -2114,7 +2114,7 @@ The returned <code>url</code> will expire in 24 hours. It's not a permanent link
 <td>The associated drawing version id of the signed pdf</td>
 </tr>
 </tbody></table>
-<h2 id='proposal-sent'>Proposal Sent</h2>
+<h2 id='proposal-sent-deprecated'>Proposal Sent(Deprecated)</h2>
 <p><code>proposal.sent</code> Triggered when a proposal is sent to customer.</p>
 
 <aside class="notice">
@@ -2202,7 +2202,7 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 <td>Download address of the proposal option pdf file</td>
 </tr>
 </tbody></table>
-<h2 id='proposal-approved'>Proposal Approved</h2>
+<h2 id='proposal-approved-deprecated'>Proposal Approved(Deprecated)</h2>
 <p><code>proposal.approved</code> Triggered when a proposal is approved by customer.</p>
 <h3 id='proposal-approved-webhook-payload'>Proposal Approved Webhook Payload</h3>
 <table><thead>
@@ -2248,8 +2248,8 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 <td>Approved proposal option data</td>
 </tr>
 </tbody></table>
-<h2 id='proposal-status-change'>Proposal Status Change</h2>
-<p><code>proposal.status_change</code> Triggered when a proposal status changes.</p>
+<h2 id='proposal-status-changed'>Proposal Status Changed</h2>
+<p><code>proposal.status_changed</code> Triggered when a proposal status changes.</p>
 <h3 id='proposal-status-change-webhook-payload'>Proposal Status Change Webhook Payload</h3>
 <table><thead>
 <tr>
@@ -2311,7 +2311,7 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 <tr>
 <td>pdf_url</td>
 <td>String</td>
-<td>(optional)Download address of the proposal pdf file (Only present when status is APPROVED)</td>
+<td>(optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed</td>
 </tr>
 </tbody></table>
 
@@ -2322,7 +2322,7 @@ The status field is an enum with the following values:
   <li><code>PENDING</code>: When a proposal is sent to the customer</li>
   <li><code>VOID</code>: When a proposal is marked as void</li>
   <li><code>LOST</code>: When a proposal is marked as lost</li>
-  <li><code>APPROVED</code>: When a proposal is approved by the customer</li>
+  <li><code>APPROVED</code>: When a proposal is approved or esigned by the customer</li>
 </ul>
 </aside>
 <h1 id='errors'>Errors</h1>
