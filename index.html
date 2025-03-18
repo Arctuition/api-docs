@@ -351,6 +351,9 @@
                   <li>
                     <a href="#proposal-approved" class="toc-h2 toc-link" data-title="Proposal Approved">Proposal Approved</a>
                   </li>
+                  <li>
+                    <a href="#proposal-status-change" class="toc-h2 toc-link" data-title="Proposal Status Change">Proposal Status Change</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -914,9 +917,7 @@ If <code>tags</code> is provided, the tags of the project will be replaced by th
       </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h@arcsite.com"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122122-121"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"Tag 1"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Tag 1"</span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -2247,6 +2248,83 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 <td>Approved proposal option data</td>
 </tr>
 </tbody></table>
+<h2 id='proposal-status-change'>Proposal Status Change</h2>
+<p><code>proposal.status_change</code> Triggered when a proposal status changes.</p>
+<h3 id='proposal-status-change-webhook-payload'>Proposal Status Change Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>proposal_id</td>
+<td>id</td>
+<td>Proposal ID</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>id</td>
+<td>Proposal related project ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Proposal name</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED)</td>
+</tr>
+<tr>
+<td>sales_representative</td>
+<td>String</td>
+<td>The sales name</td>
+</tr>
+<tr>
+<td>contact_email</td>
+<td>String</td>
+<td>The sales email</td>
+</tr>
+<tr>
+<td>customer_name</td>
+<td>String</td>
+<td>Proposal customer name</td>
+</tr>
+<tr>
+<td>customer_email</td>
+<td>String</td>
+<td>Proposal customer email</td>
+</tr>
+<tr>
+<td>close_note</td>
+<td>String</td>
+<td>(optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)</td>
+</tr>
+<tr>
+<td>total</td>
+<td>Number</td>
+<td>(optional)The total of the proposal (Only present when status is APPROVED)</td>
+</tr>
+<tr>
+<td>pdf_url</td>
+<td>String</td>
+<td>(optional)Download address of the proposal pdf file (Only present when status is APPROVED)</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The status field is an enum with the following values:
+<ul>
+  <li><code>DRAFT</code>: When a new proposal is created</li>
+  <li><code>PENDING</code>: When a proposal is sent to the customer</li>
+  <li><code>VOID</code>: When a proposal is marked as void</li>
+  <li><code>LOST</code>: When a proposal is marked as lost</li>
+  <li><code>APPROVED</code>: When a proposal is approved by the customer</li>
+</ul>
+</aside>
 <h1 id='errors'>Errors</h1>
 <p>ArcSite uses HTTP response codes to indicate the success or failure of a request. Codes within the 2xx range are considered as successfully completed requests. Codes within the 4xx and 5xx ranges will indicate that a failure has occurred.</p>
 
@@ -2356,14 +2434,14 @@ Check these files in the Attachments section of the associated I360 Appointment.
 </ul>
 <h3 id='manual-push-for-proposal-pdf'><strong>Manual Push for Proposal PDF</strong></h3>
 <ul>
-<li><p><strong>When to Push</strong>: Proposal PDF will be triggered:</p>
+<li><strong>When to Push</strong>: Proposal PDF will be triggered:
 
 <ul>
 <li>When user clicks the <code>Export</code> button in the app, a <code>Do you want to push this proposal to I360?</code> pop-up appears, if you select &quot;Yes&quot; it will trigger the push.
 <img src="images/i360/send_propsoal_to_i360-f4afc1c6.jpeg" alt="Did You Sell?" /></li>
 </ul></li>
-<li><p><strong>How It Works</strong>: The proposal PDF is exported and pushing to I360, replacing any existing files.</p></li>
-<li><p><strong>How to Verify</strong>: Check these files in the Attachments section of the associated I360 Appointment.</p></li>
+<li><strong>How It Works</strong>: The proposal PDF is exported and pushing to I360, replacing any existing files.</li>
+<li><strong>How to Verify</strong>: Check these files in the Attachments section of the associated I360 Appointment.</li>
 </ul>
 <h3 id='manual-push-for-line-items-and-pricing'>Manual Push for Line Items and Pricing</h3>
 <ul>
@@ -2424,10 +2502,7 @@ Check the Sales and Sales Items in the corresponding I360 Appointment.</p></li>
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"tag1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"tag2"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tag1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tag2"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint establishes an association between an I360 appointment and an existing ArcSite project.</p>
@@ -2513,7 +2588,7 @@ An ArcSite project can only be associated with one Appointment, and attempting t
 </tr>
 </tbody></table>
 
-<p>AssociateItem </p>
+<p>AssociateItem</p>
 
 <table><thead>
 <tr>
@@ -2661,7 +2736,8 @@ Check the file in the Attachments section of the associated Zoho CRM Record.</p>
 <li>ArcSite sends payload data to your webhook URL. You should to extract the <code>yes_no</code> from the payload and <strong>handle the logic like the sample code</strong> right side.</li>
 <li>Extract <code>Drawing ID</code> and <code>zoho_module</code> and <code>zoho_record_id</code> from the payload.</li>
 <li>Fetch all Line items info using the <code>drawing_id</code> via <a href="#get-line-items">Drawing Line Items API</a>.</li>
-<li><p>Create Quotes record with Drawing Line Items Data</p>
+<li>Create Quotes record with Drawing Line Items Data</li>
+</ol>
 
 <ul>
 <li>Deal_Name: Use the <code>zoho_module</code> and <code>zoho_record_id</code> to fetch the Deals record name from Zoho CRM.</li>
@@ -2674,8 +2750,10 @@ Check the file in the Attachments section of the associated Zoho CRM Record.</p>
 <li>Quantity: Use the <code>quantity</code> of line item</li>
 <li>Price_Book_Name: Use the <code>zoho_product_id</code> fetched before to get or create PriceBook data from Zoho CRM.</li>
 </ul></li>
-</ul></li>
-<li><p>Optionally, modify the record status or add other custom features.</p></li>
+</ul>
+
+<ol>
+<li>Optionally, modify the record status or add other custom features.</li>
 </ol>
 <h3 id='apis-for-zoho-crm'>APIs for Zoho CRM</h3><h3 id='associate-zoho-crm-record-with-arcsite-project'>Associate Zoho CRM Record with ArcSite Project</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/zoho_crm/associate_project'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
@@ -2721,10 +2799,7 @@ Check the file in the Attachments section of the associated Zoho CRM Record.</p>
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"tag1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"tag2"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tag1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tag2"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint establishes an association between a Zoho CRM record and an existing ArcSite project.</p>
@@ -2838,7 +2913,7 @@ An ArcSite Project can only be associated with one Zoho CRM record, and attempti
 <li>If the <strong>Send to Salesforce</strong> button appears, it confirms the successful association, allowing the project to push data to associated salesforce opportunity. If the button is missing, this indicates a project association failure. Please check the <a href="#associate-salesforce-opportunity-with-arcsite-project">associate API</a> for more information.</li>
 </ol>
 <h3 id='connecting-products-between-arcsite-and-salesforce'>Connecting Products between ArcSite and Salesforce</h3>
-<p>ArcSite supports the connection of one salesforce product2 to an ArcSite product through the <a href="https://user.arcsiteapp.com/admin/product_integration">ArcSite Product Manager</a> web page in user site. Once connected, this connection relationship will be used when ArcSite pushes Line Items data to Salesforce. </p>
+<p>ArcSite supports the connection of one salesforce product2 to an ArcSite product through the <a href="https://user.arcsiteapp.com/admin/product_integration">ArcSite Product Manager</a> web page in user site. Once connected, this connection relationship will be used when ArcSite pushes Line Items data to Salesforce.</p>
 
 <aside class='notice'>The connection of the product is very important for pushing line items to Salesforce. If there are any unassociated products in the drawing, the push of line items will fail.
 </aside>
@@ -2991,10 +3066,7 @@ Check the Products in the corresponding Salesforce opportunity.</p></li>
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev@arctuition.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"122112"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"tag1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"tag2"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tag1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tag2"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint establishes an association between a Salesforce object and an existing ArcSite project.</p>
