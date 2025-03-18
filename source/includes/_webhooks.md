@@ -223,7 +223,7 @@ The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hour
 | pdf_url    | String | Download address of PDF format of the drawing |
 | png_url    | String | Download address of PNG format of the drawing |
 
-## Proposal PDF Signed
+## Proposal PDF Signed(Deprecated)
 
 `proposal.signed` Triggered when a proposal is signed in the app.
 
@@ -241,7 +241,7 @@ The returned <code>url</code> will expire in 24 hours. It's not a permanent link
 | drawing_id         | String | The associated drawing id of the signed pdf         |
 | drawing_version_id | String | The associated drawing version id of the signed pdf |
 
-## Proposal Sent
+## Proposal Sent(Deprecated)
 
 `proposal.sent` Triggered when a proposal is sent to customer.
 
@@ -275,7 +275,7 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | total              | Number | The total of the proposal option                  |
 | pdf_url            | String | Download address of the proposal option pdf file  |
 
-## Proposal Approved
+## Proposal Approved(Deprecated)
 
 `proposal.approved` Triggered when a proposal is approved by customer.
 
@@ -291,25 +291,25 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | sales_representative | String         | The sales name                       |
 | approved_option      | ProposalOption | Approved proposal option data        |
 
-## Proposal Status Change
+## Proposal Status Changed
 
-`proposal.status_change` Triggered when a proposal status changes.
+`proposal.status_changed` Triggered when a proposal status changes.
 
 ### Proposal Status Change Webhook Payload
 
-| Parameter            | Type   | Description                                                                                  |
-| -------------------- | ------ | -------------------------------------------------------------------------------------------- |
-| proposal_id          | id     | Proposal ID                                                                                  |
-| project_id           | id     | Proposal related project ID                                                                  |
-| name                 | String | Proposal name                                                                                |
-| status               | String | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED)                                           |
-| sales_representative | String | The sales name                                                                               |
-| contact_email        | String | The sales email                                                                              |
-| customer_name        | String | Proposal customer name                                                                       |
-| customer_email       | String | Proposal customer email                                                                      |
-| close_note           | String | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST) |
-| total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                   |
-| pdf_url              | String | (optional)Download address of the proposal pdf file (Only present when status is APPROVED)   |
+| Parameter            | Type   | Description                                                                                                                                          |
+| -------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| proposal_id          | id     | Proposal ID                                                                                                                                          |
+| project_id           | id     | Proposal related project ID                                                                                                                          |
+| name                 | String | Proposal name                                                                                                                                        |
+| status               | String | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED)                                                                                                   |
+| sales_representative | String | The sales name                                                                                                                                       |
+| contact_email        | String | The sales email                                                                                                                                      |
+| customer_name        | String | Proposal customer name                                                                                                                               |
+| customer_email       | String | Proposal customer email                                                                                                                              |
+| close_note           | String | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
+| total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                                                                           |
+| pdf_url              | String | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
 
 <aside class="notice">
 The status field is an enum with the following values:
@@ -318,6 +318,6 @@ The status field is an enum with the following values:
   <li><code>PENDING</code>: When a proposal is sent to the customer</li>
   <li><code>VOID</code>: When a proposal is marked as void</li>
   <li><code>LOST</code>: When a proposal is marked as lost</li>
-  <li><code>APPROVED</code>: When a proposal is approved by the customer</li>
+  <li><code>APPROVED</code>: When a proposal is approved or esigned by the customer</li>
 </ul>
 </aside>
