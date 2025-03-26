@@ -33,7 +33,7 @@ curl "https://api.arcsite.com/v1/drawings/<ID>/line_items" \
       "product_id": "19923123", // not exist for custom price items
       "sku": "sku1", //  not exist for custom price items
       "price": 3.5, //   not exist for custom price items
-      "cost": 5, // not exist for custom price items
+      "cost": 5,
       "unit": "FT" //   not exist for custom price items
     },
     {
