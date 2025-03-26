@@ -29,16 +29,18 @@ curl "https://api.arcsite.com/v1/drawings/<ID>/line_items" \
     {
       "name": "product1",
       "quantity": 2.26,
-      "total": 0
+      "total": 0,
       "product_id": "19923123", // not exist for custom price items
       "sku": "sku1", //  not exist for custom price items
       "price": 3.5, //   not exist for custom price items
-      "unit": "FT", //   not exist for custom price items
+      "cost": 5, // not exist for custom price items
+      "unit": "FT" //   not exist for custom price items
     },
     {
       "name": "product2",
       "quantity": 32.57,
-      "total": 128.98
+      "total": 128.98,
+      "cost": 200
     }
   ],
   "subtotal": 131.24,
@@ -97,6 +99,7 @@ If the <code>drawing_version_id</code> is passed, the drawing line items data of
 | quantity         | Number               | The quantity of the product                                                             |
 | total            | Number               | Item total after discounts and markup applied                                           |
 | price            | Number?              | Item total before discounts and markup applied; not provided for custom price items     |
+| cost             | Number?              | Item cost                                                                               |
 | sku              | String?              | The stock keeping unit of the product; not provided for custom price items              |
 | unit             | String?              | The unit of measurement for the product's quantity; not provided for custom price items |
 | product_id       | String?              | The ID of the product; not provided for custom price items                              |
