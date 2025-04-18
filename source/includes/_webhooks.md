@@ -307,6 +307,7 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | contact_email        | String | The sales email                                                                                                                                      |
 | customer_name        | String | Proposal customer name                                                                                                                               |
 | customer_email       | String | Proposal customer email                                                                                                                              |
+| document_number      | String | (optional) Proposal document number                                                                                                                  |
 | close_note           | String | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
 | total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                                                                           |
 | pdf_url              | String | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
