@@ -17,6 +17,9 @@ curl "https://api.arcsite.com/v1/drawings/<ID>" \
   "pdf_url": "https://d1umxpetlubu85.cloudfront.net/36029346774787878/36029621652694930/40c01b5a-75d5-11ec-8ea1-0242ac170007/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02.pdf?Expires=1642318765&Signature=Lh9XnGwEtt5DdZx4GAdp7J5qbJArHKS~lY39y2OjDsSRzpXPuv6H4x0RxfqYGi6gqrZxv56GMn2MiQXN9cM2VotAMpGWBsjm4cabdpLSXZNuhtqJ4k9~VBr3EyhgGIlIQk2HUlb-~McPlfbGNrbGbzj3P5mpEZ0Ce00OG0WUs3eolPEom9s4v7QNwWRrsyltFvEhZ~T4S8tRDCjyHa50al6GsNCLb5sBX7pW~oem2~GKGYj3a-kDuzCQiKLp4K7Ncc2njmDwVHThI9aSIlggbuejBa~XbWUf2WNgcbUq0~i0-e~yVN212~Qh7vHcXV4XFXQ-7k3zdxfLE8m9il5Ufg__&Key-Pair-Id=APKAIZL6W5TJO2AK7DOQ",
   "png_url": "https://d1umxpetlubu85.cloudfront.net/36029346774787878/36029621652694930/40c01b5a-75d5-11ec-8ea1-0242ac170007/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02.png",
   "dxf_url": "https://cdn-files-1-test.arcsite.com/36029346774973628/36029621653508440/_attach_282299611393362/Web_hook_location_photo.dxf?Expires=1711623376&Signature=qZSQPST2tdtKM9URUDEIdnwJiXSpNxRabMtmjg6hzdizcVmKJ4UIF-F~0LLiF1LT2y~vbx73CHDNFhZZgBNSjzWszV123qWOn68NyfU6fMdWRlMu4P51q7SWRmxMTlcnMGrF8F29HeilhnZOhBTiF~9oHPa62KRM7Duuq6z-T1RAF7w8mcZH46N4A3wXUyvcIeTaX4jbxCLQ83l2AGsFonD-NVwjeeuNba3MnrwpsTdBIUEbZXnRHNWYJx0i0HhENpr4xJLnX0lDAh9fXI2Zfo8MIapbm7iz8IhTUkwjRdjWU35uabdob1YJ19qVEMoHMqjnftEEkw7n44CYBYUY9w__&Key-Pair-Id=APKAIZL6W5TJO2AK7DOQ"
+  "tags": [
+    "Work Order"
+  ]
 }
 ```
 
@@ -42,6 +45,7 @@ Returns drawing of your organization by project drawing id,
 | pdf_url    | String &#124; null | The URL of the PDF file |
 | png_url    | String &#124; null | The URL of the PNG file |
 | dxf_url    | String &#124; null | The URL of the DXF file |
+| tags       | List[String] | Tags added to this drawing              |
 
 <aside class="notice">
 If the <code>drawing_version_id</code> is passed, the data of the specified version will be returned. If not, the data of the latest version will be returned by default.

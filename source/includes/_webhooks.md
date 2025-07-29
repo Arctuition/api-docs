@@ -204,6 +204,7 @@ For drawing created from the user site by uploading PDF files, the <code>png_url
 | name       | String | Name of the drawing                           |
 | pdf_url    | String | Download address of PDF format of the drawing |
 | png_url    | String | Download address of PNG format of the drawing |
+| tags       | List[String] | Tags added to this drawing              |
 
 ## Drawing Updated
 
@@ -222,6 +223,8 @@ The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hour
 | name       | String | Name of the drawing                           |
 | pdf_url    | String | Download address of PDF format of the drawing |
 | png_url    | String | Download address of PNG format of the drawing |
+| tags       | List[String] | Tags added to this drawing              |
+
 
 ## Proposal PDF Signed(Deprecated)
 
