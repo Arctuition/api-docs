@@ -453,6 +453,52 @@ This endpoint adds collaborators to a project. Successfully added collaborators 
 The collaborator' ArcSite account must be created and add to your organization before adding to the project coloaborator.
 </aside>
 
+## Remove Project Collaborators
+
+```shell
+curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/remove_collaborators' \
+-H 'Authorization: Bearer **your_api_token_here**' \
+-H 'Content-Type: application/json' \
+-d '{
+    "emails": [
+        "dev@arctuition.com",
+        "haowe12@arctui1tion.com"
+    ]
+  }
+```
+
+This endpoint removes collaborators from a project. Successfully removed collaborator emails are in `success_items` field of the response and failed items are in the `fail_items`.
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success_items": [
+    "dev@arctuition.com"
+  ],
+  "fail_items": [
+    {
+      "email": "haowe12@arctui1tion.com",
+      "message": "haowe12@arctui1tion.com is not a collaborator of this project."
+    }
+  ]
+}
+```
+
+### HTTP Request
+
+`POST https://api.arcsite.com/v1/projects/<id>/remove_collaborators`
+
+### Parameters
+
+| Parameter | Type          | Description                     |
+| --------- | ------------- | ------------------------------- |
+| emails    | List[String]  | (required) emails to remove     |
+
+<aside class='notice'>
+You can only remove collaborators who are currently collaborators of the project. The project owner cannot be removed from the project.
+</aside>
+
 ## Get Project Drawings
 
 ```shell
