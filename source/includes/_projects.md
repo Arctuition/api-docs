@@ -469,11 +469,6 @@ curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/remove_collaborators' \
 
 This endpoint removes collaborators from a project.
 
-> The above command returns JSON structured like this:
-
-```json
-{}
-```
 
 ### HTTP Request
 
@@ -485,9 +480,6 @@ This endpoint removes collaborators from a project.
 | --------- | ------------- | ------------------------------- |
 | emails    | List[String]  | (required) emails to remove     |
 
-<aside class='notice'>
-You can only remove collaborators who are currently collaborators of the project. The project owner cannot be removed from the project.
-</aside>
 
 ## Get Project Drawings
 
