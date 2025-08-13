@@ -273,6 +273,9 @@
                     <a href="#add-project-collaborators" class="toc-h2 toc-link" data-title="Add Project Collaborators">Add Project Collaborators</a>
                   </li>
                   <li>
+                    <a href="#remove-project-collaborators" class="toc-h2 toc-link" data-title="Remove Project Collaborators">Remove Project Collaborators</a>
+                  </li>
+                  <li>
                     <a href="#get-project-drawings" class="toc-h2 toc-link" data-title="Get Project Drawings">Get Project Drawings</a>
                   </li>
                   <li>
@@ -1024,6 +1027,33 @@ When there are multiple <tags>tags</tags>, only projects that both have these ta
 <aside class='notice'>
 The collaborator' ArcSite account must be created and add to your organization before adding to the project coloaborator.
 </aside>
+<h2 id='remove-project-collaborators'>Remove Project Collaborators</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/projects/&lt;ID&gt;/remove_collaborators'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+    "emails": [
+        "dev@arctuition.com",
+        "haowe12@arctui1tion.com"
+    ]
+  }
+</span></code></pre></div>
+<p>This endpoint removes collaborators from a project.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/projects/&lt;id&gt;/remove_collaborators</code></p>
+<h3 id='parameters-5'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>emails</td>
+<td>List[String]</td>
+<td>(required) emails to remove</td>
+</tr>
+</tbody></table>
 <h2 id='get-project-drawings'>Get Project Drawings</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/projects/&lt;ID&gt;/drawings"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
 </code></pre></div>
@@ -1042,7 +1072,7 @@ The collaborator' ArcSite account must be created and add to your organization b
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>Returns drawings of a project.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>GET https://api.arcsite.com/v1/projects/&lt;id&gt;/drawings</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
@@ -1094,7 +1124,7 @@ curl <span class="nt">--location</span> <span class="s1">'https://api.arcsite.co
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/&lt;project_id&gt;/import_pdf</code></p>
 <h3 id='request-payload'>Request Payload</h3>
 <table><thead>
@@ -1132,7 +1162,7 @@ Either <code>file</code> or <code>file_url</code> must be provided, but not both
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/&lt;ID&gt;/archive</code></p>
 <h2 id='unarchive-project'>Unarchive Project</h2>
 <p>This endpoint unarchive a project by project id.</p>
@@ -1144,7 +1174,7 @@ Either <code>file</code> or <code>file_url</code> must be provided, but not both
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-11'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/&lt;ID&gt;/unarchive</code></p>
 <h1 id='drawings'>Drawings</h1><h2 id='get-drawing'>Get Drawing</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
