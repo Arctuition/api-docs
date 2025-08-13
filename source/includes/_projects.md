@@ -467,22 +467,12 @@ curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/remove_collaborators' \
   }
 ```
 
-This endpoint removes collaborators from a project. Successfully removed collaborator emails are in `success_items` field of the response and failed items are in the `fail_items`.
+This endpoint removes collaborators from a project.
 
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "success_items": [
-    "dev@arctuition.com"
-  ],
-  "fail_items": [
-    {
-      "email": "haowe12@arctui1tion.com",
-      "message": "haowe12@arctui1tion.com is not a collaborator of this project."
-    }
-  ]
-}
+{}
 ```
 
 ### HTTP Request
