@@ -314,8 +314,8 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | close_note           | String | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
 | total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                                                                           |
 | pdf_url              | String | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
-| drawing_id              | String | (optional) The approved drawing id. Only present when status is APPROVED. |
-| drawing_version_id              | String | (optional) The version id of approved drawing. Only present when status is APPROVED. |
+| drawing_id           | String | (optional) The ID of the approved drawing. Only present when status is APPROVED. |
+| drawing_version_id   | String | (optional) The version ID of the approved drawing. Only present when status is APPROVED. |
 
 <aside class="notice">
 The status field is an enum with the following values:
