@@ -197,14 +197,14 @@ For drawing created from the user site by uploading PDF files, the <code>png_url
 
 ### Drawing Created Webhook Payload
 
-| Parameter  | Type   | Description                                   |
-| ---------- | ------ | --------------------------------------------- |
-| id         | String | ID of the drawing                             |
-| project_id | String | Project ID of the drawing                     |
-| name       | String | Name of the drawing                           |
-| pdf_url    | String | Download address of PDF format of the drawing |
-| png_url    | String | Download address of PNG format of the drawing |
-| tags       | List[String] | Tags added to this drawing              |
+| Parameter  | Type         | Description                                   |
+| ---------- | ------------ | --------------------------------------------- |
+| id         | String       | ID of the drawing                             |
+| project_id | String       | Project ID of the drawing                     |
+| name       | String       | Name of the drawing                           |
+| pdf_url    | String       | Download address of PDF format of the drawing |
+| png_url    | String       | Download address of PNG format of the drawing |
+| tags       | List[String] | Tags added to this drawing                    |
 
 ## Drawing Updated
 
@@ -216,15 +216,14 @@ The returned <code>pdf_url</code> or <code>png_url</code> will expire in 24 hour
 
 ### Drawing Updated Webhook Payload
 
-| Parameter  | Type   | Description                                   |
-| ---------- | ------ | --------------------------------------------- |
-| id         | String | ID of the drawing                             |
-| project_id | String | Project ID of the drawing                     |
-| name       | String | Name of the drawing                           |
-| pdf_url    | String | Download address of PDF format of the drawing |
-| png_url    | String | Download address of PNG format of the drawing |
-| tags       | List[String] | Tags added to this drawing              |
-
+| Parameter  | Type         | Description                                   |
+| ---------- | ------------ | --------------------------------------------- |
+| id         | String       | ID of the drawing                             |
+| project_id | String       | Project ID of the drawing                     |
+| name       | String       | Name of the drawing                           |
+| pdf_url    | String       | Download address of PDF format of the drawing |
+| png_url    | String       | Download address of PNG format of the drawing |
+| tags       | List[String] | Tags added to this drawing                    |
 
 ## Proposal PDF Signed(Deprecated)
 
@@ -314,6 +313,7 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | close_note           | String | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
 | total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                                                                           |
 | pdf_url              | String | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
+| approved_option      | Object | (optional) Contains `id` (String) and `drawing_id` (String) fields. Only present after proposal has been approved.                                   |
 
 <aside class="notice">
 The status field is an enum with the following values:
