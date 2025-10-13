@@ -75,7 +75,7 @@ If the <code>drawing_version_id</code> is passed, the field data of the specifie
 | Name  | Type   | Description                                                                                                                                           |
 | ----- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name  | String | The name of the field                                                                                                                                 |
-| type  | String | The type of the field. Possible values: TEXT, SWITCH, SELECT, DATE, NUMBER, SIGNATURE, etc.                                                           |
+| type  | String | The type of the field. Possible values: TEXT, SWITCH, SELECT, DATE, etc.                                                           |
 | value | Any    | The value of the field. The data type depends on the field type: String for TEXT/DATE, Boolean for SWITCH, Array of Strings for SELECT |
 
 <aside class="notice">
