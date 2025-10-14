@@ -14,6 +14,7 @@ includes:
   - projects
   - drawings
   - product_items
+  - field_data
   - products
   - proposals
   - webhooks
