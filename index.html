@@ -309,6 +309,14 @@
               </ul>
           </li>
           <li>
+            <a href="#field-data" class="toc-h1 toc-link" data-title="Field Data">Field Data</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-drawing-field-data" class="toc-h2 toc-link" data-title="Get Drawing Field Data">Get Drawing Field Data</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#products" class="toc-h1 toc-link" data-title="Products">Products</a>
               <ul class="toc-list-h2">
                   <li>
@@ -1715,6 +1723,130 @@ If the <code>drawing_version_id</code> is passed, the drawing takeoff items data
 <td>- If <code>type</code> is &quot;DATE&quot;, <code>value</code> is a string in ISO format.</td>
 </tr>
 </tbody></table>
+<h1 id='field-data'>Field Data</h1>
+<p>You can get field data values from a drawing with the following APIs.</p>
+<h2 id='get-drawing-field-data'>Get Drawing Field Data</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/field_data"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default Group"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"field_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Property Address"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Address 1, Address 2"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No Visible Evidence"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SWITCH"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign by Seller(s) or Owner"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"Seller(s)"</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Get field data value by drawing id.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;/field_data</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>drawing_version_id</td>
+<td>Optional[String]</td>
+<td>query</td>
+<td>The ID of the drawing version</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the field data of the specified drawing version will be returned. If not, the field data of the latest version will be returned by default.
+</aside>
+<h3 id='response-schema'>Response Schema</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groups</td>
+<td>List[Group]</td>
+<td>List of field data groups in the drawing</td>
+</tr>
+</tbody></table>
+<h3 id='group'>Group</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the field data group</td>
+</tr>
+<tr>
+<td>field_data</td>
+<td>List[FieldData]</td>
+<td>List of field data items within this group</td>
+</tr>
+</tbody></table>
+<h3 id='fielddata'>FieldData</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the field</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>The type of the field. Possible values: TEXT, SWITCH, SELECT, DATE, etc.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>Any</td>
+<td>The value of the field. The data type depends on the field type: String for TEXT/DATE, Boolean for SWITCH, Array of Strings for SELECT</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The <code>value</code> field type varies based on the <code>type</code> field:
+<ul>
+  <li><code>TEXT</code>, <code>DATE</code>: Returns a String value</li>
+  <li><code>SWITCH</code>: Returns a Boolean value (true/false)</li>
+  <li><code>SELECT</code>: Returns an Array of Strings (supports multiple selections)</li>
+</ul>
+</aside>
 <h1 id='products'>Products</h1><h2 id='query-products'>Query products</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/products"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
 </code></pre></div>
