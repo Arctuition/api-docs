@@ -43,7 +43,8 @@ curl "https://api.arcsite.com/v1/projects" \
       "email": "h@arcsite.com",
       "phone": "122122-121"
     },
-    "tags": ["tag1", "tag2"]
+    "tags": ["tag1", "tag2"],
+    "archived": false
   }
 ]
 ```
@@ -135,7 +136,8 @@ curl -X POST 'https://api.arcsite.com/v1/projects' \
     "email": "dev@arctuition.com",
     "phone": "122112"
   },
-  "tags": ["tag1", "tag2"]
+  "tags": ["tag1", "tag2"],
+  "archived": false
 }
 ```
 
@@ -308,7 +310,8 @@ curl "https://api.arcsite.com/v1/projects/<ID>" \
     "email": "h@arcsite.com",
     "phone": "122122-121"
   },
-  "tags": ["tag1", "tag2"]
+  "tags": ["tag1", "tag2"],
+  "archived": false
 }
 ```
 
@@ -366,7 +369,8 @@ curl -X PATCH 'https://api.arcsite.com/v1/projects/search' \
       "email": "h@arcsite.com",
       "phone": "122122-121"
     },
-    "tags": ["Tag 1"]
+    "tags": ["Tag 1"],
+    "archived": false
   }
 ]
 ```
