@@ -183,8 +183,6 @@ app.listen(3000, () => {
 | job_number         | String[Optional]   | Job number of the project           |
 | work_site_addreess | Address[Optional]  | Worksite address of the project     |
 | sales_rep          | SalesRep[Optional] | Sales Representative of the project |
-| tags               | List[String] | List of tags added to the project |
-| archived           | Boolean      | Indicates whether the project is archived |
 
 ## Drawing Created
 
