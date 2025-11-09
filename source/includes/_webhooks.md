@@ -382,7 +382,7 @@ The time field in the payload depends on the <code>pay_channel</code>:
 Check the <code>pay_channel</code> field to determine which time field to use.
 </aside>
 
-<aside class="warning">
+<aside class="notice">
 <strong>Important Notes:</strong>
 <ul>
   <li>The <code>paid_amount</code> represents the amount of <strong>this specific payment</strong>, not the cumulative total paid for the proposal</li>
