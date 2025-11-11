@@ -325,3 +325,67 @@ The status field is an enum with the following values:
   <li><code>APPROVED</code>: When a proposal is approved or esigned by the customer</li>
 </ul>
 </aside>
+
+## Proposal Payment Received
+
+`proposal.payment.received` Triggered when a payment is successfully received for a proposal.
+
+This webhook fires for both ArcSite Payment and Mark as Paid (manual payment recording). The webhook is triggered once per payment transaction.
+
+> ArcSite Payment Example
+
+```json
+{
+  "event": "proposal.payment.received",
+  "data": {
+    "proposal_id": "12345",
+    "paid_amount": 5000.0,
+    "pay_channel": "arcsite_payment",
+    "paid_time": "2025-11-06T10:30:00+00:00",
+    "payment_method": "Credit Card"
+  }
+}
+```
+
+> Mark as Paid Example (manual payment recording)
+
+```json
+{
+  "event": "proposal.payment.received",
+  "data": {
+    "proposal_id": "12345",
+    "paid_amount": 2500.0,
+    "pay_channel": "mark_as_paid",
+    "paid_date": "2025-11-06",
+    "payment_method": "Check"
+  }
+}
+```
+
+### Proposal Payment Received Webhook Payload
+
+| Parameter        | Type   | Description                                                                                                       |
+| ---------------- | ------ | ----------------------------------------------------------------------------------------------------------------- |
+| proposal_id      | String | ID of the proposal that received the payment                                                                      |
+| paid_amount      | Number | Amount of this specific payment (not cumulative). Decimal with 2 decimal places                                   |
+| pay_channel      | String | Payment channel identifier: `arcsite_payment` (online payment) or `mark_as_paid` (manual recording)               |
+| paid_time        | String | (conditional) Timestamp when payment was received. Only present when `pay_channel` is `arcsite_payment`. ISO 8601 |
+| paid_date        | String | (conditional) Date when payment was recorded. Only present when `pay_channel` is `mark_as_paid`. ISO 8601 date    |
+| payment_method   | String | Payment method. Examples: `Credit Card`, `ACH`, `Check`, `Cash`                                                   |
+
+<aside class="notice">
+The time field in the payload depends on the <code>pay_channel</code>:
+<ul>
+  <li>When <code>pay_channel</code> is <code>arcsite_payment</code>, the <code>paid_time</code> field contains the precise datetime of payment in ISO 8601 format</li>
+  <li>When <code>pay_channel</code> is <code>mark_as_paid</code>, the <code>paid_date</code> field contains only the date (no time component) in ISO 8601 format</li>
+</ul>
+Check the <code>pay_channel</code> field to determine which time field to use.
+</aside>
+
+<aside class="notice">
+<strong>Important Notes:</strong>
+<ul>
+  <li>The <code>paid_amount</code> represents the amount of <strong>this specific payment</strong>, not the cumulative total paid for the proposal</li>
+  <li>If a proposal has multiple payments, you will receive a separate webhook for each payment</li>
+</ul>
+</aside>
