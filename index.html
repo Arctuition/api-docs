@@ -365,6 +365,9 @@
                   <li>
                     <a href="#proposal-status-changed" class="toc-h2 toc-link" data-title="Proposal Status Changed">Proposal Status Changed</a>
                   </li>
+                  <li>
+                    <a href="#proposal-payment-received" class="toc-h2 toc-link" data-title="Proposal Payment Received">Proposal Payment Received</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -2524,6 +2527,94 @@ The status field is an enum with the following values:
   <li><code>VOID</code>: When a proposal is marked as void</li>
   <li><code>LOST</code>: When a proposal is marked as lost</li>
   <li><code>APPROVED</code>: When a proposal is approved or esigned by the customer</li>
+</ul>
+</aside>
+<h2 id='proposal-payment-received'>Proposal Payment Received</h2>
+<p><code>proposal.payment.received</code> Triggered when a payment is successfully received for a proposal.</p>
+
+<p>This webhook fires for both ArcSite Payment and Mark as Paid (manual payment recording). The webhook is triggered once per payment transaction.</p>
+
+<blockquote>
+<p>ArcSite Payment Example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"proposal.payment.received"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"proposal_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paid_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">5000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pay_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arcsite_payment"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paid_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-11-06T10:30:00+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Credit Card"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Mark as Paid Example (manual payment recording)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"proposal.payment.received"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"proposal_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paid_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2500.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pay_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mark_as_paid"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paid_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-11-06"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='proposal-payment-received-webhook-payload'>Proposal Payment Received Webhook Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>proposal_id</td>
+<td>String</td>
+<td>ID of the proposal that received the payment</td>
+</tr>
+<tr>
+<td>paid_amount</td>
+<td>Number</td>
+<td>Amount of this specific payment (not cumulative). Decimal with 2 decimal places</td>
+</tr>
+<tr>
+<td>pay_channel</td>
+<td>String</td>
+<td>Payment channel identifier: <code>arcsite_payment</code> (online payment) or <code>mark_as_paid</code> (manual recording)</td>
+</tr>
+<tr>
+<td>paid_time</td>
+<td>String</td>
+<td>(conditional) Timestamp when payment was received. Only present when <code>pay_channel</code> is <code>arcsite_payment</code>. ISO 8601</td>
+</tr>
+<tr>
+<td>paid_date</td>
+<td>String</td>
+<td>(conditional) Date when payment was recorded. Only present when <code>pay_channel</code> is <code>mark_as_paid</code>. ISO 8601 date</td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td>String</td>
+<td>Payment method. Examples: <code>Credit Card</code>, <code>ACH</code>, <code>Check</code>, <code>Cash</code></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The time field in the payload depends on the <code>pay_channel</code>:
+<ul>
+  <li>When <code>pay_channel</code> is <code>arcsite_payment</code>, the <code>paid_time</code> field contains the precise datetime of payment in ISO 8601 format</li>
+  <li>When <code>pay_channel</code> is <code>mark_as_paid</code>, the <code>paid_date</code> field contains only the date (no time component) in ISO 8601 format</li>
+</ul>
+Check the <code>pay_channel</code> field to determine which time field to use.
+</aside>
+
+<aside class="notice">
+<strong>Important Notes:</strong>
+<ul>
+  <li>The <code>paid_amount</code> represents the amount of <strong>this specific payment</strong>, not the cumulative total paid for the proposal</li>
+  <li>If a proposal has multiple payments, you will receive a separate webhook for each payment</li>
 </ul>
 </aside>
 <h1 id='errors'>Errors</h1>
