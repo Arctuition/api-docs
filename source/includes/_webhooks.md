@@ -313,7 +313,7 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | close_note           | String | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
 | total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                                                                           |
 | pdf_url              | String | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
-| approved_option      | Object | (optional) Contains `drawing_id` (String) field and `id` (String) field only for online approvals. Only present when status is APPROVED           |
+| approved_option      | Object | (optional) Contains `drawing_id` (String) field and `id` (String) field only for online approvals. Only present when status is APPROVED              |
 
 <aside class="notice">
 The status field is an enum with the following values:
@@ -342,6 +342,7 @@ This webhook fires for both ArcSite Payment and Mark as Paid (manual payment rec
     "paid_amount": 5000.0,
     "pay_channel": "arcsite_payment",
     "paid_time": "2025-11-06T10:30:00+00:00",
+    "drawing_id": "22444",
     "payment_method": "Credit Card"
   }
 }
@@ -357,6 +358,7 @@ This webhook fires for both ArcSite Payment and Mark as Paid (manual payment rec
     "paid_amount": 2500.0,
     "pay_channel": "mark_as_paid",
     "paid_date": "2025-11-06",
+    "drawing_id": "22444",
     "payment_method": "Check"
   }
 }
@@ -364,14 +366,15 @@ This webhook fires for both ArcSite Payment and Mark as Paid (manual payment rec
 
 ### Proposal Payment Received Webhook Payload
 
-| Parameter        | Type   | Description                                                                                                       |
-| ---------------- | ------ | ----------------------------------------------------------------------------------------------------------------- |
-| proposal_id      | String | ID of the proposal that received the payment                                                                      |
-| paid_amount      | Number | Amount of this specific payment (not cumulative). Decimal with 2 decimal places                                   |
-| pay_channel      | String | Payment channel identifier: `arcsite_payment` (online payment) or `mark_as_paid` (manual recording)               |
-| paid_time        | String | (conditional) Timestamp when payment was received. Only present when `pay_channel` is `arcsite_payment`. ISO 8601 |
-| paid_date        | String | (conditional) Date when payment was recorded. Only present when `pay_channel` is `mark_as_paid`. ISO 8601 date    |
-| payment_method   | String | Payment method. Examples: `Credit Card`, `ACH`, `Check`, `Cash`                                                   |
+| Parameter      | Type   | Description                                                                                                       |
+| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------- |
+| proposal_id    | String | ID of the proposal that received the payment                                                                      |
+| drawing_id     | String | The approved drawing id of the proposal                                                                           |
+| paid_amount    | Number | Amount of this specific payment (not cumulative). Decimal with 2 decimal places                                   |
+| pay_channel    | String | Payment channel identifier: `arcsite_payment` (online payment) or `mark_as_paid` (manual recording)               |
+| paid_time      | String | (conditional) Timestamp when payment was received. Only present when `pay_channel` is `arcsite_payment`. ISO 8601 |
+| paid_date      | String | (conditional) Date when payment was recorded. Only present when `pay_channel` is `mark_as_paid`. ISO 8601 date    |
+| payment_method | String | Payment method. Examples: `Credit Card`, `ACH`, `Check`, `Cash`                                                   |
 
 <aside class="notice">
 The time field in the payload depends on the <code>pay_channel</code>:
