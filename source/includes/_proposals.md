@@ -70,40 +70,38 @@ Returns a list of proposals of your organization. You can filter by project and 
 
 ### Query Parameters
 
-| Parameter   | Default | In    | Description                                   |
-| ---------- | ------- | ----- | --------------------------------------------- |
-| project_id | -       | query | (optional) Project ID to filter proposals.    |
-| page       | 1       | query | (optional) Request a specific page.           |
-| per_page   | 10      | query | (optional) Page size.                         |
+| Parameter  | Default | In    | Description                                |
+| ---------- | ------- | ----- | ------------------------------------------ |
+| project_id | -       | query | (optional) Project ID to filter proposals. |
+| page       | 1       | query | (optional) Request a specific page.        |
+| per_page   | 10      | query | (optional) Page size.                      |
 
 ### Proposal
 
 Each item in the response array is a `Proposal` object with the following fields. Some fields are returned only for specific statuses.
 
-| Parameter                  | Type    | Description                                                                 |
-| -------------------------- | ------- | --------------------------------------------------------------------------- |
-| proposal_id                | String  | Proposal ID                                                                 |
-| project_id                 | String  | Project ID the proposal belongs to                                          |
-| name                       | String  | Proposal name                                                               |
-| status                     | String  | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED).                           |
-| sales_representative       | String  | Name of the sales representative                                            |
-| contact_email              | String  | Email of the sales representative                                           |
-| customer_name              | String  | Customer name                                                               |
-| customer_email             | String  | Customer email                                                              |
-| document_number            | String  | Proposal document number                                                    |
-| close_note                 | String  | (optional) Reason for closing the proposal. Present when status is `VOID` or `LOST`. |
-| total                      | Number  | (optional) Total amount of the proposal. Present when status is `APPROVED`. |
-| pdf_url                    | String  | (optional) URL of the proposal PDF file. Present when status is `APPROVED`. |
-| approved_option            | ApprovedOption | (optional) Approved option information. Present when status is `APPROVED`.  |
-
+| Parameter            | Type           | Description                                                                          |
+| -------------------- | -------------- | ------------------------------------------------------------------------------------ |
+| proposal_id          | String         | Proposal ID                                                                          |
+| project_id           | String         | Project ID the proposal belongs to                                                   |
+| name                 | String         | Proposal name                                                                        |
+| status               | String         | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED).                                  |
+| sales_representative | String         | Name of the sales representative                                                     |
+| contact_email        | String         | Email of the sales representative                                                    |
+| customer_name        | String         | Customer name                                                                        |
+| customer_email       | String         | Customer email                                                                       |
+| document_number      | String         | Proposal document number                                                             |
+| close_note           | String         | (optional) Reason for closing the proposal. Present when status is `VOID` or `LOST`. |
+| total                | Number         | (optional) Total amount of the proposal. Present when status is `APPROVED`.          |
+| pdf_url              | String         | (optional) URL of the proposal PDF file. Present when status is `APPROVED`.          |
+| approved_option      | ApprovedOption | (optional) Approved option information. Present when status is `APPROVED`.           |
 
 ### ApprovedOption
 
-| Parameter  | Type   | Description                       |
-| ---------- | ------ | --------------------------------- |
-| id         | String | (optional) Only for online approvals. |
+| Parameter  | Type   | Description                            |
+| ---------- | ------ | -------------------------------------- |
+| id         | String | (optional) Only for online approvals.  |
 | drawing_id | String | ID of the associated drawing resource. |
-
 
 <aside class="notice">
 The status field is an enum with the following values:
@@ -112,14 +110,13 @@ The status field is an enum with the following values:
   <li><code>PENDING</code>: When a proposal is sent to the customer</li>
   <li><code>VOID</code>: When a proposal is marked as void</li>
   <li><code>LOST</code>: When a proposal is marked as lost</li>
-  <li><code>APPROVED</code>: When a proposal is approved or e-signed by the customer</li>
+  <li><code>APPROVED</code>: When a proposal is approved or e-signed</li>
 </ul>
 </aside>
 
 <aside class='notice'>
   The <code>pdf_url</code> field is typically a time-limited URL for 24 hours. You should download the PDF soon after retrieving it.
 </aside>
-
 
 ## Export Proposal PDF
 
