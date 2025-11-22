@@ -331,6 +331,9 @@
                     <a href="#query-proposal-templates" class="toc-h2 toc-link" data-title="Query Proposal Templates">Query Proposal Templates</a>
                   </li>
                   <li>
+                    <a href="#query-proposals" class="toc-h2 toc-link" data-title="Query Proposals">Query Proposals</a>
+                  </li>
+                  <li>
                     <a href="#export-proposal-pdf" class="toc-h2 toc-link" data-title="Export Proposal PDF">Export Proposal PDF</a>
                   </li>
               </ul>
@@ -1739,30 +1742,28 @@ If the <code>drawing_version_id</code> is passed, the drawing takeoff items data
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default Group"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"field_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default Group"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"field_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Property Address"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Address 1, Address 2"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No Visible Evidence"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SWITCH"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign by Seller(s) or Owner"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                        </span><span class="s2">"Seller(s)"</span><span class="w">
-                    </span><span class="p">]</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Property Address"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Address 1, Address 2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No Visible Evidence"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SWITCH"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign by Seller(s) or Owner"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Seller(s)"</span><span class="p">]</span><span class="w">
         </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Get field data value by drawing id.</p>
@@ -1933,6 +1934,173 @@ The <code>value</code> field type varies based on the <code>type</code> field:
 <td>Page size</td>
 </tr>
 </tbody></table>
+<h2 id='query-proposals'>Query Proposals</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/extapi/v1/proposals"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"proposal_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"456"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Building Proposal"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"APPROVED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sales_representative"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contact_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Smith"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jane@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PROP-2024-001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">15000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pdf_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d1umxpetlubu85.cloudfront.net/36029346774973628/36029621653386370/36029621653386685/c6f62f3d-db06-42df-8138-91d80e792e5d/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02_test.pdf"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"approved_option"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drawing_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc123def456"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Returns a list of proposals of your organization. You can filter by project and paginate; proposals are sorted by most recent activity first.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/extapi/v1/proposals</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>project_id</td>
+<td>-</td>
+<td>query</td>
+<td>(optional) Project ID to filter proposals.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>query</td>
+<td>(optional) Request a specific page.</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>query</td>
+<td>(optional) Page size.</td>
+</tr>
+</tbody></table>
+<h3 id='proposal'>Proposal</h3>
+<p>Each item in the response array is a <code>Proposal</code> object with the following fields. Some fields are returned only for specific statuses.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>proposal_id</td>
+<td>String</td>
+<td>Proposal ID</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>String</td>
+<td>Project ID the proposal belongs to</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Proposal name</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED).</td>
+</tr>
+<tr>
+<td>sales_representative</td>
+<td>String</td>
+<td>Name of the sales representative</td>
+</tr>
+<tr>
+<td>contact_email</td>
+<td>String</td>
+<td>Email of the sales representative</td>
+</tr>
+<tr>
+<td>customer_name</td>
+<td>String</td>
+<td>Customer name</td>
+</tr>
+<tr>
+<td>customer_email</td>
+<td>String</td>
+<td>Customer email</td>
+</tr>
+<tr>
+<td>document_number</td>
+<td>String</td>
+<td>Proposal document number</td>
+</tr>
+<tr>
+<td>close_note</td>
+<td>String</td>
+<td>(optional) Reason for closing the proposal. Present when status is <code>VOID</code> or <code>LOST</code>.</td>
+</tr>
+<tr>
+<td>total</td>
+<td>Number</td>
+<td>(optional) Total amount of the proposal. Present when status is <code>APPROVED</code>.</td>
+</tr>
+<tr>
+<td>pdf_url</td>
+<td>String</td>
+<td>(optional) URL of the proposal PDF file. Present when status is <code>APPROVED</code>.</td>
+</tr>
+<tr>
+<td>approved_option</td>
+<td>ApprovedOption</td>
+<td>(optional) Approved option information. Present when status is <code>APPROVED</code>.</td>
+</tr>
+</tbody></table>
+<h3 id='approvedoption'>ApprovedOption</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>(optional) Only for online approvals.</td>
+</tr>
+<tr>
+<td>drawing_id</td>
+<td>String</td>
+<td>ID of the associated drawing resource.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The status field is an enum with the following values:
+<ul>
+  <li><code>DRAFT</code>: When a new proposal is created</li>
+  <li><code>PENDING</code>: When a proposal is sent to the customer</li>
+  <li><code>VOID</code>: When a proposal is marked as void</li>
+  <li><code>LOST</code>: When a proposal is marked as lost</li>
+  <li><code>APPROVED</code>: When a proposal is approved or e-signed</li>
+</ul>
+</aside>
+
+<aside class='notice'>
+  The <code>pdf_url</code> field is typically a time-limited URL for 24 hours. You should download the PDF soon after retrieving it.
+</aside>
 <h2 id='export-proposal-pdf'>Export Proposal PDF</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/export_proposal_pdf"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
 </code></pre></div>
@@ -1944,7 +2112,7 @@ The <code>value</code> field type varies based on the <code>type</code> field:
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Export Proposal PDF by giving the proposal template id.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/export_proposal_pdf</code></p>
 <h3 id='parameters'>Parameters</h3>
 <table><thead>
@@ -2117,7 +2285,7 @@ The value for the prefix <code>t</code> corresponds to the timestamp and the pre
   <span class="c1">// Verify signature</span>
   <span class="k">return</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">timingSafeEqual</span><span class="p">(</span>
     <span class="nx">Buffer</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">signature</span><span class="p">),</span>
-    <span class="nx">Buffer</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">expectedSignature</span><span class="p">)</span>
+    <span class="nx">Buffer</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">expectedSignature</span><span class="p">),</span>
   <span class="p">);</span>
 <span class="p">}</span>
 
@@ -2526,7 +2694,7 @@ The status field is an enum with the following values:
   <li><code>PENDING</code>: When a proposal is sent to the customer</li>
   <li><code>VOID</code>: When a proposal is marked as void</li>
   <li><code>LOST</code>: When a proposal is marked as lost</li>
-  <li><code>APPROVED</code>: When a proposal is approved or esigned by the customer</li>
+  <li><code>APPROVED</code>: When a proposal is approved or esigned.</li>
 </ul>
 </aside>
 <h2 id='proposal-payment-received'>Proposal Payment Received</h2>
@@ -3035,8 +3203,7 @@ Check the file in the Attachments section of the associated Zoho CRM Record.</p>
 <li>ArcSite sends payload data to your webhook URL. You should to extract the <code>yes_no</code> from the payload and <strong>handle the logic like the sample code</strong> right side.</li>
 <li>Extract <code>Drawing ID</code> and <code>zoho_module</code> and <code>zoho_record_id</code> from the payload.</li>
 <li>Fetch all Line items info using the <code>drawing_id</code> via <a href="#get-line-items">Drawing Line Items API</a>.</li>
-<li>Create Quotes record with Drawing Line Items Data</li>
-</ol>
+<li><p>Create Quotes record with Drawing Line Items Data</p>
 
 <ul>
 <li>Deal_Name: Use the <code>zoho_module</code> and <code>zoho_record_id</code> to fetch the Deals record name from Zoho CRM.</li>
@@ -3049,10 +3216,8 @@ Check the file in the Attachments section of the associated Zoho CRM Record.</p>
 <li>Quantity: Use the <code>quantity</code> of line item</li>
 <li>Price_Book_Name: Use the <code>zoho_product_id</code> fetched before to get or create PriceBook data from Zoho CRM.</li>
 </ul></li>
-</ul>
-
-<ol>
-<li>Optionally, modify the record status or add other custom features.</li>
+</ul></li>
+<li><p>Optionally, modify the record status or add other custom features.</p></li>
 </ol>
 <h3 id='apis-for-zoho-crm'>APIs for Zoho CRM</h3><h3 id='associate-zoho-crm-record-with-arcsite-project'>Associate Zoho CRM Record with ArcSite Project</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/zoho_crm/associate_project'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
