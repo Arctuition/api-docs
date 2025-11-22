@@ -79,7 +79,6 @@ We categorize data pushing into three types based on the data involved:
 
 - **When to push**:
   Product line items and pricing will be triggered:
-
   - When user clicks the `Export` button in the app, a `Do you want to push this proposal to I360?` pop-up appears, if you select "Yes" it will trigger the push.
     ![Did You Sell?](images/i360/send_propsoal_to_i360.jpeg)
   - Alternatively, click `Send to I360` button in the Takeoff & Estimate Tab on the drawing detail page of the user site.
@@ -354,7 +353,6 @@ Let’s say you want to create a Quotes record with product line items in Zoho C
 3. Extract `Drawing ID` and `zoho_module` and `zoho_record_id` from the payload.
 4. Fetch all Line items info using the `drawing_id` via [Drawing Line Items API](#get-line-items).
 5. Create Quotes record with Drawing Line Items Data
-
    - Deal_Name: Use the `zoho_module` and `zoho_record_id` to fetch the Deals record name from Zoho CRM.
    - Discount: Use the sum of `discount` and `markup` from the drawing line items data.
    - Tax: Use line items sum of`tax` as the `Tax` of Quotes record.
@@ -547,7 +545,6 @@ We categorize data pushing into three types based on the data involved:
 
 - **When to push**:
   Product line items and pricing will be triggered:
-
   - When user clicks the `Export` button in the app, a `Do you want to push this proposal to Salesforce?` pop-up appears, if you select "Yes" it will trigger the push.
     ![Do you want to push this proposal?](images/salesforce/send_proposal_to_salesforce.jpeg)
   - Alternatively, click `Send to Salesforce` button in the Takeoff & Estimate Tab on the drawing detail page of the user site.

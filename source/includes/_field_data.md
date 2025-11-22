@@ -2,7 +2,6 @@
 
 You can get field data values from a drawing with the following APIs.
 
-
 ## Get Drawing Field Data
 
 ```shell
@@ -14,30 +13,28 @@ curl "https://api.arcsite.com/v1/drawings/<ID>/field_data" \
 
 ```json
 {
-    "groups": [
+  "groups": [
+    {
+      "name": "Default Group",
+      "field_data": [
         {
-            "name": "Default Group",
-            "field_data": [
-                {
-                    "name": "Property Address",
-                    "type": "TEXT",
-                    "value": "Address 1, Address 2"
-                },
-                {
-                    "name": "No Visible Evidence",
-                    "type": "SWITCH",
-                    "value": true
-                },
-                {
-                    "name": "Sign by Seller(s) or Owner",
-                    "type": "SELECT",
-                    "value": [
-                        "Seller(s)"
-                    ]
-                }
-            ]
+          "name": "Property Address",
+          "type": "TEXT",
+          "value": "Address 1, Address 2"
+        },
+        {
+          "name": "No Visible Evidence",
+          "type": "SWITCH",
+          "value": true
+        },
+        {
+          "name": "Sign by Seller(s) or Owner",
+          "type": "SELECT",
+          "value": ["Seller(s)"]
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
@@ -59,9 +56,9 @@ If the <code>drawing_version_id</code> is passed, the field data of the specifie
 
 ### Response Schema
 
-| Name   | Type         | Description                           |
-| ------ | ------------ | ------------------------------------- |
-| groups | List[Group]  | List of field data groups in the drawing |
+| Name   | Type        | Description                              |
+| ------ | ----------- | ---------------------------------------- |
+| groups | List[Group] | List of field data groups in the drawing |
 
 ### Group
 
@@ -72,10 +69,10 @@ If the <code>drawing_version_id</code> is passed, the field data of the specifie
 
 ### FieldData
 
-| Name  | Type   | Description                                                                                                                                           |
-| ----- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name  | String | The name of the field                                                                                                                                 |
-| type  | String | The type of the field. Possible values: TEXT, SWITCH, SELECT, DATE, etc.                                                           |
+| Name  | Type   | Description                                                                                                                            |
+| ----- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| name  | String | The name of the field                                                                                                                  |
+| type  | String | The type of the field. Possible values: TEXT, SWITCH, SELECT, DATE, etc.                                                               |
 | value | Any    | The value of the field. The data type depends on the field type: String for TEXT/DATE, Boolean for SWITCH, Array of Strings for SELECT |
 
 <aside class="notice">

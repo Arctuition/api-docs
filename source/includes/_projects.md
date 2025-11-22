@@ -473,17 +473,15 @@ curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/remove_collaborators' \
 
 This endpoint removes collaborators from a project.
 
-
 ### HTTP Request
 
 `POST https://api.arcsite.com/v1/projects/<id>/remove_collaborators`
 
 ### Parameters
 
-| Parameter | Type          | Description                     |
-| --------- | ------------- | ------------------------------- |
-| emails    | List[String]  | (required) emails to remove     |
-
+| Parameter | Type         | Description                 |
+| --------- | ------------ | --------------------------- |
+| emails    | List[String] | (required) emails to remove |
 
 ## Get Project Drawings
 

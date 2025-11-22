@@ -150,7 +150,7 @@ function verifyWebhook(header, payload, secret) {
   // Verify signature
   return crypto.timingSafeEqual(
     Buffer.from(signature),
-    Buffer.from(expectedSignature)
+    Buffer.from(expectedSignature),
   );
 }
 
@@ -322,7 +322,7 @@ The status field is an enum with the following values:
   <li><code>PENDING</code>: When a proposal is sent to the customer</li>
   <li><code>VOID</code>: When a proposal is marked as void</li>
   <li><code>LOST</code>: When a proposal is marked as lost</li>
-  <li><code>APPROVED</code>: When a proposal is approved or esigned by the customer</li>
+  <li><code>APPROVED</code>: When a proposal is approved or esigned.</li>
 </ul>
 </aside>
 

@@ -37,15 +37,15 @@ Returns drawing of your organization by project drawing id,
 
 ### Response Schema
 
-| Name       | Type               | Description             |
-| ---------- | ------------------ | ----------------------- |
-| id         | String             | The ID of the drawing   |
-| project_id | String             | The ID of the project   |
-| name       | String             | The name of the drawing |
-| pdf_url    | String &#124; null | The URL of the PDF file |
-| png_url    | String &#124; null | The URL of the PNG file |
-| dxf_url    | String &#124; null | The URL of the DXF file |
-| tags       | List[String] | Tags added to this drawing              |
+| Name       | Type               | Description                |
+| ---------- | ------------------ | -------------------------- |
+| id         | String             | The ID of the drawing      |
+| project_id | String             | The ID of the project      |
+| name       | String             | The name of the drawing    |
+| pdf_url    | String &#124; null | The URL of the PDF file    |
+| png_url    | String &#124; null | The URL of the PNG file    |
+| dxf_url    | String &#124; null | The URL of the DXF file    |
+| tags       | List[String]       | Tags added to this drawing |
 
 <aside class="notice">
 If the <code>drawing_version_id</code> is passed, the data of the specified version will be returned. If not, the data of the latest version will be returned by default.
