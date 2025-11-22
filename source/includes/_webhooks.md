@@ -150,7 +150,7 @@ function verifyWebhook(header, payload, secret) {
   // Verify signature
   return crypto.timingSafeEqual(
     Buffer.from(signature),
-    Buffer.from(expectedSignature)
+    Buffer.from(expectedSignature),
   );
 }
 
