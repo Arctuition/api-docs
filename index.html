@@ -336,6 +336,9 @@
                   <li>
                     <a href="#export-proposal-pdf" class="toc-h2 toc-link" data-title="Export Proposal PDF">Export Proposal PDF</a>
                   </li>
+                  <li>
+                    <a href="#get-proposal-payments" class="toc-h2 toc-link" data-title="Get Proposal Payments">Get Proposal Payments</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -2137,6 +2140,79 @@ The status field is an enum with the following values:
 <aside class="notice">
 The returned url will expire in 24 hours.
 </aside>
+<h2 id='get-proposal-payments'>Get Proposal Payments</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/proposals/&lt;proposal_id&gt;/payments"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"paid_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2500.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pay_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arcsite_payment"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paid_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-11-06T10:15:30Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Credit Card"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"succeeded"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"refunded_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"paid_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pay_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mark_as_paid"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paid_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-11-07"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"succeeded"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Returns a list of payments that have been received for the specified proposal.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/proposals/&lt;proposal_id&gt;/payments</code></p>
+<h3 id='response-schema'>Response Schema</h3>
+<p>The response is an array of Payment objects with the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>paid_amount</td>
+<td>Number</td>
+<td>The amount paid</td>
+</tr>
+<tr>
+<td>pay_channel</td>
+<td>String</td>
+<td>Channel through which payment was received. Values: <code>arcsite_payment</code> or <code>mark_as_paid</code></td>
+</tr>
+<tr>
+<td>paid_time</td>
+<td>String</td>
+<td>ISO 8601 datetime when payment was received. Present when <code>pay_channel</code> is <code>arcsite_payment</code></td>
+</tr>
+<tr>
+<td>paid_date</td>
+<td>String</td>
+<td>Date when payment was recorded (YYYY-MM-DD format). Present when <code>pay_channel</code> is <code>mark_as_paid</code></td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td>String</td>
+<td>Method of payment (e.g., &quot;Credit Card&quot;, &quot;Check&quot;, &quot;ACH&quot;)</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>Payment status. Values: <code>succeeded</code> (payment successful) or <code>returned</code> (ACH Return occurred)</td>
+</tr>
+<tr>
+<td>refunded_amount</td>
+<td>Number</td>
+<td>(optional) Amount refunded. Only included for payments that have at least one refund record. Subtract this from <code>paid_amount</code> to get the net amount received</td>
+</tr>
+</tbody></table>
 <h1 id='webhooks'>Webhooks</h1>
 <p>Use incoming webhooks to get real-time updates.</p>
 
