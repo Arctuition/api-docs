@@ -168,12 +168,15 @@ curl "https://api.arcsite.com/v1/proposals/12345/payments" \
     "pay_channel": "arcsite_payment",
     "paid_time": "2025-11-06T10:15:30Z",
     "payment_method": "Credit Card",
+    "status": "succeeded",
+    "refunded_amount": 500.0
   },
   {
     "paid_amount": 1000.0,
     "pay_channel": "mark_as_paid",
     "paid_date": "2025-11-07",
     "payment_method": "Check",
+    "status": "succeeded"
   }
 ]
 ```
@@ -186,10 +189,10 @@ Returns a list of payments that have been received for the specified proposal.
 
 
 <aside class="notice">
-The time field in the payload depends on the <code>pay_channel</code>:
+<strong>Response Fields:</strong>
 <ul>
-  <li>When <code>pay_channel</code> is <code>arcsite_payment</code>, the <code>paid_time</code> field contains the precise datetime of payment in ISO 8601 format</li>
-  <li>When <code>pay_channel</code> is <code>mark_as_paid</code>, the <code>paid_date</code> field contains only the date (no time component) in ISO 8601 format</li>
+  <li><strong>Time field:</strong> depends on <code>pay_channel</code>. When <code>pay_channel</code> is <code>arcsite_payment</code>, use <code>paid_time</code> (ISO 8601 datetime). When <code>pay_channel</code> is <code>mark_as_paid</code>, use <code>paid_date</code> (date only)</li>
+  <li><strong>status:</strong> can be <code>succeeded</code> (payment successful) or <code>returned</code> (ACH Return occurred). Exclude <code>returned</code> payments when calculating totals</li>
+  <li><strong>refunded_amount:</strong> (optional) if present, subtract this from <code>paid_amount</code> to get the net amount received</li>
 </ul>
-Check the <code>pay_channel</code> field to determine which time field to use.
 </aside>
