@@ -193,6 +193,6 @@ Returns a list of payments that have been received for the specified proposal.
 <ul>
   <li><strong>Time field:</strong> depends on <code>pay_channel</code>. When <code>pay_channel</code> is <code>arcsite_payment</code>, use <code>paid_time</code> (ISO 8601 datetime). When <code>pay_channel</code> is <code>mark_as_paid</code>, use <code>paid_date</code> (date only)</li>
   <li><strong>status:</strong> can be <code>succeeded</code> (payment successful) or <code>returned</code> (ACH Return occurred). Exclude <code>returned</code> payments when calculating totals</li>
-  <li><strong>refunded_amount:</strong> (optional) if present, subtract this from <code>paid_amount</code> to get the net amount received</li>
+  <li><strong>refunded_amount:</strong> (optional) only included for payments that have at least one refund record related to them. When present, subtract this from <code>paid_amount</code> to get the net amount received</li>
 </ul>
 </aside>
