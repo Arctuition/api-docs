@@ -149,3 +149,51 @@ Export Proposal PDF by giving the proposal template id.
 <aside class="notice">
 The returned url will expire in 24 hours.
 </aside>
+
+
+## Get Proposal Payments
+
+```shell
+curl "https://api.arcsite.com/v1/proposals/12345/payments" \
+  -H "Authorization: Bearer **your_api_token_here**"
+```
+
+> The above command returns JSON structured like this:
+
+
+```json
+[
+  {
+    "proposal_id": "12345",
+    "paid_amount": 2500.0,
+    "pay_channel": "arcsite_payment",
+    "paid_time": "2025-11-06T10:15:30Z",
+    "payment_method": "Credit Card",
+    "drawing_id": "282299611593762"
+  },
+  {
+    "proposal_id": "12345",
+    "paid_amount": 1000.0,
+    "pay_channel": "mark_as_paid",
+    "paid_date": "2025-11-07",
+    "payment_method": "Check",
+    "drawing_id": "282299611593762"
+  }
+]
+```
+
+Returns a list of payments that have been received for the specified proposal.
+
+### HTTP Request
+
+`GET https://api.arcsite.com/v1/proposals/<proposal_id>/payments`
+
+
+<aside class="notice">
+The time field in the payload depends on the <code>pay_channel</code>:
+<ul>
+  <li>When <code>pay_channel</code> is <code>arcsite_payment</code>, the <code>paid_time</code> field contains the precise datetime of payment in ISO 8601 format</li>
+  <li>When <code>pay_channel</code> is <code>mark_as_paid</code>, the <code>paid_date</code> field contains only the date (no time component) in ISO 8601 format</li>
+</ul>
+Check the <code>pay_channel</code> field to determine which time field to use.
+</aside>
