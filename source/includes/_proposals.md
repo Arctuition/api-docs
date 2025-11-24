@@ -149,3 +149,52 @@ Export Proposal PDF by giving the proposal template id.
 <aside class="notice">
 The returned url will expire in 24 hours.
 </aside>
+
+## Get Proposal Payments
+
+```shell
+curl "https://api.arcsite.com/v1/proposals/<proposal_id>/payments" \
+  -H "Authorization: Bearer **your_api_token_here**"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "paid_amount": 2500.0,
+    "pay_channel": "arcsite_payment",
+    "paid_time": "2025-11-06T10:15:30Z",
+    "payment_method": "Credit Card",
+    "status": "succeeded",
+    "refunded_amount": 500.0
+  },
+  {
+    "paid_amount": 1000.0,
+    "pay_channel": "mark_as_paid",
+    "paid_date": "2025-11-07",
+    "payment_method": "Check",
+    "status": "succeeded"
+  }
+]
+```
+
+Returns a list of payments that have been received for the specified proposal.
+
+### HTTP Request
+
+`GET https://api.arcsite.com/v1/proposals/<proposal_id>/payments`
+
+### Response Schema
+
+The response is an array of Payment objects with the following fields:
+
+| Field           | Type   | Description                                                                                                                                                  |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| paid_amount     | Number | The amount paid                                                                                                                                              |
+| pay_channel     | String | Channel through which payment was received. Values: `arcsite_payment` or `mark_as_paid`                                                                      |
+| paid_time       | String | ISO 8601 datetime when payment was received. Present when `pay_channel` is `arcsite_payment`                                                                 |
+| paid_date       | String | Date when payment was recorded (YYYY-MM-DD format). Present when `pay_channel` is `mark_as_paid`                                                             |
+| payment_method  | String | Method of payment (e.g., "Credit Card", "Check", "ACH")                                                                                                      |
+| status          | String | Payment status. Values: `succeeded` (payment successful) or `returned` (ACH Return occurred)                                                                 |
+| refunded_amount | Number | (optional) Amount refunded. Only included for payments that have at least one refund record. Subtract this from `paid_amount` to get the net amount received |
