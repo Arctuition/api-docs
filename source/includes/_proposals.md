@@ -164,20 +164,16 @@ curl "https://api.arcsite.com/v1/proposals/12345/payments" \
 ```json
 [
   {
-    "proposal_id": "12345",
     "paid_amount": 2500.0,
     "pay_channel": "arcsite_payment",
     "paid_time": "2025-11-06T10:15:30Z",
     "payment_method": "Credit Card",
-    "drawing_id": "282299611593762"
   },
   {
-    "proposal_id": "12345",
     "paid_amount": 1000.0,
     "pay_channel": "mark_as_paid",
     "paid_date": "2025-11-07",
     "payment_method": "Check",
-    "drawing_id": "282299611593762"
   }
 ]
 ```
