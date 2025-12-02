@@ -57,10 +57,12 @@ Returns a list of projects your organization. The projects are returned in sorte
 
 ### Query Parameters
 
-| Parameter | Default | In    | Description             |
-| --------- | ------- | ----- | ----------------------- |
-| page      | 1       | query | Request a specific page |
-| per_page  | 10      | query | Page size               |
+| Parameter         | Default | In    | Description                                                              |
+| ----------------- | ------- | ----- | ------------------------------------------------------------------------ |
+| page              | 1       | query | Request a specific page                                                  |
+| per_page          | 10      | query | Page size                                                                |
+| created_at_begin  | None    | query | (optional) Filter by project creation start date in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`) |
+| created_at_end    | None    | query | (optional) Filter by project creation end date in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`)   |
 
 ## Create Project
 
