@@ -529,6 +529,18 @@ Max <code>per_page</code> is 100.
 <td>query</td>
 <td>Page size</td>
 </tr>
+<tr>
+<td>created_at_begin</td>
+<td>None</td>
+<td>query</td>
+<td>(optional) Filter by project creation start date in UTC ISO 8601 format (e.g., <code>2025-01-16T04:19:23</code>)</td>
+</tr>
+<tr>
+<td>created_at_end</td>
+<td>None</td>
+<td>query</td>
+<td>(optional) Filter by project creation end date in UTC ISO 8601 format (e.g., <code>2025-01-16T04:19:23</code>)</td>
+</tr>
 </tbody></table>
 <h2 id='create-project'>Create Project</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/projects'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
