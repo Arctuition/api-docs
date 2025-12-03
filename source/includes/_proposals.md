@@ -34,7 +34,7 @@ Returns a list of proposal templates of your organization.
 ## Query Proposals
 
 ```shell
-curl "https://api.arcsite.com/extapi/v1/proposals" \
+curl "https://api.arcsite.com/v1/proposals" \
   -H "Authorization: Bearer **your_api_token_here**"
 ```
 
@@ -66,7 +66,7 @@ Returns a list of proposals of your organization. You can filter by project and 
 
 ### HTTP Request
 
-`GET https://api.arcsite.com/extapi/v1/proposals`
+`GET https://api.arcsite.com/v1/proposals`
 
 ### Query Parameters
 
