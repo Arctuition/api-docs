@@ -1886,7 +1886,7 @@ The <code>value</code> field type varies based on the <code>type</code> field:
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>Returns a list of products your organization. The products are returned in sorted order, with the most recent created product appearing first.</p>
+<p>Returns a list of products for your organization. By default, products are sorted by creation time in descending order (most recent first).</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://api.arcsite.com/v1/products</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
@@ -1909,6 +1909,18 @@ The <code>value</code> field type varies based on the <code>type</code> field:
 <td>10</td>
 <td>query</td>
 <td>Page size</td>
+</tr>
+<tr>
+<td>order_by</td>
+<td>create_at</td>
+<td>query</td>
+<td>Sort field. Options: <code>create_at</code>, <code>update_at</code></td>
+</tr>
+<tr>
+<td>order</td>
+<td>desc</td>
+<td>query</td>
+<td>Sort order. Options: <code>asc</code> (ascending), <code>desc</code> (descending)</td>
 </tr>
 </tbody></table>
 <h1 id='proposals'>Proposals</h1><h2 id='query-proposal-templates'>Query Proposal Templates</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/proposal_templates"</span> <span class="se">\</span>
