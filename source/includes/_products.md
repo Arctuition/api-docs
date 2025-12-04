@@ -21,7 +21,7 @@ curl "https://api.arcsite.com/v1/products" \
 ]
 ```
 
-Returns a list of products your organization. The products are returned in sorted order, with the most recent created product appearing first.
+Returns a list of products for your organization. By default, products are sorted by creation time in descending order (most recent first).
 
 ### HTTP Request
 
@@ -29,7 +29,9 @@ Returns a list of products your organization. The products are returned in sorte
 
 ### Query Parameters
 
-| Parameter | Default | In    | Description             |
-| --------- | ------- | ----- | ----------------------- |
-| page      | 1       | query | Request a specific page |
-| per_page  | 10      | query | Page size               |
+| Parameter | Default    | In    | Description                                           |
+| --------- | ---------- | ----- | ----------------------------------------------------- |
+| page      | 1          | query | Request a specific page                               |
+| per_page  | 10         | query | Page size                                             |
+| order_by  | create_at  | query | Sort field. Options: `create_at`, `update_at`         |
+| order     | desc       | query | Sort order. Options: `asc` (ascending), `desc` (descending) |
