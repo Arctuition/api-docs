@@ -57,7 +57,8 @@ curl "https://api.arcsite.com/v1/proposals" \
     "approved_option": {
       "id": "789",
       "drawing_id": "abc123def456"
-    }
+    },
+    "initial_proposal_id": "111"
   }
 ]
 ```
@@ -95,6 +96,7 @@ Each item in the response array is a `Proposal` object with the following fields
 | total                | Number         | (optional) Total amount of the proposal. Present when status is `APPROVED`.          |
 | pdf_url              | String         | (optional) URL of the proposal PDF file. Present when status is `APPROVED`.          |
 | approved_option      | ApprovedOption | (optional) Approved option information. Present when status is `APPROVED`.           |
+| initial_proposal_id  | String         | (optional) ID of the initial proposal. Only present for change order proposals.      |
 
 ### ApprovedOption
 
