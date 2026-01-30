@@ -1983,7 +1983,8 @@ The <code>value</code> field type varies based on the <code>type</code> field:
     </span><span class="nl">"approved_option"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"drawing_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc123def456"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"initial_proposal_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -2092,6 +2093,11 @@ The <code>value</code> field type varies based on the <code>type</code> field:
 <td>approved_option</td>
 <td>ApprovedOption</td>
 <td>(optional) Approved option information. Present when status is <code>APPROVED</code>.</td>
+</tr>
+<tr>
+<td>initial_proposal_id</td>
+<td>String</td>
+<td>(optional) ID of the initial proposal. Only present for change order proposals.</td>
 </tr>
 </tbody></table>
 <h3 id='approvedoption'>ApprovedOption</h3>
@@ -2784,6 +2790,11 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 <td>approved_option</td>
 <td>Object</td>
 <td>(optional) Contains <code>drawing_id</code> (String) field and <code>id</code> (String) field only for online approvals. Only present when status is APPROVED</td>
+</tr>
+<tr>
+<td>initial_proposal_id</td>
+<td>String</td>
+<td>(optional) ID of the initial proposal. Only present for change order proposals.</td>
 </tr>
 </tbody></table>
 
