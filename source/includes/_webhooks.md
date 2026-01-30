@@ -292,7 +292,6 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | contact_email        | String         | The sales email                                                                 |
 | sales_representative | String         | The sales name                                                                  |
 | approved_option      | ProposalOption | Approved proposal option data                                                   |
-| initial_proposal_id  | String         | (optional) ID of the initial proposal. Only present for change order proposals. |
 
 ## Proposal Status Changed
 
