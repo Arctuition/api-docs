@@ -283,15 +283,15 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 
 ### Proposal Approved Webhook Payload
 
-| Parameter            | Type           | Description                          |
-| -------------------- | -------------- | ------------------------------------ |
-| project_id           | id             | Approved proposal related project ID |
-| proposal_id          | id             | Proposal ID                          |
-| name                 | String         | Proposal name                        |
-| customer_name        | String         | Proposal customer name               |
-| contact_email        | String         | The sales email                      |
-| sales_representative | String         | The sales name                       |
-| approved_option      | ProposalOption | Approved proposal option data        |
+| Parameter            | Type           | Description                                                                     |
+| -------------------- | -------------- | ------------------------------------------------------------------------------- |
+| project_id           | id             | Approved proposal related project ID                                            |
+| proposal_id          | id             | Proposal ID                                                                     |
+| name                 | String         | Proposal name                                                                   |
+| customer_name        | String         | Proposal customer name                                                          |
+| contact_email        | String         | The sales email                                                                 |
+| sales_representative | String         | The sales name                                                                  |
+| approved_option      | ProposalOption | Approved proposal option data                                                   |
 
 ## Proposal Status Changed
 
@@ -314,6 +314,7 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | total                | Number | (optional)The total of the proposal (Only present when status is APPROVED)                                                                           |
 | pdf_url              | String | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
 | approved_option      | Object | (optional) Contains `drawing_id` (String) field and `id` (String) field only for online approvals. Only present when status is APPROVED              |
+| initial_proposal_id  | String | (optional) ID of the initial proposal. Only present for change order proposals.                                                                      |
 
 <aside class="notice">
 The status field is an enum with the following values:
