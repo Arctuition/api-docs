@@ -29,9 +29,9 @@ Returns a list of products for your organization. By default, products are sorte
 
 ### Query Parameters
 
-| Parameter | Default    | In    | Description                                           |
-| --------- | ---------- | ----- | ----------------------------------------------------- |
-| page      | 1          | query | Request a specific page                               |
-| per_page  | 10         | query | Page size                                             |
-| order_by  | create_at  | query | Sort field. Options: `create_at`, `update_at`         |
-| order     | desc       | query | Sort order. Options: `asc` (ascending), `desc` (descending) |
+| Parameter | Default   | In    | Description                                                 |
+| --------- | --------- | ----- | ----------------------------------------------------------- |
+| page      | 1         | query | Request a specific page                                     |
+| per_page  | 10        | query | Page size                                                   |
+| order_by  | create_at | query | Sort field. Options: `create_at`, `update_at`               |
+| order     | desc      | query | Sort order. Options: `asc` (ascending), `desc` (descending) |
