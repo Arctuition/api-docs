@@ -61,3 +61,57 @@ The returned urls will expire in 24 hours.
 <aside class="notice">
 The pdf could take some time(often less than 1 minute) to generate if the drawing contains location based photos, the <code>pdf_url</code> could be null before it has been generated.
 </aside>
+
+## Get Drawing Location Photos
+
+```shell
+curl "https://api.arcsite.com/v1/drawings/<ID>/location_photos" \
+  -H "Authorization: Bearer **your_api_token_here**"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "location_photos": [
+    {
+      "url": "https://cdn-files-1.arcsite.com/location-photo-1.png?Expires=1642318765&Signature=..."
+    },
+    {
+      "url": "https://cdn-files-1.arcsite.com/location-photo-2.png?Expires=1642318765&Signature=..."
+    }
+  ]
+}
+```
+
+Returns location photos associated with a drawing.
+
+### HTTP Request
+
+`GET https://api.arcsite.com/v1/drawings/<id>/location_photos`
+
+### Query Parameters
+
+| Parameter          | Default          | In    | Description                   |
+| ------------------ | ---------------- | ----- | ----------------------------- |
+| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+
+### Response Schema
+
+| Name            | Type         | Description                         |
+| --------------- | ------------ | ----------------------------------- |
+| location_photos | List[Object] | List of location photo objects      |
+
+### Location Photo
+
+| Name | Type   | Description                          |
+| ---- | ------ | ------------------------------------ |
+| url  | String | The presigned URL of the photo file  |
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the location photos of the specified version will be returned. If not, the location photos of the latest version will be returned by default.
+</aside>
+
+<aside class="notice">
+The returned URLs will expire in 24 hours.
+</aside>
