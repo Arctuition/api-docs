@@ -295,6 +295,9 @@
                   <li>
                     <a href="#get-drawing" class="toc-h2 toc-link" data-title="Get Drawing">Get Drawing</a>
                   </li>
+                  <li>
+                    <a href="#get-drawing-location-photos" class="toc-h2 toc-link" data-title="Get Drawing Location Photos">Get Drawing Location Photos</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1304,6 +1307,78 @@ The returned urls will expire in 24 hours.
 
 <aside class="notice">
 The pdf could take some time(often less than 1 minute) to generate if the drawing contains location based photos, the <code>pdf_url</code> could be null before it has been generated.
+</aside>
+<h2 id='get-drawing-location-photos'>Get Drawing Location Photos</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/location_photos"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"location_photos"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cdn-files-1.arcsite.com/location-photo-1.png?Expires=1642318765&amp;Signature=..."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cdn-files-1.arcsite.com/location-photo-2.png?Expires=1642318765&amp;Signature=..."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Returns location photos associated with a drawing.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;/location_photos</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>drawing_version_id</td>
+<td>Optional[String]</td>
+<td>query</td>
+<td>The ID of the drawing version</td>
+</tr>
+</tbody></table>
+<h3 id='response-schema-2'>Response Schema</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>location_photos</td>
+<td>List[Object]</td>
+<td>List of location photo objects</td>
+</tr>
+</tbody></table>
+<h3 id='location-photo'>Location Photo</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>The presigned URL of the photo file</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the location photos of the specified version will be returned. If not, the location photos of the latest version will be returned by default.
+</aside>
+
+<aside class="notice">
+The returned URLs will expire in 24 hours.
 </aside>
 <h1 id='product-items'>Product Items</h1>
 <p>You can get product items from a drawing with the following APIs.</p>
