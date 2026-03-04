@@ -316,6 +316,7 @@ The returned <code>url</code> in proposal options will expire in 24 hours. It's 
 | approved_option      | Object               | (optional) Contains `drawing_id` (String) field and `id` (String) field only for online approvals. Only present when status is APPROVED              |
 | initial_proposal_id  | String               | (optional) ID of the initial proposal. Only present for change order proposals.                                                                      |
 | proposal_options     | List[ProposalOption] | (optional) Full list of proposal options for online proposals. Included whenever proposal status changes.                                            |
+| template_id          | String? | The ID of the template used to create the proposal. Returns `null` when the proposal is signed in app.                           |
 
 <aside class="notice">
 The status field is an enum with the following values:
