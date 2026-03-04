@@ -129,7 +129,7 @@ curl "https://api.arcsite.com/v1/drawings/<ID>/payment" \
 ```json
 {
   "balance": {
-    "schedules": [
+    "payment_schedules": [
       {
         "name": "Deposit",
         "amount": 500.00,
@@ -169,15 +169,15 @@ Returns the payment data for a drawing, including balance schedules and deposit 
 
 | Name      | Type         | Description                      |
 | --------- | ------------ | -------------------------------- |
-| schedules | List[Object] | List of payment schedule objects |
+| payment_schedules | List[PaymentSchedule] | List of payment schedule objects |
 
-### Schedule
+### PaymentSchedule
 
 | Name       | Type   | Description                                          |
 | ---------- | ------ | ---------------------------------------------------- |
-| name       | String | The name of the payment phase                        |
-| amount     | Number | The amount of the payment phase                      |
-| percentage | Number | The percentage of the payment phase (0.00 - 100.00)  |
+| name       | String | The name of the payment schedule                        |
+| amount     | Number | The amount of the payment schedule                      |
+| percentage | Number | The percentage of the payment schedule (0.00 - 100.00)  |
 
 <aside class="notice">
 If the <code>drawing_version_id</code> is passed, the payment data of the specified version will be returned. If not, the payment data of the latest version will be returned by default.
