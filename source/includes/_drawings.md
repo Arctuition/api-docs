@@ -115,3 +115,70 @@ If the <code>drawing_version_id</code> is passed, the location photos of the spe
 <aside class="notice">
 The returned URLs will expire in 24 hours.
 </aside>
+
+
+## Get Drawing Payment
+
+```shell
+curl "https://api.arcsite.com/v1/drawings/<ID>/payment" \
+  -H "Authorization: Bearer **your_api_token_here**"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "balance": {
+    "schedules": [
+      {
+        "name": "Deposit",
+        "amount": 500.00,
+        "percentage": 25.00
+      },
+      {
+        "name": "On Completion",
+        "amount": 1500.00,
+        "percentage": 75.00
+      }
+    ]
+  },
+  "deposit": 500.00
+}
+```
+
+Returns the payment data for a drawing, including balance schedules and deposit amount.
+
+### HTTP Request
+
+`GET https://api.arcsite.com/v1/drawings/<id>/payment`
+
+### Query Parameters
+
+| Parameter          | Default          | In    | Description                   |
+| ------------------ | ---------------- | ----- | ----------------------------- |
+| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+
+### Response Schema
+
+| Name    | Type   | Description                                    |
+| ------- | ------ | ---------------------------------------------- |
+| balance | Object | The balance information of the drawing payment |
+| deposit | Number | The deposit amount                             |
+
+### Balance
+
+| Name      | Type         | Description                      |
+| --------- | ------------ | -------------------------------- |
+| schedules | List[Object] | List of payment schedule objects |
+
+### Schedule
+
+| Name       | Type   | Description                                          |
+| ---------- | ------ | ---------------------------------------------------- |
+| name       | String | The name of the payment phase                        |
+| amount     | Number | The amount of the payment phase                      |
+| percentage | Number | The percentage of the payment phase (0.00 - 100.00)  |
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the payment data of the specified version will be returned. If not, the payment data of the latest version will be returned by default.
+</aside>
