@@ -298,6 +298,9 @@
                   <li>
                     <a href="#get-drawing-location-photos" class="toc-h2 toc-link" data-title="Get Drawing Location Photos">Get Drawing Location Photos</a>
                   </li>
+                  <li>
+                    <a href="#get-drawing-payment" class="toc-h2 toc-link" data-title="Get Drawing Payment">Get Drawing Payment</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1379,6 +1382,110 @@ If the <code>drawing_version_id</code> is passed, the location photos of the spe
 
 <aside class="notice">
 The returned URLs will expire in 24 hours.
+</aside>
+<h2 id='get-drawing-payment'>Get Drawing Payment</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/payment"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"payment_schedules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.00</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">25.00</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"On Completion"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1500.00</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">75.00</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"deposit"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.00</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Returns the payment data for a drawing, including balance schedules and deposit amount.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;/payment</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>drawing_version_id</td>
+<td>Optional[String]</td>
+<td>query</td>
+<td>The ID of the drawing version</td>
+</tr>
+</tbody></table>
+<h3 id='response-schema-3'>Response Schema</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>balance</td>
+<td>Object</td>
+<td>The balance information of the drawing payment</td>
+</tr>
+<tr>
+<td>deposit</td>
+<td>Number</td>
+<td>The deposit amount</td>
+</tr>
+</tbody></table>
+<h3 id='balance'>Balance</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payment_schedules</td>
+<td>List[PaymentSchedule]</td>
+<td>List of payment schedule objects</td>
+</tr>
+</tbody></table>
+<h3 id='paymentschedule'>PaymentSchedule</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the payment schedule</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Number</td>
+<td>The amount of the payment schedule</td>
+</tr>
+<tr>
+<td>percentage</td>
+<td>Number</td>
+<td>The percentage of the payment schedule (0.00 - 100.00)</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the payment data of the specified version will be returned. If not, the payment data of the latest version will be returned by default.
 </aside>
 <h1 id='product-items'>Product Items</h1>
 <p>You can get product items from a drawing with the following APIs.</p>
