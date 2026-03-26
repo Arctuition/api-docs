@@ -630,7 +630,7 @@ curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/transfer_owner' \
 {}
 ```
 
-This endpoint transfers the ownership of a project to another user. The new owner must belong to the same organization, or to a company within the same enterprise group.
+This endpoint transfers the ownership of a project to another user. The new owner must belong to the same organization.
 
 ### HTTP Request
 
@@ -643,6 +643,6 @@ This endpoint transfers the ownership of a project to another user. The new owne
 | owner     | String | (required) Email or username of the new owner    |
 
 <aside class='notice'>
-<code>owner</code> must be a valid ArcSite username or email that belongs to the same organization or enterprise group.
+<code>owner</code> must be a valid ArcSite username or email that belongs to the same organization.
 </aside>
 
