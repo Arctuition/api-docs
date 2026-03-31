@@ -640,9 +640,9 @@ This endpoint transfers the ownership of a project to another user. The new owne
 
 | Parameter | Type   | Description                                      |
 | --------- | ------ | ------------------------------------------------ |
-| owner     | String | (required) Email or username of the new owner    |
+| owner     | String | (required) Email, username, or full name (first name + last name) of the new owner    |
 
 <aside class='notice'>
-<code>owner</code> must be a valid ArcSite username or email that belongs to the same organization.
+<code>owner</code> must be a valid ArcSite user that belongs to the same organization. The value can be the user's email address, username, or full name (first name and last name).
 </aside>
 
