@@ -8,6 +8,8 @@ You can get product items from a drawing with the following APIs.
 
 ![Export Proposal Sample](images/export_proposal_sample.png)
 
+- [Excluded Items](#get-excluded-line-items): Product items that are marked as not included in the proposal.
+
 - [Takeoff Items](#get-takeoff-line-items): Product items can be fetched in the way that we generate Takeoff report in Excel format.
 
 ![Export Takeoff](images/export_takeoff.png)
@@ -122,6 +124,31 @@ If the <code>drawing_version_id</code> is passed, the drawing line items data of
 | ----- | ------ | ----------------------- |
 | name  | String | The name of the tax     |
 | total | Number | The total amount of tax |
+
+## Get Excluded Line items
+
+```shell
+curl "https://api.arcsite.com/v1/drawings/<ID>/excluded_line_items" \
+  -H "Authorization: Bearer **your_api_token_here**"
+```
+
+Get line items that are not included in the proposal by drawing id.
+
+### HTTP Request
+
+`GET https://api.arcsite.com/v1/drawings/<id>/excluded_line_items`
+
+### Query Parameters
+
+| Parameter          | Default          | In    | Description                   |
+| ------------------ | ---------------- | ----- | ----------------------------- |
+| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the excluded line items data of the specified version will be returned. If not, the data of the latest version will be returned by default.
+</aside>
+
+The response schema is identical to [Get Proposal Line Items](#get-proposal-line-items), where `line_items` contains only the items not included in the proposal.
 
 ## Get Takeoff Line items
 
