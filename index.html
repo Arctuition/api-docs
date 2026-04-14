@@ -310,6 +310,9 @@
                     <a href="#get-proposal-line-items" class="toc-h2 toc-link" data-title="Get Proposal Line items">Get Proposal Line items</a>
                   </li>
                   <li>
+                    <a href="#get-excluded-line-items" class="toc-h2 toc-link" data-title="Get Excluded Line items">Get Excluded Line items</a>
+                  </li>
+                  <li>
                     <a href="#get-takeoff-line-items" class="toc-h2 toc-link" data-title="Get Takeoff Line items">Get Takeoff Line items</a>
                   </li>
               </ul>
@@ -1499,7 +1502,8 @@ If the <code>drawing_version_id</code> is passed, the payment data of the specif
 <p><img src="images/export_proposal_sample-920284f1.png" alt="Export Proposal Sample" /></p>
 
 <ul>
-<li><a href="#get-takeoff-line-items">Takeoff Items</a>: Product items can be fetched in the way that we generate Takeoff report in Excel format.</li>
+<li><p><a href="#get-excluded-line-items">Excluded Items</a>: Product items that are marked as not included in the proposal.</p></li>
+<li><p><a href="#get-takeoff-line-items">Takeoff Items</a>: Product items can be fetched in the way that we generate Takeoff report in Excel format.</p></li>
 </ul>
 
 <p><img src="images/export_takeoff-18088c04.png" alt="Export Takeoff" /></p>
@@ -1732,6 +1736,34 @@ If the <code>drawing_version_id</code> is passed, the drawing line items data of
 <td>The total amount of tax</td>
 </tr>
 </tbody></table>
+<h2 id='get-excluded-line-items'>Get Excluded Line items</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/excluded_line_items"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
+</code></pre></div>
+<p>Get line items that are not included in the proposal by drawing id.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;/excluded_line_items</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>In</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>drawing_version_id</td>
+<td>Optional[String]</td>
+<td>query</td>
+<td>The ID of the drawing version</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If the <code>drawing_version_id</code> is passed, the excluded line items data of the specified version will be returned. If not, the data of the latest version will be returned by default.
+</aside>
+
+<p>The response schema is identical to <a href="#get-proposal-line-items">Get Proposal Line Items</a>, where <code>line_items</code> contains only the items not included in the proposal.</p>
 <h2 id='get-takeoff-line-items'>Get Takeoff Line items</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;/takeoff_items"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
 </code></pre></div>
@@ -1787,9 +1819,9 @@ If the <code>drawing_version_id</code> is passed, the drawing line items data of
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Get takeoff items by drawing id.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET https://api.arcsite.com/v1/drawings/&lt;id&gt;/takeoff_items</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
