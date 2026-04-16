@@ -611,3 +611,38 @@ curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/unarchive' \
 ### HTTP Request
 
 `POST https://api.arcsite.com/v1/projects/<ID>/unarchive`
+
+
+## Transfer Project Owner
+
+```shell
+curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/transfer_owner' \
+-H 'Authorization: Bearer **your_api_token_here**' \
+-H 'Content-Type: application/json' \
+-d '{
+    "owner": "newowner@example.com"
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{}
+```
+
+This endpoint transfers the ownership of a project to another user. The new owner must belong to the same organization.
+
+### HTTP Request
+
+`POST https://api.arcsite.com/v1/projects/<ID>/transfer_owner`
+
+### Parameters
+
+| Parameter | Type   | Description                                      |
+| --------- | ------ | ------------------------------------------------ |
+| owner     | String | (required) Email or full name (first name + last name) of the new owner    |
+
+<aside class='notice'>
+<code>owner</code> must be a valid ArcSite user that belongs to the same organization. The value can be the user's email address or full name (first name and last name).
+</aside>
+
