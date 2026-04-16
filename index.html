@@ -287,6 +287,9 @@
                   <li>
                     <a href="#unarchive-project" class="toc-h2 toc-link" data-title="Unarchive Project">Unarchive Project</a>
                   </li>
+                  <li>
+                    <a href="#transfer-project-owner" class="toc-h2 toc-link" data-title="Transfer Project Owner">Transfer Project Owner</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1218,6 +1221,39 @@ Either <code>file</code> or <code>file_url</code> must be provided, but not both
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-11'>HTTP Request</h3>
 <p><code>POST https://api.arcsite.com/v1/projects/&lt;ID&gt;/unarchive</code></p>
+<h2 id='transfer-project-owner'>Transfer Project Owner</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.arcsite.com/v1/projects/&lt;ID&gt;/transfer_owner'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer **your_api_token_here**'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+    "owner": "newowner@example.com"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint transfers the ownership of a project to another user. The new owner must belong to the same organization.</p>
+<h3 id='http-request-12'>HTTP Request</h3>
+<p><code>POST https://api.arcsite.com/v1/projects/&lt;ID&gt;/transfer_owner</code></p>
+<h3 id='parameters-6'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>owner</td>
+<td>String</td>
+<td>(required) Email or full name (first name + last name) of the new owner</td>
+</tr>
+</tbody></table>
+
+<aside class='notice'>
+<code>owner</code> must be a valid ArcSite user that belongs to the same organization. The value can be the user's email address or full name (first name and last name).
+</aside>
 <h1 id='drawings'>Drawings</h1><h2 id='get-drawing'>Get Drawing</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.arcsite.com/v1/drawings/&lt;ID&gt;"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: Bearer **your_api_token_here**"</span>
 </code></pre></div>
