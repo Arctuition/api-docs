@@ -183,6 +183,32 @@ app.listen(3000, () => {
 | job_number         | String[Optional]   | Job number of the project           |
 | work_site_addreess | Address[Optional]  | Worksite address of the project     |
 | sales_rep          | SalesRep[Optional] | Sales Representative of the project |
+| tags               | List[String]       | Tags attached to the project        |
+
+## Project Updated
+
+`project.updated` Triggered when a project's own data is modified, including:
+
+- Renaming the project, or updating its description / display name / client profile.
+- Adding or removing a tag on the project, or removing a tag definition that was attached to the project.
+
+<aside class="notice">
+The webhook is <strong>not</strong> triggered by collaborator changes (adding or removing collaborators), ownership transfers, or the initial tag attachment that happens during project creation (in that case only <code>project.created</code> is fired).
+</aside>
+
+### Project Updated Webhook Payload
+
+The payload schema is identical to `project.created`.
+
+| Parameter          | Type               | Description                         |
+| ------------------ | ------------------ | ----------------------------------- |
+| id                 | String             | ID of the project                   |
+| name               | String             | Name of the project                 |
+| customer           | Customer[Optional] | Customer profile of the project     |
+| job_number         | String[Optional]   | Job number of the project           |
+| work_site_addreess | Address[Optional]  | Worksite address of the project     |
+| sales_rep          | SalesRep[Optional] | Sales Representative of the project |
+| tags               | List[String]       | Tags attached to the project        |
 
 ## Drawing Created
 
