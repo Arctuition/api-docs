@@ -366,6 +366,9 @@
                     <a href="#project-created" class="toc-h2 toc-link" data-title="Project Created">Project Created</a>
                   </li>
                   <li>
+                    <a href="#project-updated" class="toc-h2 toc-link" data-title="Project Updated">Project Updated</a>
+                  </li>
+                  <li>
                     <a href="#drawing-created" class="toc-h2 toc-link" data-title="Drawing Created">Drawing Created</a>
                   </li>
                   <li>
@@ -2697,6 +2700,64 @@ The value for the prefix <code>t</code> corresponds to the timestamp and the pre
 <td>sales_rep</td>
 <td>SalesRep[Optional]</td>
 <td>Sales Representative of the project</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>List[String]</td>
+<td>Tags attached to the project</td>
+</tr>
+</tbody></table>
+<h2 id='project-updated'>Project Updated</h2>
+<p><code>project.updated</code> Triggered when a project&#39;s own data is modified, including:</p>
+
+<ul>
+<li>Renaming the project, or updating its description / display name / client profile.</li>
+<li>Adding or removing a tag on the project, or removing a tag definition that was attached to the project.</li>
+</ul>
+<h3 id='project-updated-webhook-payload'>Project Updated Webhook Payload</h3>
+<p>The payload schema is identical to <code>project.created</code>.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>ID of the project</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the project</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>Customer[Optional]</td>
+<td>Customer profile of the project</td>
+</tr>
+<tr>
+<td>job_number</td>
+<td>String[Optional]</td>
+<td>Job number of the project</td>
+</tr>
+<tr>
+<td>work_site_addreess</td>
+<td>Address[Optional]</td>
+<td>Worksite address of the project</td>
+</tr>
+<tr>
+<td>sales_rep</td>
+<td>SalesRep[Optional]</td>
+<td>Sales Representative of the project</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>List[String]</td>
+<td>Tags attached to the project</td>
 </tr>
 </tbody></table>
 <h2 id='drawing-created'>Drawing Created</h2>
