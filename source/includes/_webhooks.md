@@ -192,9 +192,6 @@ app.listen(3000, () => {
 - Renaming the project, or updating its description / display name / client profile.
 - Adding or removing a tag on the project, or removing a tag definition that was attached to the project.
 
-<aside class="notice">
-The webhook is <strong>not</strong> triggered by collaborator changes (adding or removing collaborators), ownership transfers, or the initial tag attachment that happens during project creation (in that case only <code>project.created</code> is fired).
-</aside>
 
 ### Project Updated Webhook Payload
 
