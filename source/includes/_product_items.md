@@ -30,29 +30,16 @@ curl "https://api.arcsite.com/v1/drawings/<ID>/line_items" \
   "line_items": [
     {
       "name": "product1",
-      "description": "Product 1 description",
       "quantity": 2.26,
       "total": 0,
       "product_id": "19923123", // not exist for custom price items
       "sku": "sku1", //  not exist for custom price items
       "price": 3.5, //   not exist for custom price items
       "cost": 5,
-      "unit": "FT", //   not exist for custom price items
-      "price_part_items": [
-        {
-          "name": "Option A",
-          "price_part_name": "Material",
-          "sku": "MAT-001",
-          "price": 10,
-          "cost": 5,
-          "quantity": 2,
-          "unit": "EA"
-        }
-      ]
+      "unit": "FT" //   not exist for custom price items
     },
     {
       "name": "product2",
-      "description": "Custom item description",
       "quantity": 32.57,
       "total": 128.98,
       "cost": 200
@@ -108,30 +95,28 @@ If the <code>drawing_version_id</code> is passed, the drawing line items data of
 
 ### LineItem
 
-| Name             | Type                 | Description                                                                                            |
-| ---------------- | -------------------- | ------------------------------------------------------------------------------------------------------ |
-| name             | String               | The name of the product                                                                                |
-| description      | String?              | The description of the product (or of the custom price item)                                           |
-| quantity         | Number               | The quantity of the product                                                                            |
-| total            | Number               | Item total after discounts and markup applied                                                          |
-| price            | Number?              | Item total before discounts and markup applied; not provided for custom price items                    |
-| cost             | Number?              | Item cost                                                                                              |
-| sku              | String?              | The stock keeping unit of the product; not provided for custom price items                             |
-| unit             | String?              | The unit of measurement for the product's quantity; not provided for custom price items                |
-| product_id       | String?              | The ID of the product; not provided for custom price items                                             |
-| price_part_items | List[PricePartItem]? | Detail of price part items; not provided for custom price items                                        |
+| Name             | Type                 | Description                                                                             |
+| ---------------- | -------------------- | --------------------------------------------------------------------------------------- |
+| name             | String               | The name of the product                                                                 |
+| quantity         | Number               | The quantity of the product                                                             |
+| total            | Number               | Item total after discounts and markup applied                                           |
+| price            | Number?              | Item total before discounts and markup applied; not provided for custom price items     |
+| cost             | Number?              | Item cost                                                                               |
+| sku              | String?              | The stock keeping unit of the product; not provided for custom price items              |
+| unit             | String?              | The unit of measurement for the product's quantity; not provided for custom price items |
+| product_id       | String?              | The ID of the product; not provided for custom price items                              |
+| price_part_items | List[PricePartItem]? | Detail of price part items; not provided for custom price items                         |
 
 ### PricePartItem
 
-| Name            | Type   | Description                             |
-| --------------- | ------ | --------------------------------------- |
-| name            | String | The name of price part option           |
-| price_part_name | String | The name of the price part              |
-| sku             | String | The sku of price part option            |
-| price           | Number | The total price of price part option    |
-| cost            | Number | The total cost of price part option     |
-| quantity        | Number | The total quantity of price part option |
-| unit            | String | The final unit of price part option     |
+| Name     | Type   | Description                             |
+| -------- | ------ | --------------------------------------- |
+| name     | String | The name of price part option           |
+| sku      | String | The sku of price part option            |
+| price    | Number | The total price of price part option    |
+| cost     | Number | The total cost of price part option     |
+| quantity | Number | The total quantity of price part option |
+| unit     | String | The final unit of price part option     |
 
 ### TaxItem
 
