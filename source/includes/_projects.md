@@ -313,7 +313,13 @@ curl "https://api.arcsite.com/v1/projects/<ID>" \
     "phone": "122122-121"
   },
   "tags": ["tag1", "tag2"],
-  "archived": false
+  "archived": false,
+  "owner": "owner@arcsite.com",
+  "collaborators": [
+    {"email": "admin@arcsite.com", "role": "PROJECT_ADMIN"},
+    {"email": "dev@arcsite.com", "role": "PROJECT_COLLABORATOR"},
+    {"email": "viewer@arcsite.com", "role": "PROJECT_VIEWER"}
+  ]
 }
 ```
 
@@ -322,6 +328,27 @@ Returns project of your organization by project id,
 ### HTTP Request
 
 `GET https://api.arcsite.com/v1/projects/<id>`
+
+### Response Fields
+
+In addition to the core project fields, the response includes who can access the project:
+
+| Field         | Type                                | Description                                                              |
+| ------------- | ----------------------------------- | ------------------------------------------------------------------------ |
+| owner         | String                              | Email of the project owner (the creator). Always a single email.         |
+| collaborators | List[[Collaborator](#collaborator)] | Users with access to the project, excluding the owner.                   |
+
+<aside class='notice'>
+The owner is returned as a separate field and never appears in <code>collaborators</code>. If you also need the owner in your own view, render it alongside the collaborator list.
+</aside>
+
+<aside class='notice'>
+When a project is shared with a user group, the group's members are flattened into <code>collaborators</code> as individual entries, each carrying the group's role. The group name itself is not returned.
+</aside>
+
+<aside class='notice'>
+If a user has access through multiple paths (e.g., directly and via a group), they appear once with the highest-priority role, where <code>PROJECT_ADMIN</code> > <code>PROJECT_COLLABORATOR</code> > <code>PROJECT_VIEWER</code>. Inactive users are excluded.
+</aside>
 
 ## Search Projects
 
