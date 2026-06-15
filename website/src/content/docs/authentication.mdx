@@ -1,0 +1,52 @@
+---
+title: Authentication
+description: How to authenticate requests to the ArcSite API using API tokens.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The ArcSite API uses API tokens to authenticate requests. You can view and manage your API tokens by visiting [the ArcSite web UI](https://user.arcsiteapp.com#/admin).
+
+Authentication to the API is performed via the [HTTP Authorization header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization):
+
+<Tabs syncKey="lang">
+<TabItem label="cURL">
+
+```shell
+curl "https://api.arcsite.com/v1/projects" \
+  -H "Authorization: Bearer your_api_token_here"
+```
+
+</TabItem>
+<TabItem label="JavaScript">
+
+```js
+const response = await fetch("https://api.arcsite.com/v1/projects", {
+  headers: {
+    Authorization: "Bearer your_api_token_here",
+  },
+});
+const data = await response.json();
+```
+
+</TabItem>
+<TabItem label="Python">
+
+```python
+import requests
+
+response = requests.get(
+    "https://api.arcsite.com/v1/projects",
+    headers={"Authorization": "Bearer your_api_token_here"},
+)
+data = response.json()
+```
+
+</TabItem>
+</Tabs>
+
+All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTP_Secure). Calls made over plain HTTP will fail, and requests without authentication will also fail.
+
+:::note
+You must replace `your_api_token_here` with your own API token.
+:::

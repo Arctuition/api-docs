@@ -1,0 +1,391 @@
+/* ============================================================================
+   ArcSite API docs — theme
+   Typography: Inter (UI/body) · Averta (brand display) · JetBrains Mono (code)
+   Accent: ArcSite blue
+   ========================================================================== */
+
+:root {
+  --brand-font: 'Averta', 'Inter Variable', var(--__sl-font-fallback);
+  --sl-font: 'Inter Variable', var(--__sl-font-fallback);
+  --sl-font-mono: 'JetBrains Mono Variable', var(--__sl-font-mono-fallback);
+
+  /* Content rhythm */
+  --sl-line-height: 1.7;
+  --sl-content-width: 50rem;
+}
+
+/* ---- Accent palette — ArcSite brand orange (#e3571c) --------------------- */
+/* dark theme is the :root default in Starlight */
+:root {
+  --sl-color-accent-low: #4a1c0b;
+  --sl-color-accent: #e3571c;
+  --sl-color-accent-high: #f6c9b2;
+  --sl-color-text-accent: #ff7a43;
+
+  /* Neutral, faintly warm near-black surfaces matching arcsite.com */
+  --sl-color-bg: #0b0a09;
+  --sl-color-bg-nav: #100e0c;
+  --sl-color-bg-sidebar: #080706;
+  --sl-color-bg-inline-code: #211b18;
+  --sl-color-hairline-light: #2a2421;
+  --sl-color-hairline: #1d1815;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #fbe7dd;
+  --sl-color-accent: #e3571c;
+  --sl-color-accent-high: #8f3110;
+  --sl-color-text-accent: #c2461a;
+
+  /* Warm off-white surfaces (matching the brand's cream tones) */
+  --sl-color-bg: #ffffff;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-bg-sidebar: #faf6f3;
+  --sl-color-bg-inline-code: #f4ede9;
+  --sl-color-hairline-light: #ece4df;
+  --sl-color-hairline: #f3ece8;
+}
+
+/* ---- Global polish -------------------------------------------------------- */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  letter-spacing: -0.006em;
+}
+
+/* ---- Headings: brand font, tighter tracking ------------------------------ */
+.sl-markdown-content :is(h1, h2, h3, h4),
+.content-panel h1,
+h1#_top {
+  font-family: var(--brand-font);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+}
+
+.sl-markdown-content h2 {
+  margin-top: 2.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--sl-color-hairline-light);
+}
+
+.sl-markdown-content h3 {
+  margin-top: 2rem;
+}
+
+/* Brand wordmark in the header */
+.site-title,
+a.site-title span {
+  font-family: var(--brand-font);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ---- Top nav: hairline + soft blur --------------------------------------- */
+header.header {
+  border-bottom: 1px solid var(--sl-color-hairline);
+  backdrop-filter: saturate(1.4) blur(8px);
+}
+
+/* ---- Links --------------------------------------------------------------- */
+.sl-markdown-content a:not(:where(.not-content *)) {
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, var(--sl-color-text-accent) 45%, transparent);
+  transition: text-decoration-color 0.15s ease;
+}
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  text-decoration-color: var(--sl-color-text-accent);
+}
+
+/* ---- Inline code --------------------------------------------------------- */
+.sl-markdown-content :not(pre) > code {
+  font-size: 0.85em;
+  padding: 0.13em 0.4em;
+  border-radius: 0.375rem;
+  border: 1px solid var(--sl-color-hairline-light);
+}
+
+/* HTTP method one-liners (`GET https://...`) — color-coded endpoint chips.
+   The rehype `rehypeApiMethods` plugin splits the verb into its own span. */
+.sl-markdown-content code.endpoint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-size: 0.84em;
+  font-weight: 500;
+  color: var(--sl-color-white);
+  background: var(--sl-color-bg-sidebar);
+  border-color: var(--sl-color-hairline-light);
+  padding: 0.28em 0.65em 0.28em 0.4em;
+}
+.endpoint-method {
+  font-family: var(--sl-font-mono);
+  font-weight: 700;
+  font-size: 0.84em;
+  letter-spacing: 0.04em;
+  color: #fff;
+  padding: 0.15em 0.55em;
+  border-radius: 0.3rem;
+  line-height: 1.3;
+}
+.method-get { background: #5b6b7a; }
+.method-post { background: var(--sl-color-accent); }
+.method-put,
+.method-patch { background: #a9741c; }
+.method-delete { background: #b03a2e; }
+.method-head,
+.method-options { background: #6b6b6b; }
+
+/* ---- Code blocks (Expressive Code) --------------------------------------- */
+.expressive-code .frame {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 8px 24px -12px rgba(0, 0, 0, 0.25);
+}
+:root[data-theme='light'] .expressive-code .frame pre {
+  border: 1px solid var(--sl-color-hairline-light);
+}
+
+/* ---- Tables: cleaner, zebra-free, hairline rows -------------------------- */
+.sl-markdown-content table {
+  font-size: 0.9rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+.sl-markdown-content thead th {
+  font-family: var(--brand-font);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-2);
+  background: var(--sl-color-bg-sidebar);
+}
+.sl-markdown-content :is(th, td) {
+  border-bottom: 1px solid var(--sl-color-hairline-light);
+  padding: 0.6rem 0.9rem;
+  vertical-align: top;
+}
+.sl-markdown-content tbody tr {
+  transition: background 0.12s ease;
+}
+.sl-markdown-content tbody tr:hover {
+  background: color-mix(in oklab, var(--sl-color-accent) 4%, transparent);
+}
+/* First column reads as an identifier (parameter / field / code name) */
+.sl-markdown-content tbody td:first-child {
+  font-family: var(--sl-font-mono);
+  font-size: 0.84em;
+  font-weight: 600;
+  color: var(--sl-color-text-accent);
+  white-space: nowrap;
+}
+/* …unless it already contains its own inline code or a link */
+.sl-markdown-content tbody td:first-child:has(code),
+.sl-markdown-content tbody td:first-child:has(a) {
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* ---- Asides / callouts: softer, modern ----------------------------------- */
+.starlight-aside {
+  border-radius: 0.6rem;
+  border-inline-start-width: 3px;
+  padding: 1rem 1.15rem;
+}
+/* Notes keep Starlight's neutral blue — orange is reserved for brand/actions
+   so callouts don't read as warnings. */
+
+/* ---- Sidebar: refined active state --------------------------------------- */
+.sidebar-content a[aria-current='page'] {
+  font-weight: 600;
+  border-radius: 0.4rem;
+}
+.sidebar-content summary .group-label span {
+  font-family: var(--brand-font);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-3);
+}
+
+/* ============================================================================
+   Landing page
+   The splash hero, feature grid and live-request window live in a self-contained
+   component with scoped styles: src/components/Landing.astro
+   ========================================================================== */
+
+/* The landing supplies its own hero headline, so suppress Starlight's
+   auto-rendered page title (and its top padding) on that page only. */
+main:has(.lp) h1#_top {
+  display: none;
+}
+main:has(.lp) .sl-markdown-content {
+  margin-top: 0;
+}
+
+/* ============================================================================
+   Global micro-interactions & atmosphere
+   ========================================================================== */
+
+/* Brand-tinted text selection */
+::selection {
+  background: color-mix(in oklab, var(--sl-color-accent) 28%, transparent);
+  color: var(--sl-color-white);
+}
+
+/* Custom scrollbar — slim, warm, brand thumb on hover */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sl-color-hairline-light) transparent;
+}
+*::-webkit-scrollbar { width: 11px; height: 11px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--sl-color-hairline-light);
+  border: 3px solid var(--sl-color-bg);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--sl-color-accent) 60%, var(--sl-color-hairline-light));
+}
+
+/* Brand focus ring — visible, on-brand, keyboard-only */
+:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ---- Sidebar: orange active state with a left accent bar ----------------- */
+.sidebar-content a[aria-current='page'] {
+  position: relative;
+  background: color-mix(in oklab, var(--sl-color-accent) 9%, transparent);
+  color: var(--sl-color-text-accent);
+}
+.sidebar-content a[aria-current='page']::before {
+  content: '';
+  position: absolute;
+  left: -0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.1em;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--sl-color-accent);
+}
+.sidebar-content a:not([aria-current='page']) {
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+/* ---- Right-hand table of contents: refined active marker ----------------- */
+starlight-toc a[aria-current='true'] {
+  color: var(--sl-color-text-accent);
+  font-weight: 600;
+}
+
+/* ---- Heading anchor links: brand-tinted, reveal on hover ----------------- */
+.sl-markdown-content :is(h2, h3, h4) a.sl-anchor-link {
+  color: var(--sl-color-accent);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.sl-markdown-content :is(h2, h3, h4):hover a.sl-anchor-link,
+.sl-markdown-content a.sl-anchor-link:focus-visible {
+  opacity: 0.75;
+}
+.sl-markdown-content a.sl-anchor-link:hover {
+  opacity: 1;
+}
+
+/* ---- Quickstart: numbered step timeline ---------------------------------- */
+.qs-steps {
+  position: relative;
+  counter-reset: qs-step;
+  padding-left: 3.4rem;
+  margin-top: 1.75rem;
+}
+/* vertical spine, fading out at the tail */
+.qs-steps::before {
+  content: '';
+  position: absolute;
+  left: 1.04rem;
+  top: 1.4rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--sl-color-hairline-light) 0%,
+    var(--sl-color-hairline-light) 82%,
+    transparent 100%
+  );
+  z-index: 0;
+}
+.qs-steps h2 {
+  counter-increment: qs-step;
+  position: relative;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: 2.6rem;
+}
+.qs-steps h2:first-of-type {
+  margin-top: 0.5rem;
+}
+/* number badge sitting on the spine */
+.qs-steps h2::before {
+  content: counter(qs-step);
+  position: absolute;
+  left: -3.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sl-color-accent);
+  color: #fff;
+  font-family: var(--brand-font);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1;
+  box-shadow:
+    0 0 0 5px var(--sl-color-bg),
+    0 4px 12px -4px color-mix(in oklab, var(--sl-color-accent) 65%, transparent);
+  z-index: 1;
+}
+
+/* ---- Expressive Code: snappier copy button ------------------------------- */
+.expressive-code .copy button {
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.expressive-code .copy button:hover {
+  border-color: color-mix(in oklab, var(--sl-color-accent) 50%, transparent) !important;
+}
+
+/* ---- Synced language tabs: clearer active indicator ---------------------- */
+starlight-tabs [role='tab'][aria-selected='true'] {
+  color: var(--sl-color-text-accent);
+  border-color: var(--sl-color-accent);
+}
+
+/* ---- Next/Prev pagination links: hover lift ------------------------------ */
+.pagination-links a {
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pagination-links a:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--sl-color-accent) 45%, var(--sl-color-hairline-light));
+  box-shadow: 0 10px 26px -16px rgba(0, 0, 0, 0.4);
+}
+
+/* Respect reduced-motion: disable smooth scroll & transforms */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pagination-links a:hover { transform: none; }
+}

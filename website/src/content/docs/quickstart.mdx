@@ -1,0 +1,100 @@
+---
+title: Quickstart
+description: Make your first ArcSite API request in under a minute.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+From zero to your first response in three steps.
+
+<div class="qs-steps">
+
+## Get an API token
+
+API tokens are created and managed in the ArcSite admin console. Sign in and open [the admin console](https://user.arcsiteapp.com#/admin) to generate a token, then use it as a Bearer credential on every request.
+
+:::note
+Keep your token secret and never commit it to source control. Replace `your_api_token_here` in the examples below with your actual token.
+:::
+
+## Know the base URL
+
+All requests go to the following base URL:
+
+`https://api.arcsite.com/v1`
+
+## Make your first request
+
+List the caller's projects to confirm everything is wired up correctly.
+
+`GET https://api.arcsite.com/v1/projects`
+
+<Tabs syncKey="lang">
+<TabItem label="cURL">
+
+```shell
+curl "https://api.arcsite.com/v1/projects" \
+  -H "Authorization: Bearer your_api_token_here"
+```
+
+</TabItem>
+<TabItem label="JavaScript">
+
+```js
+const response = await fetch("https://api.arcsite.com/v1/projects", {
+  headers: {
+    Authorization: "Bearer your_api_token_here",
+  },
+});
+const data = await response.json();
+```
+
+</TabItem>
+<TabItem label="Python">
+
+```python
+import requests
+
+response = requests.get(
+    "https://api.arcsite.com/v1/projects",
+    headers={"Authorization": "Bearer your_api_token_here"},
+)
+data = response.json()
+```
+
+</TabItem>
+</Tabs>
+
+```json title="Response" collapse={9-17}
+[
+  {
+    "id": 36029621652695040,
+    "name": "project 4",
+    "created_at": "2022-01-16T04:19:23",
+    "updated_at": "2022-01-16T04:19:23",
+    "job_number": "144111",
+    "customer": {
+      "name": "Jack",
+      "phone": "1441",
+      "email": "c@arcsite.com",
+      "address": {
+        "street": "street",
+        "city": "city",
+        "state": "state",
+        "zip_code": "300433"
+      }
+    },
+    "tags": ["tag1", "tag2"],
+    "archived": false
+  }
+]
+```
+
+</div>
+
+## Next steps
+
+- [Authentication](/authentication/)
+- [Projects](/projects/)
+- [Webhooks](/webhooks/)
+- [Integrations](/integrations/)

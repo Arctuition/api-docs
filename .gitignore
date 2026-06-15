@@ -29,4 +29,6 @@ doc/
 *.sublime-workspace
 *.sublime-project
 
-docs
+# Slate's root-level build output (anchored so it does NOT match the
+# Starlight content collection at website/src/content/docs/).
+/docs

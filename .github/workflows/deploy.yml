@@ -1,9 +1,13 @@
-name: Deploy on Master
+name: Deploy on Master (legacy Slate — retired)
+
+# RETIRED: the live docs are now built from website/ by
+# .github/workflows/deploy-modern-docs.yml (Starlight).
+# This Slate deploy is kept as a manual-only rollback fallback and no longer
+# runs automatically on push. To roll back to the old Slate site, trigger this
+# workflow manually from the Actions tab.
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   deploy:

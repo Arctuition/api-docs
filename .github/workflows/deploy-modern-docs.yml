@@ -1,0 +1,53 @@
+name: Deploy Modern Docs (Starlight)
+
+# Live deploy for the Starlight docs in website/.
+# Publishes to gh-pages, which serves dev.arcsite.com (custom domain preserved
+# via website/public/CNAME, copied to dist/CNAME on build).
+#
+# This replaces the legacy Slate deploy (.github/workflows/deploy.yml), which is
+# now manual-only (workflow_dispatch) and kept solely as a rollback fallback.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'website/**'
+      - '.github/workflows/deploy-modern-docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-modern-docs
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: website/dist
+          publish_branch: gh-pages
