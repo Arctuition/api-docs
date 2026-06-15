@@ -64,7 +64,7 @@ Use the [ArcSite Webhooks web UI](https://user.arcsiteapp.com/admin/webhooks) to
 
 ![Webhhoks](/images/webhooks/webhooks_list.png)
 
-```json title="Event payload"
+```json title="Sample webhook header"
 {
   "ArcSite-Signature": "t=1716975491,v=5f43f28c3d33c34b18634399a8e3bb69dcfb9f146cea562289306d783187d0f1"
 }
