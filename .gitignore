@@ -1,34 +1,4 @@
-*.gem
-*.rbc
-.bundle
-.config
-coverage
-InstalledFiles
-lib/bundler/man
-pkg
-rdoc
-spec/reports
-test/tmp
-test/version_tmp
-tmp
-*.DS_STORE
-build/
-.cache
-.vagrant
-.sass-cache
-vendor/
-.bin/
-
-# YARD artifacts
-.yardoc
-_yardoc
-doc/
-.idea/
-
-
-*.sublime-workspace
-*.sublime-project
-
-# Slate's root-level build output (anchored so it does NOT match the
-# Starlight content collection at website/src/content/docs/).
-/docs
+node_modules/
+dist/
+.astro/
+.DS_Store
