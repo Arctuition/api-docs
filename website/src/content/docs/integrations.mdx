@@ -474,7 +474,7 @@ Let’s say you want to create a Quotes record with product line items in Zoho C
      # Do nothing or other logic
   else
      # Fetch all Line Items info using drawing_id
-     ine_items = request_arcsite_drawing_line_items_api(drawing_id)
+     line_items = request_arcsite_drawing_line_items_api(drawing_id)
      # Create Zoho CRM Quotes or other record with the line items data
 ```
 
@@ -610,7 +610,7 @@ An ArcSite Project can only be associated with one Zoho CRM record, and attempti
 
 This webhook is triggered after exporting a Proposal PDF in the ArcSite App and the user chooses “Yes” or “No” when prompted.
 
-This webhook will only be triggered if::
+This webhook will only be triggered if:
 
 - The project is associated with a Zoho CRM record.
 - This webhook has been added.
@@ -627,7 +627,7 @@ This webhook will only be triggered if::
 | project_id     | String  | (required) The project id of the project                                                               |
 | drawing_id     | String  | (required) The drawing of the project                                                                  |
 | zoho_module    | String  | (required) The name of the Zoho CRM module, the value should one of Deals, Quotes, Leads and Contacts. |
-| zoho_record_id | Boolean | (required) The record ID in Zoho CRM                                                                   |
+| zoho_record_id | String | (required) The record ID in Zoho CRM                                                                   |
 | yes_no         | Boolean | (required) User Selection                                                                              |
 
 ## Salesforce Integration
@@ -762,7 +762,7 @@ Let's say you've edited a Drawing and want to auto-generate Salesforce Quote whe
 1. Complete Basic Integration and subscribe to the [Proposal Exported in App](#prompt-after-exporting-proposal-in-app-for-salesforce) Webhook.
 2. ArcSite sends payload data to your webhook URL. You should to extract the `yes_no` from the payload and **handle the logic like the sample code** right side.
 3. Extract `drawing_id` and `salesforce_object_type` and `salesforce_object_id` from the payload.
-4. Fetch all Line items info using the `drawng_id` via [Drawing Line Items API](/product_items/#get-proposal-line-items).
+4. Fetch all Line items info using the `drawing_id` via [Drawing Line Items API](/product_items/#get-proposal-line-items).
 5. **Generate an Salesforce Quote Object**
 
 - Name: Use the Drawing Name as the Quote's Name.

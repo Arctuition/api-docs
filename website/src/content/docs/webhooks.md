@@ -190,7 +190,7 @@ app.listen(3000, () => {
 | name               | String             | Name of the project                 |
 | customer           | Customer[Optional] | Customer profile of the project     |
 | job_number         | String[Optional]   | Job number of the project           |
-| work_site_addreess | Address[Optional]  | Worksite address of the project     |
+| work_site_address | Address[Optional]  | Worksite address of the project     |
 | sales_rep          | SalesRep[Optional] | Sales Representative of the project |
 | tags               | List[String]       | Tags attached to the project        |
 
@@ -212,7 +212,7 @@ The payload schema is identical to `project.created`.
 | name               | String             | Name of the project                 |
 | customer           | Customer[Optional] | Customer profile of the project     |
 | job_number         | String[Optional]   | Job number of the project           |
-| work_site_addreess | Address[Optional]  | Worksite address of the project     |
+| work_site_address | Address[Optional]  | Worksite address of the project     |
 | sales_rep          | SalesRep[Optional] | Sales Representative of the project |
 | tags               | List[String]       | Tags attached to the project        |
 
