@@ -8,10 +8,10 @@ Output is 100% static HTML, deployed to GitHub Pages.
 ## Local development
 
 ```sh
-npm install      # first time only
-npm run dev      # http://localhost:4321
-npm run build    # static output → dist/ (also validates internal links & anchors)
-npm run preview  # serve the built dist/ locally
+pnpm install      # first time only
+pnpm dev          # http://localhost:4321
+pnpm build        # static output → dist/ (also validates internal links & anchors)
+pnpm preview      # serve the built dist/ locally
 ```
 
 ## Project layout

@@ -12,13 +12,13 @@ Slate/Middleman site was removed after the cutover; it remains in git history.)
 ## Commands
 
 ```sh
-npm install        # first time
-npm run dev        # dev server at http://localhost:4321
-npm run build      # static build to dist/
-npm run preview    # serve the built dist/ locally
+pnpm install        # first time
+pnpm dev            # dev server at http://localhost:4321
+pnpm build          # static build to dist/
+pnpm preview        # serve the built dist/ locally
 ```
 
-There is no unit-test suite. **`npm run build` is the correctness gate**: it fails on
+There is no unit-test suite. **`pnpm build` is the correctness gate**: it fails on
 broken internal links and missing heading anchors (via `starlight-links-validator`).
 To check a single page, run the dev server and open it; there is no per-page build.
 
