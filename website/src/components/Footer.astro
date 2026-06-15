@@ -1,0 +1,26 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default><slot /></Default>
+
+<footer class="arcsite-footer not-content">
+  <p>
+    Built by <a href="https://www.arcsite.com" target="_blank" rel="noopener noreferrer">ArcSite</a>
+    · © 2026 ArcSite, Inc.
+    · <a href="https://www.arcsite.com" target="_blank" rel="noopener noreferrer">arcsite.com</a>
+  </p>
+</footer>
+
+<style>
+  .arcsite-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sl-color-hairline);
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-xs);
+  }
+  .arcsite-footer a {
+    color: var(--sl-color-text-accent);
+  }
+</style>

@@ -1,0 +1,31 @@
+# Build gate for the Starlight docs. The build validates all internal links
+# and heading anchors via the starlight-links-validator plugin (see
+# website/astro.config.mjs), so a green build means links are valid too.
+name: "Docs CI (build + link validation)"
+
+on:
+  pull_request:
+    paths:
+      - 'website/**'
+      - '.github/workflows/docs-ci.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build docs (also validates internal links & anchors)
+        run: npm run build

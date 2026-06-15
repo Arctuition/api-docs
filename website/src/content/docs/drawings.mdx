@@ -1,0 +1,268 @@
+---
+title: Drawings
+description: Retrieve ArcSite drawings, their location photos, and payment data.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Get Drawing
+
+Returns drawing of your organization by project drawing id,
+
+`GET https://api.arcsite.com/v1/drawings/<id>`
+
+<Tabs syncKey="lang">
+<TabItem label="cURL">
+
+```shell
+curl "https://api.arcsite.com/v1/drawings/<ID>" \
+  -H "Authorization: Bearer your_api_token_here"
+```
+
+</TabItem>
+<TabItem label="JavaScript">
+
+```js
+const response = await fetch("https://api.arcsite.com/v1/drawings/<ID>", {
+  headers: {
+    Authorization: "Bearer your_api_token_here",
+  },
+});
+const data = await response.json();
+```
+
+</TabItem>
+<TabItem label="Python">
+
+```python
+import requests
+
+response = requests.get(
+    "https://api.arcsite.com/v1/drawings/<ID>",
+    headers={"Authorization": "Bearer your_api_token_here"},
+)
+data = response.json()
+```
+
+</TabItem>
+</Tabs>
+
+```json title="Response"
+{
+  "id": "36029621652695015",
+  "project_id": "28123123123",
+  "name": "Drawing_1_Pre-Survey_Proposal (1)-page_03_test-page_02",
+  "pdf_url": "https://d1umxpetlubu85.cloudfront.net/36029346774787878/36029621652694930/40c01b5a-75d5-11ec-8ea1-0242ac170007/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02.pdf?Expires=1642318765&Signature=Lh9XnGwEtt5DdZx4GAdp7J5qbJArHKS~lY39y2OjDsSRzpXPuv6H4x0RxfqYGi6gqrZxv56GMn2MiQXN9cM2VotAMpGWBsjm4cabdpLSXZNuhtqJ4k9~VBr3EyhgGIlIQk2HUlb-~McPlfbGNrbGbzj3P5mpEZ0Ce00OG0WUs3eolPEom9s4v7QNwWRrsyltFvEhZ~T4S8tRDCjyHa50al6GsNCLb5sBX7pW~oem2~GKGYj3a-kDuzCQiKLp4K7Ncc2njmDwVHThI9aSIlggbuejBa~XbWUf2WNgcbUq0~i0-e~yVN212~Qh7vHcXV4XFXQ-7k3zdxfLE8m9il5Ufg__&Key-Pair-Id=APKAIZL6W5TJO2AK7DOQ",
+  "png_url": "https://d1umxpetlubu85.cloudfront.net/36029346774787878/36029621652694930/40c01b5a-75d5-11ec-8ea1-0242ac170007/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02.png",
+  "dxf_url": "https://cdn-files-1-test.arcsite.com/36029346774973628/36029621653508440/_attach_282299611393362/Web_hook_location_photo.dxf?Expires=1711623376&Signature=qZSQPST2tdtKM9URUDEIdnwJiXSpNxRabMtmjg6hzdizcVmKJ4UIF-F~0LLiF1LT2y~vbx73CHDNFhZZgBNSjzWszV123qWOn68NyfU6fMdWRlMu4P51q7SWRmxMTlcnMGrF8F29HeilhnZOhBTiF~9oHPa62KRM7Duuq6z-T1RAF7w8mcZH46N4A3wXUyvcIeTaX4jbxCLQ83l2AGsFonD-NVwjeeuNba3MnrwpsTdBIUEbZXnRHNWYJx0i0HhENpr4xJLnX0lDAh9fXI2Zfo8MIapbm7iz8IhTUkwjRdjWU35uabdob1YJ19qVEMoHMqjnftEEkw7n44CYBYUY9w__&Key-Pair-Id=APKAIZL6W5TJO2AK7DOQ"
+  "tags": [
+    "Work Order"
+  ]
+}
+```
+
+### Query Parameters
+
+| Parameter          | Default          | In    | Description                   |
+| ------------------ | ---------------- | ----- | ----------------------------- |
+| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+
+### Response Schema
+
+| Name       | Type               | Description                |
+| ---------- | ------------------ | -------------------------- |
+| id         | String             | The ID of the drawing      |
+| project_id | String             | The ID of the project      |
+| name       | String             | The name of the drawing    |
+| pdf_url    | String &#124; null | The URL of the PDF file    |
+| png_url    | String &#124; null | The URL of the PNG file    |
+| dxf_url    | String &#124; null | The URL of the DXF file    |
+| tags       | List[String]       | Tags added to this drawing |
+
+:::note
+If the `drawing_version_id` is passed, the data of the specified version will be returned. If not, the data of the latest version will be returned by default.
+:::
+
+:::note
+Please note that all URLs are not guaranteed and may be null if the app fails to upload to the cloud.
+
+The returned urls will expire in 24 hours.
+:::
+
+:::note
+The pdf could take some time(often less than 1 minute) to generate if the drawing contains location based photos, the `pdf_url` could be null before it has been generated.
+:::
+
+## Get Drawing Location Photos
+
+Returns location photos associated with a drawing.
+
+`GET https://api.arcsite.com/v1/drawings/<id>/location_photos`
+
+<Tabs syncKey="lang">
+<TabItem label="cURL">
+
+```shell
+curl "https://api.arcsite.com/v1/drawings/<ID>/location_photos" \
+  -H "Authorization: Bearer your_api_token_here"
+```
+
+</TabItem>
+<TabItem label="JavaScript">
+
+```js
+const response = await fetch("https://api.arcsite.com/v1/drawings/<ID>/location_photos", {
+  headers: {
+    Authorization: "Bearer your_api_token_here",
+  },
+});
+const data = await response.json();
+```
+
+</TabItem>
+<TabItem label="Python">
+
+```python
+import requests
+
+response = requests.get(
+    "https://api.arcsite.com/v1/drawings/<ID>/location_photos",
+    headers={"Authorization": "Bearer your_api_token_here"},
+)
+data = response.json()
+```
+
+</TabItem>
+</Tabs>
+
+```json title="Response"
+{
+  "location_photos": [
+    {
+      "url": "https://cdn-files-1.arcsite.com/location-photo-1.png?Expires=1642318765&Signature=..."
+    },
+    {
+      "url": "https://cdn-files-1.arcsite.com/location-photo-2.png?Expires=1642318765&Signature=..."
+    }
+  ]
+}
+```
+
+### Query Parameters
+
+| Parameter          | Default          | In    | Description                   |
+| ------------------ | ---------------- | ----- | ----------------------------- |
+| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+
+### Response Schema
+
+| Name            | Type         | Description                         |
+| --------------- | ------------ | ----------------------------------- |
+| location_photos | List[Object] | List of location photo objects      |
+
+### Location Photo
+
+| Name | Type   | Description                          |
+| ---- | ------ | ------------------------------------ |
+| url  | String | The presigned URL of the photo file  |
+
+:::note
+If the `drawing_version_id` is passed, the location photos of the specified version will be returned. If not, the location photos of the latest version will be returned by default.
+:::
+
+:::note
+The returned URLs will expire in 24 hours.
+:::
+
+## Get Drawing Payment
+
+Returns the payment data for a drawing, including balance schedules and deposit amount.
+
+`GET https://api.arcsite.com/v1/drawings/<id>/payment`
+
+<Tabs syncKey="lang">
+<TabItem label="cURL">
+
+```shell
+curl "https://api.arcsite.com/v1/drawings/<ID>/payment" \
+  -H "Authorization: Bearer your_api_token_here"
+```
+
+</TabItem>
+<TabItem label="JavaScript">
+
+```js
+const response = await fetch("https://api.arcsite.com/v1/drawings/<ID>/payment", {
+  headers: {
+    Authorization: "Bearer your_api_token_here",
+  },
+});
+const data = await response.json();
+```
+
+</TabItem>
+<TabItem label="Python">
+
+```python
+import requests
+
+response = requests.get(
+    "https://api.arcsite.com/v1/drawings/<ID>/payment",
+    headers={"Authorization": "Bearer your_api_token_here"},
+)
+data = response.json()
+```
+
+</TabItem>
+</Tabs>
+
+```json title="Response"
+{
+  "balance": {
+    "payment_schedules": [
+      {
+        "name": "Deposit",
+        "amount": 500.00,
+        "percentage": 25.00
+      },
+      {
+        "name": "On Completion",
+        "amount": 1500.00,
+        "percentage": 75.00
+      }
+    ]
+  },
+  "deposit": 500.00
+}
+```
+
+### Query Parameters
+
+| Parameter          | Default          | In    | Description                   |
+| ------------------ | ---------------- | ----- | ----------------------------- |
+| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+
+### Response Schema
+
+| Name    | Type   | Description                                    |
+| ------- | ------ | ---------------------------------------------- |
+| balance | Object | The balance information of the drawing payment |
+| deposit | Number | The deposit amount                             |
+
+### Balance
+
+| Name      | Type         | Description                      |
+| --------- | ------------ | -------------------------------- |
+| payment_schedules | List[PaymentSchedule] | List of payment schedule objects |
+
+### PaymentSchedule
+
+| Name       | Type   | Description                                          |
+| ---------- | ------ | ---------------------------------------------------- |
+| name       | String | The name of the payment schedule                        |
+| amount     | Number | The amount of the payment schedule                      |
+| percentage | Number | The percentage of the payment schedule (0.00 - 100.00)  |
+
+:::note
+If the `drawing_version_id` is passed, the payment data of the specified version will be returned. If not, the payment data of the latest version will be returned by default.
+:::
