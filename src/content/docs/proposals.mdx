@@ -1,6 +1,6 @@
 ---
 title: Proposals
-description: Query proposal templates and proposals, export proposal PDFs, and retrieve proposal payments.
+description: Query proposal templates and proposals, retrieve proposal details, export proposal PDFs, and retrieve proposal payments.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -117,6 +117,7 @@ data = response.json()
     "customer_name": "Jane Smith",
     "customer_email": "jane@example.com",
     "document_number": "PROP-2024-001",
+    "template_id": "36029621652695041",
     "total": 15000.0,
     "pdf_url": "https://d1umxpetlubu85.cloudfront.net/36029346774973628/36029621653386370/36029621653386685/c6f62f3d-db06-42df-8138-91d80e792e5d/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02_test.pdf",
     "approved_option": {
@@ -151,6 +152,7 @@ Each item in the response array is a `Proposal` object with the following fields
 | customer_name        | String         | Customer name                                                                        |
 | customer_email       | String         | Customer email                                                                       |
 | document_number      | String         | Proposal document number                                                             |
+| template_id          | String         | Proposal template ID                                                                 |
 | close_note           | String         | (optional) Reason for closing the proposal. Present when status is `VOID` or `LOST`. |
 | total                | Number         | (optional) Total amount of the proposal. Present when status is `APPROVED`.          |
 | pdf_url              | String         | (optional) URL of the proposal PDF file. Present when status is `APPROVED`.          |
@@ -176,6 +178,100 @@ The status field is an enum with the following values:
 
 :::note
 The `pdf_url` field is typically a time-limited URL for 24 hours. You should download the PDF soon after retrieving it.
+:::
+
+## Get Proposal by ID
+
+Returns one proposal by proposal ID. The response uses the same base `Proposal` fields as [Query Proposals](#query-proposals). For online proposals, the response also includes `proposal_options`, which can be used to link unsold proposals to the drawing versions they were generated from.
+
+`GET https://api.arcsite.com/v1/proposals/<proposal_id>`
+
+<Tabs syncKey="lang">
+<TabItem label="cURL">
+
+```shell
+curl "https://api.arcsite.com/v1/proposals/<proposal_id>" \
+  -H "Authorization: Bearer your_api_token_here"
+```
+
+</TabItem>
+<TabItem label="JavaScript">
+
+```js
+const response = await fetch("https://api.arcsite.com/v1/proposals/<proposal_id>", {
+  headers: {
+    Authorization: "Bearer your_api_token_here",
+  },
+});
+const data = await response.json();
+```
+
+</TabItem>
+<TabItem label="Python">
+
+```python
+import requests
+
+response = requests.get(
+    "https://api.arcsite.com/v1/proposals/<proposal_id>",
+    headers={"Authorization": "Bearer your_api_token_here"},
+)
+data = response.json()
+```
+
+</TabItem>
+</Tabs>
+
+```json title="Response" collapse={17-28}
+{
+  "proposal_id": "123",
+  "project_id": "456",
+  "name": "Main Building Proposal",
+  "status": "PENDING",
+  "sales_representative": "John Doe",
+  "contact_email": "john@example.com",
+  "customer_name": "Jane Smith",
+  "customer_email": "jane@example.com",
+  "document_number": "PROP-2024-001",
+  "template_id": "36029621652695041",
+  "proposal_options": [
+    {
+      "name": "Option 1",
+      "drawing_id": "abc123def456",
+      "drawing_version_id": "441f328-1a1b-4882-bd26-c86ee5a7bb0f",
+      "total": 15000.0,
+      "pdf_url": "https://d1umxpetlubu85.cloudfront.net/36029346774973628/36029621653386370/36029621653386685/c6f62f3d-db06-42df-8138-91d80e792e5d/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02_test.pdf"
+    }
+  ]
+}
+```
+
+### Parameters
+
+| Parameter   | Type   | Description           |
+| ----------- | ------ | --------------------- |
+| proposal_id | String | (required) Proposal ID |
+
+### Response Schema
+
+The response is a `Proposal` object with the fields documented in the [Proposal](#proposal) schema. Online proposals also include the following field:
+
+| Parameter        | Type                 | Description                                                                                     |
+| ---------------- | -------------------- | ----------------------------------------------------------------------------------------------- |
+| proposal_options | List[ProposalOption] | (optional) Full list of proposal options for online proposals, including drawing and PDF details |
+
+### ProposalOption
+
+| Parameter          | Type   | Description                                              |
+| ------------------ | ------ | -------------------------------------------------------- |
+| name               | String | Proposal option name                                     |
+| drawing_id         | String | ID of the drawing resource used to generate this option  |
+| drawing_version_id | String | ID of the drawing version used to generate this option   |
+| total              | Number | Total amount for this proposal option                    |
+| pdf_url            | String | Time-limited URL of the proposal option PDF file         |
+
+:::note
+For pending or draft online proposals, the top-level `approved_option` and `pdf_url` fields are not returned. Use `proposal_options` to access the drawing IDs and option PDF URLs.
 :::
 
 ## Export Proposal PDF
