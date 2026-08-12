@@ -204,7 +204,7 @@ app.listen(3000, () => {
 
 ### Project Updated Webhook Payload
 
-The payload schema is identical to `project.created`.
+The payload schema matches `project.created`, with the additional `source` field.
 
 | Parameter          | Type               | Description                         |
 | ------------------ | ------------------ | ----------------------------------- |
@@ -215,6 +215,11 @@ The payload schema is identical to `project.created`.
 | work_site_address | Address[Optional]  | Worksite address of the project     |
 | sales_rep          | SalesRep[Optional] | Sales Representative of the project |
 | tags               | List[String]       | Tags attached to the project        |
+| source             | String \| null      | Origin of the update: `app` for the ArcSite App, `web` for the ArcSite web UI, `open_api` for the ArcSite Open API, or `null` when unavailable (such as a system-initiated update) |
+
+:::note
+The `source` field is available only on `project.updated` webhook payloads. Other webhook event payloads are unchanged.
+:::
 
 ## Drawing Created
 
