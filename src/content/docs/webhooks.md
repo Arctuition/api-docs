@@ -43,6 +43,7 @@ A of webhook payload contains both _event type_ and _payload data_.
 | [`proposal.sent`](#proposal-sentdeprecated)                  | Triggered when a proposal is sent to customer. (Deprecated)                                  |
 | [`proposal.approved`](#proposal-approveddeprecated)          | Triggered when a proposal is approved by customer. (Deprecated)                              |
 | [`proposal.status_changed`](#proposal-status-changed)        | Triggered when a proposal status changes.                                                    |
+| [`proposal.viewed`](#proposal-viewed)                        | Triggered the first time a customer opens an online proposal.                                |
 | [`proposal.payment.received`](#proposal-payment-received)    | Triggered when a payment is successfully received for a proposal.                            |
 
 ## Built-in retries
@@ -364,6 +365,57 @@ The status field is an enum with the following values:
   <li>`APPROVED`: When a proposal is approved or esigned.</li>
 </ul>
 :::
+
+## Proposal Viewed
+
+`proposal.viewed` Triggered the first time a customer opens an online proposal.
+
+Sent once per proposal, on the first open only — later opens do not
+re-trigger it. Use it to advance a deal stage or queue follow-up while the customer is still
+looking at the bid. Sales previews and sign-in-person sessions do not trigger this event.
+
+:::note
+A change order is a separate proposal, so opening one sends its own `proposal.viewed` with the
+same `project_id` but a different `proposal_id`. Key your automation off `proposal_id`, and use
+`initial_proposal_id` to tie the change order back to the original proposal.
+:::
+
+```json title="Example"
+{
+  "event": "proposal.viewed",
+  "data": {
+    "proposal_id": "1234567890",
+    "project_id": "9876543210",
+    "name": "Backyard Fence",
+    "viewed_at": "2026-07-30T10:00:00.123456Z",
+    "status": "PENDING",
+    "sales_representative": "Jane Smith",
+    "contact_email": "jane@contractor.com",
+    "customer_name": "John Doe",
+    "customer_email": "john@example.com",
+    "document_number": "P-0001",
+    "template_id": "2468013579"
+  }
+}
+```
+
+### Proposal Viewed Webhook Payload
+
+| Parameter            | Type    | Description                                                                                                     |
+| -------------------- | ------- | --------------------------------------------------------------------------------------------------------------- |
+| proposal_id          | id      | Proposal ID                                                                                                     |
+| project_id           | id      | Proposal related project ID                                                                                     |
+| name                 | String  | Proposal name                                                                                                   |
+| viewed_at            | String  | When the customer first opened the proposal (ISO 8601, UTC)                                                     |
+| status               | String  | Proposal status when the webhook payload is generated; it may have changed since the first view                 |
+| sales_representative | String  | The sales name                                                                                                  |
+| contact_email        | String  | The sales email                                                                                                 |
+| customer_name        | String  | Proposal customer name                                                                                          |
+| customer_email       | String  | Proposal customer email                                                                                         |
+| document_number      | String  | (optional) Proposal document number                                                                             |
+| initial_proposal_id  | String  | (optional) ID of the initial proposal. Only present for change order proposals.                                 |
+| template_id          | String  | The ID of the template used to create the online proposal.                                                      |
+
 
 ## Proposal Payment Received
 
