@@ -365,9 +365,9 @@ The status field is an enum with the following values:
 
 `proposal.viewed` Triggered the first time a customer opens an online proposal.
 
-Sent once per proposal, on the first open only — later opens by the same customer do not
+Sent once per proposal, on the first open only — later opens do not
 re-trigger it. Use it to advance a deal stage or queue follow-up while the customer is still
-looking at the bid.
+looking at the bid. Sales previews and sign-in-person sessions do not trigger this event.
 
 :::note
 A change order is a separate proposal, so opening one sends its own `proposal.viewed` with the
@@ -402,14 +402,15 @@ same `project_id` but a different `proposal_id`. Key your automation off `propos
 | project_id           | id      | Proposal related project ID                                                                                     |
 | name                 | String  | Proposal name                                                                                                   |
 | viewed_at            | String  | When the customer first opened the proposal (ISO 8601, UTC)                                                     |
-| status               | String  | Proposal status at the time of the view. Normally `PENDING`                                                     |
+| status               | String  | Proposal status when the webhook payload is generated; it may have changed since the first view                 |
 | sales_representative | String  | The sales name                                                                                                  |
 | contact_email        | String  | The sales email                                                                                                 |
 | customer_name        | String  | Proposal customer name                                                                                          |
 | customer_email       | String  | Proposal customer email                                                                                         |
 | document_number      | String  | (optional) Proposal document number                                                                             |
 | initial_proposal_id  | String  | (optional) ID of the initial proposal. Only present for change order proposals.                                 |
-| template_id          | String? | The ID of the template used to create the proposal. Returns `null` when the proposal is signed in app.          |
+| template_id          | String  | The ID of the template used to create the online proposal.                                                      |
+
 
 ## Proposal Payment Received
 
