@@ -308,6 +308,7 @@ The returned `url` in proposal options will expire in 24 hours. It's not a perma
 
 | Parameter          | Type   | Description                                       |
 | ------------------ | ------ | ------------------------------------------------- |
+| id                 | String | Proposal option ID                                |
 | name               | String | Proposal option name                              |
 | drawing_id         | String | The proposal option associated drawing ID         |
 | drawing_version_id | String | The proposal option associated drawing version ID |
@@ -320,15 +321,27 @@ The returned `url` in proposal options will expire in 24 hours. It's not a perma
 
 ### Proposal Approved Webhook Payload
 
-| Parameter            | Type           | Description                          |
-| -------------------- | -------------- | ------------------------------------ |
-| project_id           | id             | Approved proposal related project ID |
-| proposal_id          | id             | Proposal ID                          |
-| name                 | String         | Proposal name                        |
-| customer_name        | String         | Proposal customer name               |
-| contact_email        | String         | The sales email                      |
-| sales_representative | String         | The sales name                       |
-| approved_option      | ProposalOption | Approved proposal option data        |
+| Parameter            | Type                   | Description                          |
+| -------------------- | ---------------------- | ------------------------------------ |
+| project_id           | id                     | Approved proposal related project ID |
+| proposal_id          | id                     | Proposal ID                          |
+| name                 | String                 | Proposal name                        |
+| customer_name        | String                 | Proposal customer name               |
+| contact_email        | String                 | The sales email                      |
+| sales_representative | String                 | The sales name                       |
+| approved_option      | ApprovedProposalOption | Approved proposal option data        |
+
+### ApprovedProposalOption
+
+| Parameter          | Type   | Description                                       |
+| ------------------ | ------ | ------------------------------------------------- |
+| name               | String | Approved proposal option name                    |
+| drawing_id         | String | Associated drawing ID                            |
+| drawing_version_id | String | Associated drawing version ID                    |
+| total              | Number | Total amount of the approved option              |
+| pdf_url            | String | Download address of the approved proposal PDF    |
+
+The deprecated `proposal.approved` event does not include an option `id` in `approved_option`.
 
 ## Proposal Status Changed
 
@@ -350,7 +363,7 @@ The returned `url` in proposal options will expire in 24 hours. It's not a perma
 | close_note           | String               | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
 | total                | Number               | (optional)The total of the proposal (Only present when status is APPROVED)                                                                           |
 | pdf_url              | String               | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
-| approved_option      | Object               | (optional) Contains `drawing_id` (String) field and `id` (String) field only for online approvals. Only present when status is APPROVED              |
+| approved_option      | Object               | (optional) Contains `drawing_id` (String); online approvals also include `id` (String) and `drawing_version_id` (String). Only present when status is APPROVED |
 | initial_proposal_id  | String               | (optional) ID of the initial proposal. Only present for change order proposals.                                                                      |
 | proposal_options     | List[ProposalOption] | (optional) Full list of proposal options for online proposals. Included whenever proposal status changes.                                            |
 | template_id          | String? | The ID of the template used to create the proposal. Returns `null` when the proposal is signed in app.                           |

@@ -122,7 +122,8 @@ data = response.json()
     "pdf_url": "https://d1umxpetlubu85.cloudfront.net/36029346774973628/36029621653386370/36029621653386685/c6f62f3d-db06-42df-8138-91d80e792e5d/Drawing_1_Pre-Survey_Proposal_-281-29-page_03_test-page_02_test.pdf",
     "approved_option": {
       "id": "789",
-      "drawing_id": "abc123def456"
+      "drawing_id": "abc123def456",
+      "drawing_version_id": "441f328-1a1b-4882-bd26-c86ee5a7bb0f"
     },
     "initial_proposal_id": "111"
   }
@@ -161,10 +162,11 @@ Each item in the response array is a `Proposal` object with the following fields
 
 ### ApprovedOption
 
-| Parameter  | Type   | Description                            |
-| ---------- | ------ | -------------------------------------- |
-| id         | String | (optional) Only for online approvals.  |
-| drawing_id | String | ID of the associated drawing resource. |
+| Parameter          | Type   | Description                                                               |
+| ------------------ | ------ | ------------------------------------------------------------------------- |
+| id                 | String | (optional) ID of the approved option, only for online approvals.          |
+| drawing_id         | String | ID of the associated drawing resource.                                    |
+| drawing_version_id | String | (optional) ID of the approved drawing version, only for online approvals. |
 
 :::note
 The status field is an enum with the following values:
@@ -236,6 +238,7 @@ data = response.json()
   "template_id": "36029621652695041",
   "proposal_options": [
     {
+      "id": "789",
       "name": "Option 1",
       "drawing_id": "abc123def456",
       "drawing_version_id": "441f328-1a1b-4882-bd26-c86ee5a7bb0f",
@@ -264,6 +267,7 @@ The response is a `Proposal` object with the fields documented in the [Proposal]
 
 | Parameter          | Type   | Description                                              |
 | ------------------ | ------ | -------------------------------------------------------- |
+| id                 | String | ID of this proposal option                               |
 | name               | String | Proposal option name                                     |
 | drawing_id         | String | ID of the drawing resource used to generate this option  |
 | drawing_version_id | String | ID of the drawing version used to generate this option   |
@@ -273,6 +277,14 @@ The response is a `Proposal` object with the fields documented in the [Proposal]
 :::note
 For pending or draft online proposals, the top-level `approved_option` and `pdf_url` fields are not returned. Use `proposal_options` to access the drawing IDs and option PDF URLs.
 :::
+
+For an approved online proposal, match `approved_option.id` to `proposal_options[].id` to identify the approved option. Different options can share a `drawing_id`, so the drawing ID alone does not identify the approved option.
+
+```js
+const approvedOption = data.proposal_options.find(
+  (option) => option.id === data.approved_option.id,
+);
+```
 
 ## Export Proposal PDF
 
