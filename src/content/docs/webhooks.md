@@ -52,7 +52,7 @@ A delivery succeeds when your endpoint returns a 2xx response status code within
 
 ArcSite makes up to 7 attempts per event: the first delivery and 6 retries, sent 15 seconds, 30 seconds, 3 minutes, 10 minutes, 20 minutes and 30 minutes after the previous failed attempt. If the last attempt fails, about 64 minutes after the first, ArcSite stops retrying the event.
 
-Every retry sends the same request body as the first attempt, which holds the data as it was when the event happened. The `ArcSite-Signature` header has a new timestamp and signature on each attempt.
+Every retry sends the same request body as the first attempt. The body holds the data as it was when ArcSite generated the payload, shortly after the event, so it can already include changes made after the event. The `ArcSite-Signature` header has a new timestamp and signature on each attempt.
 
 :::note
 Webhooks are delivered at least once, so your endpoint can receive the same event more than once, for example when it takes longer than 30 seconds to respond. Deliveries do not carry a unique delivery ID, so make sure your handler can safely process the same event twice.
