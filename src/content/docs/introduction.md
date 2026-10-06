@@ -23,3 +23,4 @@ https://api.arcsite.com/v1
 - **Status codes** — The API uses standard HTTP status codes. See the [Errors](/errors/) page for details.
 - **Pagination** — List endpoints are paginated with the `page` and `per_page` parameters. See [Pagination](/pagination/) for details.
 - **Authentication** — Requests are authenticated with a bearer token header. See [Authentication](/authentication/) for details.
+- **Rate limits** — Each company can make up to 5,000 requests per hour. See [Rate limits](/errors/#rate-limits) for details.
