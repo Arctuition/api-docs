@@ -39,4 +39,4 @@ Requests over the limit return `429 Too Many Requests`:
 }
 ```
 
-The response does not include a `Retry-After` header. When you receive a `429`, wait until the next hour starts before you retry.
+When you receive a `429`, wait until the next hour starts before you retry.
