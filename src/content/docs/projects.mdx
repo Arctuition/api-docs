@@ -299,6 +299,16 @@ ArcSite supports integration with various external platforms. Once project creat
 3. Project name cannot start with `.`.
 4. Project name must be less than or equal to 200 characters.
 
+If your organization already has a project with the same name, the request returns `400 Bad Request`:
+
+```json title="Duplicate name response"
+{
+  "message": "Project name Backyard Fence already exists, please use another name."
+}
+```
+
+Other invalid requests, such as a missing required field, also return `400`.
+
 ### Customer
 
 | Parameter    | Type    | Description                         |

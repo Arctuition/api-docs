@@ -48,7 +48,15 @@ A of webhook payload contains both _event type_ and _payload data_.
 
 ## Built-in retries
 
-ArcSite webhooks have built-in retry methods for 3xx, 4xx, or 5xx response status codes. If ArcSite doesn’t quickly receive a 2xx response status code for an event, webhooks will retry the event until it receives a 2xx response or up to certain times.
+A delivery succeeds when your endpoint returns a 2xx response status code within 30 seconds. Any other result, such as a non-2xx status code, a timeout or a connection error, counts as a failure, and ArcSite retries the event.
+
+ArcSite makes up to 7 attempts per event: the first delivery and 6 retries, sent 15 seconds, 30 seconds, 3 minutes, 10 minutes, 20 minutes and 30 minutes after the previous failed attempt. If the last attempt fails, about 64 minutes after the first, ArcSite stops retrying the event.
+
+Every retry sends the same request body as the first attempt. The body holds the data as it was when ArcSite generated the payload, shortly after the event, so it can already include changes made after the event. The `ArcSite-Signature` header has a new timestamp and signature on each attempt.
+
+:::note
+Webhooks are delivered at least once, so your endpoint can receive the same event more than once, for example when it takes longer than 30 seconds to respond. Deliveries do not carry a unique delivery ID, so make sure your handler can safely process the same event twice.
+:::
 
 ## Secure your endpoint
 
@@ -354,14 +362,14 @@ The deprecated `proposal.approved` event does not include an option `id` in `app
 | proposal_id          | id                   | Proposal ID                                                                                                                                          |
 | project_id           | id                   | Proposal related project ID                                                                                                                          |
 | name                 | String               | Proposal name                                                                                                                                        |
-| status               | String               | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED)                                                                                                   |
+| status               | String               | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED/EXPIRED)                                                                                           |
 | sales_representative | String               | The sales name                                                                                                                                       |
 | contact_email        | String               | The sales email                                                                                                                                      |
 | customer_name        | String               | Proposal customer name                                                                                                                               |
 | customer_email       | String               | Proposal customer email                                                                                                                              |
 | document_number      | String               | (optional) Proposal document number                                                                                                                  |
 | close_note           | String               | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
-| total                | Number               | (optional)The total of the proposal (Only present when status is APPROVED)                                                                           |
+| total                | Number               | (optional)The total of the proposal (Only present when status is APPROVED). For a change order, this is the full revised amount; see [Change Orders](/proposals/#change-orders) |
 | pdf_url              | String               | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
 | approved_option      | Object               | (optional) Contains `drawing_id` (String); online approvals also include `id` (String) and `drawing_version_id` (String). Only present when status is APPROVED |
 | initial_proposal_id  | String               | (optional) ID of the initial proposal. Only present for change order proposals.                                                                      |
@@ -376,6 +384,7 @@ The status field is an enum with the following values:
   <li>`VOID`: When a proposal is marked as void</li>
   <li>`LOST`: When a proposal is marked as lost</li>
   <li>`APPROVED`: When a proposal is approved or esigned.</li>
+  <li>`EXPIRED`: When a sent proposal passes its expiration date without being approved</li>
 </ul>
 :::
 
