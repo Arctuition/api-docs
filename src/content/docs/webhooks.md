@@ -1,32 +1,51 @@
 ---
 title: Webhooks
-description: Use incoming webhooks to get real-time notifications when events happen in your ArcSite organization.
+description: Use webhooks to get real-time notifications when events happen in your ArcSite organization.
 ---
 
-Use incoming webhooks to get real-time updates.
+Use webhooks to get real-time updates.
 
-ArcSite uses webhooks to notify your application when an event happens in your organization. Webhooks are particularly useful for asynchronous events like new drawing created.
+ArcSite uses webhooks to notify your application when an event happens in your organization. Webhooks are particularly useful for asynchronous events such as a new drawing being created.
 
-A webhook enables ArcSite to push real-time notifications to your app. ArcSite uses HTTPS to send these notifications to your app as a JSON payload. You can then use these notifications to execute actions in your backend systems.
+A webhook enables ArcSite to push real-time notifications to your app. ArcSite sends these notifications to your app as a JSON payload in an HTTP `POST` request. You can then use these notifications to execute actions in your backend systems.
 
-You can create and manage your webhooks from [the ArcSite web UI](https://user.arcsiteapp.com#/admin).
+You can create and manage your webhooks in the ArcSite web app under **Admin → Developers → [Webhooks](https://user.arcsiteapp.com/admin/webhooks)**. Only organization owners and admins can manage webhooks.
 
-A of webhook payload contains both _event type_ and _payload data_.
+Webhook URLs should use `https://` (plain `http://` is also accepted), can be at most 255 characters, and must resolve to a public internet address: private-network, loopback and link-local addresses are rejected. You can include basic-auth credentials in the URL (`https://user:pass@example.com/hook`).
+
+Each webhook payload contains the _event type_ and the _payload data_.
 
 ```json title="Event payload"
 {
   "event": "project.created",
   "data": {
-    "id": 36029621652695040,
+    "id": "36029621652695040",
     "name": "project 4",
-    "created_at": "2022-01-16T04:19:23",
-    "updated_at": "2022-01-16T04:19:23",
+    "created_at": "2022-01-16T04:19:23.000000Z",
+    "updated_at": "2022-01-16T04:19:23.000000Z",
+    "archived": false,
     "job_number": "144111",
     "customer": {
       "name": "Jack",
       "phone": "1441",
-      "second_phone": "1122"
-    }
+      "second_phone": "1122",
+      "email": "customer@example.com",
+      "second_email": null,
+      "address": {
+        "street": "street",
+        "city": "city",
+        "county": "county",
+        "state": "state",
+        "zip_code": "300433"
+      }
+    },
+    "work_site_address": null,
+    "sales_rep": {
+      "name": "Wang",
+      "email": "sales@example.com",
+      "phone": "122122-121"
+    },
+    "tags": ["tag1", "tag2"]
   }
 }
 ```
@@ -37,7 +56,7 @@ A of webhook payload contains both _event type_ and _payload data_.
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
 | [`project.created`](#project-created)                        | Triggered when a project is created.                                                         |
 | [`project.updated`](#project-updated)                        | Triggered when a project's own data is modified, such as renaming, descriptions, or tags.   |
-| [`drawing.created`](#drawing-created)                        | Triggered when a drawing is created by uploading PDF files or uploading a new drawing.       |
+| [`drawing.created`](#drawing-created)                        | Triggered when a drawing is created by uploading PDF files (on the web or with the Import PDF API) or uploading a new drawing. |
 | [`drawing.updated`](#drawing-updated)                        | Triggered when a drawing is manually re-uploaded to the cloud after its initial creation.    |
 | [`proposal.signed`](#proposal-pdf-signeddeprecated)          | Triggered when a proposal is signed in the app. (Deprecated)                                 |
 | [`proposal.sent`](#proposal-sentdeprecated)                  | Triggered when a proposal is sent to customer. (Deprecated)                                  |
@@ -45,17 +64,20 @@ A of webhook payload contains both _event type_ and _payload data_.
 | [`proposal.status_changed`](#proposal-status-changed)        | Triggered when a proposal status changes.                                                    |
 | [`proposal.viewed`](#proposal-viewed)                        | Triggered the first time a customer opens an online proposal.                                |
 | [`proposal.payment.received`](#proposal-payment-received)    | Triggered when a payment is successfully received for a proposal.                            |
+| `app_export_proposal.prompted`                               | Triggered after a proposal PDF is exported in the ArcSite App and the user answers the push prompt. Available only when your organization is connected to a supported integration; see [Integrations](/integrations/). |
 
-## Built-in retries
+## Delivery and retries
 
-A delivery succeeds when your endpoint returns a 2xx response status code within 30 seconds. Any other result, such as a non-2xx status code, a timeout or a connection error, counts as a failure, and ArcSite retries the event.
+ArcSite sends each event as an HTTP `POST` with `Content-Type: application/json`. A delivery succeeds when your endpoint returns a 2xx response status code within 30 seconds (the connection must be accepted within 5 seconds). Any other result, such as a non-2xx status code, a timeout or a connection error, counts as a failure, and ArcSite retries the event.
 
-ArcSite makes up to 7 attempts per event: the first delivery and 6 retries, sent 15 seconds, 30 seconds, 3 minutes, 10 minutes, 20 minutes and 30 minutes after the previous failed attempt. If the last attempt fails, about 64 minutes after the first, ArcSite stops retrying the event.
+ArcSite follows up to 5 redirects (`301`, `302`, `303`, `307`, `308`), as long as every hop resolves to a public internet address. After a `307` or `308` it repeats the `POST` with the same body; after a `301`, `302` or `303` it follows with a `GET` without a body. The response at the end of the redirects decides whether the delivery succeeded.
+
+ArcSite makes up to 7 attempts per event: the first delivery and 6 retries, sent 15 seconds, 30 seconds, 3 minutes, 10 minutes, 20 minutes and 30 minutes after the previous failed attempt. If the last attempt fails, about 64 minutes after the first, ArcSite stops retrying the event. If your endpoint responds with `410 Gone`, ArcSite stops retrying that event right away. The webhook itself stays enabled.
 
 Every retry sends the same request body as the first attempt. The body holds the data as it was when ArcSite generated the payload, shortly after the event, so it can already include changes made after the event. The `ArcSite-Signature` header has a new timestamp and signature on each attempt.
 
 :::note
-Webhooks are delivered at least once, so your endpoint can receive the same event more than once, for example when it takes longer than 30 seconds to respond. Deliveries do not carry a unique delivery ID, so make sure your handler can safely process the same event twice.
+Webhooks are delivered at least once, so your endpoint can receive the same event more than once, for example when it takes longer than 30 seconds to respond. Events can also arrive out of order. Deliveries do not carry a unique delivery ID, so make sure your handler can safely process the same event twice.
 :::
 
 ## Secure your endpoint
@@ -71,7 +93,7 @@ The following section describes how to verify webhook signatures:
 
 Use the [ArcSite Webhooks web UI](https://user.arcsiteapp.com/admin/webhooks) to get the webhook secret. ArcSite generates a unique secret key for each webhook.
 
-![Webhhoks](/images/webhooks/webhooks_list.png)
+![Webhooks](/images/webhooks/webhooks_list.png)
 
 ```json title="Sample webhook header"
 {
@@ -95,8 +117,10 @@ SECRET = 'your_webhook_secret'
 
 
 def verify_webhook(header, payload, secret):
+    if not header:
+        return False
     # Extract timestamp and signature
-    elements = dict(item.split('=') for item in header.split(','))
+    elements = dict(item.split('=', 1) for item in header.split(','))
     timestamp, signature = elements['t'], elements['v']
     # Prepare signed payload string
     signed_payload = f"{timestamp}.{payload}"
@@ -166,6 +190,9 @@ function verifyWebhook(header, payload, secret) {
     .update(signedPayload)
     .digest("hex");
   // Verify signature
+  if (!signature || signature.length !== expectedSignature.length) {
+    return false;
+  }
   return crypto.timingSafeEqual(
     Buffer.from(signature),
     Buffer.from(expectedSignature),
@@ -197,10 +224,13 @@ app.listen(3000, () => {
 | ------------------ | ------------------ | ----------------------------------- |
 | id                 | String             | ID of the project                   |
 | name               | String             | Name of the project                 |
-| customer           | Customer[Optional] | Customer profile of the project     |
-| job_number         | String[Optional]   | Job number of the project           |
-| work_site_address | Address[Optional]  | Worksite address of the project     |
-| sales_rep          | SalesRep[Optional] | Sales Representative of the project |
+| created_at         | String             | Creation time (ISO 8601, UTC, e.g. `2022-01-16T04:19:23.000000Z`) |
+| updated_at         | String             | Last update time (ISO 8601, UTC)    |
+| archived           | Boolean            | Whether the project is archived     |
+| customer           | [Customer](/projects/#customer) \| null | Customer profile of the project     |
+| job_number         | String \| null     | Job number of the project           |
+| work_site_address  | [Address](/projects/#address) \| null | Worksite address of the project     |
+| sales_rep          | [SalesRep](/projects/#salesrep) \| null | Sales Representative of the project |
 | tags               | List[String]       | Tags attached to the project        |
 
 ## Project Updated
@@ -209,6 +239,8 @@ app.listen(3000, () => {
 
 - Renaming the project, or updating its description / display name / client profile.
 - Adding or removing a tag on the project, or removing a tag definition that was attached to the project.
+
+It is sent for every successful update request, even one that changes nothing. Archiving or unarchiving a project does not trigger it.
 
 
 ### Project Updated Webhook Payload
@@ -219,10 +251,13 @@ The payload schema matches `project.created`, with the additional `source` field
 | ------------------ | ------------------ | ----------------------------------- |
 | id                 | String             | ID of the project                   |
 | name               | String             | Name of the project                 |
-| customer           | Customer[Optional] | Customer profile of the project     |
-| job_number         | String[Optional]   | Job number of the project           |
-| work_site_address | Address[Optional]  | Worksite address of the project     |
-| sales_rep          | SalesRep[Optional] | Sales Representative of the project |
+| created_at         | String             | Creation time (ISO 8601, UTC, e.g. `2022-01-16T04:19:23.000000Z`) |
+| updated_at         | String             | Last update time (ISO 8601, UTC)    |
+| archived           | Boolean            | Whether the project is archived     |
+| customer           | [Customer](/projects/#customer) \| null | Customer profile of the project     |
+| job_number         | String \| null     | Job number of the project           |
+| work_site_address  | [Address](/projects/#address) \| null | Worksite address of the project     |
+| sales_rep          | [SalesRep](/projects/#salesrep) \| null | Sales Representative of the project |
 | tags               | List[String]       | Tags attached to the project        |
 | source             | String \| null      | Origin of the update: `app` for the ArcSite App, `web` for the ArcSite web UI, `open_api` for the ArcSite Open API, or `null` when unavailable (such as a system-initiated update) |
 
@@ -232,12 +267,12 @@ The `source` field is available only on `project.updated` webhook payloads. Othe
 
 ## Drawing Created
 
-The `drawing.created` webhook will be triggered when a drawing is created by uploading PDF files on the user site or manually uploading some newly created drawing to the cloud from the ArcSite App.
+The `drawing.created` webhook will be triggered when a drawing is created by uploading PDF files on the user site or with the [Import PDF](/projects/#import-pdf) API, or by manually uploading some newly created drawing to the cloud from the ArcSite App.
 
 :::note
-The returned `pdf_url` or `png_url` will expire in 24 hours. They are not permanent links and should not be used in your system directly. You need to download the files from the urls for your future use.
+The returned `pdf_url` or `png_url` will expire 24 hours after ArcSite generates the payload. They are not permanent links and should not be used in your system directly. You need to download the files from the urls for your future use.
 
-For drawing created from the user site by uploading PDF files, the `png_url` will be null.
+For drawing created from the user site by uploading PDF files, the `png_url` will be an empty string (`""`). `pdf_url` and `dxf_url` are `null` when the drawing has no PDF or DXF file.
 :::
 
 ### Drawing Created Webhook Payload
@@ -247,8 +282,9 @@ For drawing created from the user site by uploading PDF files, the `png_url` wil
 | id         | String       | ID of the drawing                             |
 | project_id | String       | Project ID of the drawing                     |
 | name       | String       | Name of the drawing                           |
-| pdf_url    | String       | Download address of PDF format of the drawing |
-| png_url    | String       | Download address of PNG format of the drawing |
+| pdf_url    | String \| null | Download address of PDF format of the drawing |
+| png_url    | String       | Download address of PNG format of the drawing (empty string if there is none) |
+| dxf_url    | String \| null | Download address of DXF format of the drawing |
 | tags       | List[String] | Tags added to this drawing                    |
 
 ## Drawing Updated
@@ -256,7 +292,7 @@ For drawing created from the user site by uploading PDF files, the `png_url` wil
 The `drawing.updated` webhook is triggered whenever a drawing is manually re-uploaded to the cloud from the ArcSite App after its initial creation.
 
 :::note
-The returned `pdf_url` or `png_url` will expire in 24 hours. They are not permanent links and should not be used in your system directly. You need to download the files from the urls for your future use.
+The returned `pdf_url` or `png_url` will expire 24 hours after ArcSite generates the payload. They are not permanent links and should not be used in your system directly. You need to download the files from the urls for your future use.
 :::
 
 ### Drawing Updated Webhook Payload
@@ -266,8 +302,9 @@ The returned `pdf_url` or `png_url` will expire in 24 hours. They are not perman
 | id         | String       | ID of the drawing                             |
 | project_id | String       | Project ID of the drawing                     |
 | name       | String       | Name of the drawing                           |
-| pdf_url    | String       | Download address of PDF format of the drawing |
-| png_url    | String       | Download address of PNG format of the drawing |
+| pdf_url    | String \| null | Download address of PDF format of the drawing |
+| png_url    | String       | Download address of PNG format of the drawing (empty string if there is none) |
+| dxf_url    | String \| null | Download address of DXF format of the drawing |
 | tags       | List[String] | Tags added to this drawing                    |
 
 ## Proposal PDF Signed(Deprecated)
@@ -275,7 +312,7 @@ The returned `pdf_url` or `png_url` will expire in 24 hours. They are not perman
 `proposal.signed` Triggered when a proposal is signed in the app.
 
 :::note
-The returned `url` will expire in 24 hours. It's not a permanent link and should not be used in your system directly. You need to download the file from the url for your future use.
+The returned `url` will expire 24 hours after ArcSite generates the payload. It's not a permanent link and should not be used in your system directly. You need to download the file from the url for your future use.
 :::
 
 ### Proposal PDF signed Webhook Payload
@@ -297,15 +334,15 @@ A proposal option is associated with a specific drawing version in Arcsite. If y
 :::
 
 :::note
-The returned `url` in proposal options will expire in 24 hours. It's not a permanent link and should not be used in your system directly. You need to download the file from the url for your future use.
+The returned `url` in proposal options will expire 24 hours after ArcSite generates the payload. It's not a permanent link and should not be used in your system directly. You need to download the file from the url for your future use.
 :::
 
 ### Proposal Sent Webhook Payload
 
 | Parameter            | Type                 | Description                          |
 | -------------------- | -------------------- | ------------------------------------ |
-| project_id           | id                   | Approved proposal related project ID |
-| proposal_id          | id                   | Proposal ID                          |
+| project_id           | String               | Approved proposal related project ID |
+| proposal_id          | String               | Proposal ID                          |
 | name                 | String               | Proposal name                        |
 | customer_name        | String               | Proposal customer name               |
 | contact_email        | String               | The sales email                      |
@@ -331,13 +368,16 @@ The returned `url` in proposal options will expire in 24 hours. It's not a perma
 
 | Parameter            | Type                   | Description                          |
 | -------------------- | ---------------------- | ------------------------------------ |
-| project_id           | id                     | Approved proposal related project ID |
-| proposal_id          | id                     | Proposal ID                          |
+| project_id           | String                 | Approved proposal related project ID |
+| proposal_id          | String                 | Proposal ID                          |
 | name                 | String                 | Proposal name                        |
 | customer_name        | String                 | Proposal customer name               |
 | contact_email        | String                 | The sales email                      |
 | sales_representative | String                 | The sales name                       |
+| customer_email       | String \| null         | Proposal customer email              |
+| customer_address     | [Address](/projects/#address) | Customer address of the project |
 | approved_option      | ApprovedProposalOption | Approved proposal option data        |
+| initial_proposal_id  | String                 | (optional) ID of the first proposal in the change-order chain |
 
 ### ApprovedProposalOption
 
@@ -349,32 +389,34 @@ The returned `url` in proposal options will expire in 24 hours. It's not a perma
 | total              | Number | Total amount of the approved option              |
 | pdf_url            | String | Download address of the approved proposal PDF    |
 
-The deprecated `proposal.approved` event does not include an option `id` in `approved_option`.
+The deprecated `proposal.approved` event does not include an option `id` in `approved_option`. The `pdf_url` expires 24 hours after ArcSite generates the payload.
 
 ## Proposal Status Changed
 
 `proposal.status_changed` Triggered when a proposal status changes.
 
+It isn't sent for status changes caused by payments (use [`proposal.payment.received`](#proposal-payment-received)), when the customer e-signs a proposal that still needs the sales representative's signature, or when an expired proposal is reopened by setting a new expiration date.
+
 ### Proposal Status Change Webhook Payload
 
 | Parameter            | Type                 | Description                                                                                                                                          |
 | -------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| proposal_id          | id                   | Proposal ID                                                                                                                                          |
-| project_id           | id                   | Proposal related project ID                                                                                                                          |
+| proposal_id          | String               | Proposal ID                                                                                                                                          |
+| project_id           | String               | Proposal related project ID                                                                                                                          |
 | name                 | String               | Proposal name                                                                                                                                        |
-| status               | String               | Proposal status (DRAFT/PENDING/VOID/LOST/APPROVED/EXPIRED)                                                                                           |
+| status               | String               | Proposal status. See the enum below.                                                                                                                  |
 | sales_representative | String               | The sales name                                                                                                                                       |
 | contact_email        | String               | The sales email                                                                                                                                      |
 | customer_name        | String               | Proposal customer name                                                                                                                               |
-| customer_email       | String               | Proposal customer email                                                                                                                              |
+| customer_email       | String \| null       | Proposal customer email                                                                                                                              |
 | document_number      | String               | (optional) Proposal document number                                                                                                                  |
-| close_note           | String               | (optional)Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
-| total                | Number               | (optional)The total of the proposal (Only present when status is APPROVED). For a change order, this is the full revised amount; see [Change Orders](/proposals/#change-orders) |
-| pdf_url              | String               | (optional) Download link to the proposal PDF file. Only present when status is APPROVED. Contains the signed version if the proposal has been signed |
-| approved_option      | Object               | (optional) Contains `drawing_id` (String); online approvals also include `id` (String) and `drawing_version_id` (String). Only present when status is APPROVED |
-| initial_proposal_id  | String               | (optional) ID of the initial proposal. Only present for change order proposals.                                                                      |
+| close_note           | String               | (optional) Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
+| total                | Number               | (optional) The total of the proposal (Only present when status is APPROVED, PARTIALLY_PAID, PAID or OVER_PAID). For a change order, this is the full revised amount; see [Change Orders](/proposals/#change-orders) |
+| pdf_url              | String               | (optional) Download link to the proposal PDF file. Only present when status is APPROVED, PARTIALLY_PAID, PAID or OVER_PAID. Contains the signed version if the proposal has been signed. Expires 24 hours after ArcSite generates the payload |
+| approved_option      | Object               | (optional) Contains `drawing_id` (String); online approvals also include `id` (String) and `drawing_version_id` (String). Only present when status is APPROVED, PARTIALLY_PAID, PAID or OVER_PAID |
+| initial_proposal_id  | String               | (optional) ID of the first proposal in the change-order chain. Present on every proposal in a chain, including the original proposal, where it equals `proposal_id` |
 | proposal_options     | List[ProposalOption] | (optional) Full list of proposal options for online proposals. Included whenever proposal status changes.                                            |
-| template_id          | String? | The ID of the template used to create the proposal. Returns `null` when the proposal is signed in app.                           |
+| template_id          | String \| null | The ID of the template used to create the proposal. Returns `null` when the proposal is signed in app.                           |
 
 :::note
 The status field is an enum with the following values:
@@ -383,8 +425,9 @@ The status field is an enum with the following values:
   <li>`PENDING`: When a proposal is sent to the customer</li>
   <li>`VOID`: When a proposal is marked as void</li>
   <li>`LOST`: When a proposal is marked as lost</li>
-  <li>`APPROVED`: When a proposal is approved or esigned.</li>
+  <li>`APPROVED`: When a proposal is approved or e-signed, online or in the app</li>
   <li>`EXPIRED`: When a sent proposal passes its expiration date without being approved</li>
+  <li>`PARTIALLY_PAID`, `PAID`, `OVER_PAID`: When a change order is approved on a proposal that already has payments recorded</li>
 </ul>
 :::
 
@@ -394,7 +437,7 @@ The status field is an enum with the following values:
 
 Sent once per proposal, on the first open only — later opens do not
 re-trigger it. Use it to advance a deal stage or queue follow-up while the customer is still
-looking at the bid. Sales previews and sign-in-person sessions do not trigger this event.
+looking at the bid. Sales previews and sign-in-person sessions do not trigger this event, and a proposal that was signed in person does not send it later.
 
 :::note
 A change order is a separate proposal, so opening one sends its own `proposal.viewed` with the
@@ -412,7 +455,7 @@ same `project_id` but a different `proposal_id`. Key your automation off `propos
     "viewed_at": "2026-07-30T10:00:00.123456Z",
     "status": "PENDING",
     "sales_representative": "Jane Smith",
-    "contact_email": "jane@contractor.com",
+    "contact_email": "jane@example.com",
     "customer_name": "John Doe",
     "customer_email": "john@example.com",
     "document_number": "P-0001",
@@ -425,18 +468,20 @@ same `project_id` but a different `proposal_id`. Key your automation off `propos
 
 | Parameter            | Type    | Description                                                                                                     |
 | -------------------- | ------- | --------------------------------------------------------------------------------------------------------------- |
-| proposal_id          | id      | Proposal ID                                                                                                     |
-| project_id           | id      | Proposal related project ID                                                                                     |
+| proposal_id          | String  | Proposal ID                                                                                                     |
+| project_id           | String  | Proposal related project ID                                                                                     |
 | name                 | String  | Proposal name                                                                                                   |
 | viewed_at            | String  | When the customer first opened the proposal (ISO 8601, UTC)                                                     |
 | status               | String  | Proposal status when the webhook payload is generated; it may have changed since the first view                 |
 | sales_representative | String  | The sales name                                                                                                  |
 | contact_email        | String  | The sales email                                                                                                 |
 | customer_name        | String  | Proposal customer name                                                                                          |
-| customer_email       | String  | Proposal customer email                                                                                         |
+| customer_email       | String \| null | Proposal customer email                                                                                  |
 | document_number      | String  | (optional) Proposal document number                                                                             |
-| initial_proposal_id  | String  | (optional) ID of the initial proposal. Only present for change order proposals.                                 |
+| initial_proposal_id  | String  | (optional) ID of the first proposal in the change-order chain. Present on every proposal in a chain, including the original proposal, where it equals `proposal_id` |
 | template_id          | String  | The ID of the template used to create the online proposal.                                                      |
+
+`close_note`, `total`, `pdf_url` and `approved_option` are also included under the same conditions as in [`proposal.status_changed`](#proposal-status-changed).
 
 
 ## Proposal Payment Received
@@ -452,7 +497,7 @@ This webhook fires for both ArcSite Payment and Mark as Paid (manual payment rec
     "proposal_id": "12345",
     "paid_amount": 5000.0,
     "pay_channel": "arcsite_payment",
-    "paid_time": "2025-11-06T10:30:00+00:00",
+    "paid_time": "2025-11-06T10:30:00",
     "drawing_id": "22444",
     "payment_method": "Credit Card"
   }
@@ -481,9 +526,9 @@ This webhook fires for both ArcSite Payment and Mark as Paid (manual payment rec
 | drawing_id     | String | The approved drawing id of the proposal                                                                           |
 | paid_amount    | Number | Amount of this specific payment (not cumulative). Decimal with 2 decimal places                                   |
 | pay_channel    | String | Payment channel identifier: `arcsite_payment` (online payment) or `mark_as_paid` (manual recording)               |
-| paid_time      | String | (conditional) Timestamp when payment was received. Only present when `pay_channel` is `arcsite_payment`. ISO 8601 |
+| paid_time      | String | (conditional) Timestamp (UTC) when payment was received, in ISO 8601 format without a timezone designator (e.g. `2025-11-06T10:30:00`). Only present when `pay_channel` is `arcsite_payment` |
 | paid_date      | String | (conditional) Date when payment was recorded. Only present when `pay_channel` is `mark_as_paid`. ISO 8601 date    |
-| payment_method | String | Payment method. Examples: `Credit Card`, `ACH`, `Check`, `Cash`                                                   |
+| payment_method | String | Payment method: `Credit Card`, `ACH`, `Check`, `Cash`, `Wire` or `Other`                                          |
 
 :::note
 The time field in the payload depends on the `pay_channel`:

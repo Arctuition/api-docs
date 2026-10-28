@@ -5,7 +5,9 @@ description: How to authenticate requests to the ArcSite API using API tokens.
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-The ArcSite API uses API tokens to authenticate requests. You can view and manage your API tokens by visiting [the ArcSite web UI](https://user.arcsiteapp.com#/admin).
+The ArcSite API uses API tokens to authenticate requests. A company admin can create and delete API tokens in the ArcSite web app under **Admin → Developers → [API tokens](https://user.arcsiteapp.com/admin/apitokens)**. The Developers section is available on plans that include the Developer API.
+
+An API token belongs to your organization, not to a single user: it can read and change every project in the organization, so keep it secret. API tokens don't expire; delete a token to revoke it.
 
 Authentication to the API is performed via the [HTTP Authorization header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization):
 
@@ -45,7 +47,7 @@ data = response.json()
 </TabItem>
 </Tabs>
 
-All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTP_Secure). Calls made over plain HTTP will fail, and requests without authentication will also fail.
+All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTP_Secure). Plain HTTP requests are redirected to HTTPS, and a redirected `POST` or `PATCH` can lose its body, so always use `https://`. Requests without a valid token fail with `401 Unauthorized`.
 
 The header takes the following form:
 

@@ -5,9 +5,15 @@ description: Create, query, update, archive, and manage collaborators on ArcSite
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
+:::note
+Project IDs are returned as strings. `job_number`, `customer`, `work_site_address` and `sales_rep` can be `null`, and so can any string field inside them.
+
+Endpoints that take a project ID return `404` when the project doesn't exist or was deleted, and `403` when it belongs to an organization your token can't access. Enterprise accounts can access the projects of every company in the enterprise, but [Query Projects](#query-projects) and [Search Projects](#search-projects) return only your own company's projects.
+:::
+
 ## Query Projects
 
-Returns a list of projects in your organization. Projects are returned in sorted order, with the most recently created project appearing first.
+Returns a list of projects in your organization. Projects are returned in sorted order, with the most recently created project appearing first. Archived projects are included, with `archived: true`.
 
 `GET https://api.arcsite.com/v1/projects`
 
@@ -50,17 +56,17 @@ data = response.json()
 ```json title="Response" collapse={8-33}
 [
   {
-    "id": 36029621652695040,
+    "id": "36029621652695040",
     "name": "project 4",
-    "created_at": "2022-01-16T04:19:23",
-    "updated_at": "2022-01-16T04:19:23",
+    "created_at": "2022-01-16T04:19:23.000000Z",
+    "updated_at": "2022-01-16T04:19:23.000000Z",
     "job_number": "144111",
     "customer": {
       "name": "Jack",
       "phone": "1441",
       "second_phone": "1122",
-      "email": "c@arcsite.com",
-      "second_email": "s@arcsite.com",
+      "email": "customer@example.com",
+      "second_email": "customer2@example.com",
       "address": {
         "street": "street",
         "city": "city",
@@ -78,7 +84,7 @@ data = response.json()
     },
     "sales_rep": {
       "name": "Wang",
-      "email": "h@arcsite.com",
+      "email": "sales@example.com",
       "phone": "122122-121"
     },
     "tags": ["tag1", "tag2"],
@@ -89,12 +95,16 @@ data = response.json()
 
 ### Query Parameters
 
-| Parameter        | Default | In    | Description                                                                                           |
-| ---------------- | ------- | ----- | ----------------------------------------------------------------------------------------------------- |
-| page             | 1       | query | Request a specific page                                                                               |
-| per_page         | 10      | query | Page size                                                                                             |
-| created_at_begin | None    | query | (optional) Filter by project creation start date in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`) |
-| created_at_end   | None    | query | (optional) Filter by project creation end date in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`)   |
+| Parameter        | Default | In    | Description                                                                                                        |
+| ---------------- | ------- | ----- | ------------------------------------------------------------------------------------------------------------------ |
+| page             | 1       | query | Request a specific page                                                                                            |
+| per_page         | 10      | query | Page size (maximum 100)                                                                                            |
+| created_at_begin | None    | query | (optional) Only return projects created at or after this time, in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`) |
+| created_at_end   | None    | query | (optional) Only return projects created at or before this time, in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`) |
+
+:::note
+Send `created_at_begin` and `created_at_end` in UTC. A timezone offset in the value is ignored, not converted. A date without a time (e.g., `2025-01-16`) means `00:00:00` on that day, so `created_at_end=2025-01-16` excludes the rest of January 16.
+:::
 
 ## Create Project
 
@@ -110,14 +120,15 @@ curl -X POST 'https://api.arcsite.com/v1/projects' \
   -H 'Authorization: Bearer your_api_token_here' \
   -H 'Content-Type: application/json' \
   -d '{
-    "name": "hahaa",
+    "name": "Backyard Fence",
+    "owner": "owner@example.com",
     "job_number": "144111",
     "customer": {
       "name": "Jack",
       "phone": "1441",
       "second_phone": "1122",
-      "email": "c@arcsite.com",
-      "second_email": "s@arcsite.com",
+      "email": "customer@example.com",
+      "second_email": "customer2@example.com",
       "address": {
         "street": "street",
         "city": "city",
@@ -135,7 +146,7 @@ curl -X POST 'https://api.arcsite.com/v1/projects' \
     },
     "sales_rep": {
       "name": "Wang",
-      "email": "h@arcsite.com",
+      "email": "sales@example.com",
       "phone": "122122-121"
     },
     "tags": ["tag1", "tag2"]
@@ -153,14 +164,15 @@ const response = await fetch("https://api.arcsite.com/v1/projects", {
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    name: "hahaa",
+    name: "Backyard Fence",
+    owner: "owner@example.com",
     job_number: "144111",
     customer: {
       name: "Jack",
       phone: "1441",
       second_phone: "1122",
-      email: "c@arcsite.com",
-      second_email: "s@arcsite.com",
+      email: "customer@example.com",
+      second_email: "customer2@example.com",
       address: {
         street: "street",
         city: "city",
@@ -178,7 +190,7 @@ const response = await fetch("https://api.arcsite.com/v1/projects", {
     },
     sales_rep: {
       name: "Wang",
-      email: "h@arcsite.com",
+      email: "sales@example.com",
       phone: "122122-121",
     },
     tags: ["tag1", "tag2"],
@@ -197,14 +209,15 @@ response = requests.post(
     "https://api.arcsite.com/v1/projects",
     headers={"Authorization": "Bearer your_api_token_here"},
     json={
-        "name": "hahaa",
+        "name": "Backyard Fence",
+        "owner": "owner@example.com",
         "job_number": "144111",
         "customer": {
             "name": "Jack",
             "phone": "1441",
             "second_phone": "1122",
-            "email": "c@arcsite.com",
-            "second_email": "s@arcsite.com",
+            "email": "customer@example.com",
+            "second_email": "customer2@example.com",
             "address": {
                 "street": "street",
                 "city": "city",
@@ -222,7 +235,7 @@ response = requests.post(
         },
         "sales_rep": {
             "name": "Wang",
-            "email": "h@arcsite.com",
+            "email": "sales@example.com",
             "phone": "122122-121",
         },
         "tags": ["tag1", "tag2"],
@@ -237,22 +250,22 @@ data = response.json()
 ```json title="Response"
 {
   "id": "36029621653386360",
-  "name": "nac",
-  "created_at": "2022-01-16T03:31:39",
-  "updated_at": "2022-01-16T03:31:39",
-  "job_number": "heeloo",
+  "name": "Backyard Fence",
+  "created_at": "2022-01-16T03:31:39.000000Z",
+  "updated_at": "2022-01-16T03:31:39.000000Z",
+  "job_number": "144111",
   "customer": {
-    "name": "hello",
-    "phone": "122112",
-    "second_phone": "122112",
-    "email": "dev@arctuition.com",
-    "second_email": "dev@arctuition.com",
+    "name": "Jack",
+    "phone": "1441",
+    "second_phone": "1122",
+    "email": "customer@example.com",
+    "second_email": "customer2@example.com",
     "address": {
-      "street": "address",
+      "street": "street",
       "city": "city",
       "county": "county",
       "state": "state",
-      "zip_code": "200544"
+      "zip_code": "300433"
     }
   },
   "work_site_address": {
@@ -264,8 +277,8 @@ data = response.json()
   },
   "sales_rep": {
     "name": "Wang",
-    "email": "dev@arctuition.com",
-    "phone": "122112"
+    "email": "sales@example.com",
+    "phone": "122122-121"
   },
   "tags": ["tag1", "tag2"],
   "archived": false
@@ -280,12 +293,16 @@ data = response.json()
 | owner              | String       | (required) Owner of the project                |
 | customer           | Customer     | (optional) Customer profile of the project     |
 | job_number         | String       | (optional) Job number of the project           |
-| work_site_address | Address      | (optional) Worksite address of the project     |
-| sales_rep          | SalesRep     | (optional) Sales Representative of the project |
+| work_site_address  | Address      | (optional) Worksite address of the project     |
+| sales_rep          | SalesRep \| String | (optional) Sales Representative of the project. Either a [SalesRep](#salesrep) object, or the email of an active user in your organization, in which case the sales rep's name, email and phone are taken from that user's profile. |
 | tags               | List[String] | (optional) Tags added to this project          |
 
 :::note
-`owner` must be a valid ArcSite username/email belonging to the same organization.
+`owner` is the email, username, or full name (`First Last`) of a user in your organization (for enterprise accounts, of any company in the enterprise). If no user matches, the request fails with `404`.
+:::
+
+:::note
+Tags are case-sensitive. Tags that don't exist yet are created in your organization. Responses list tags in alphabetical order.
 :::
 
 ### Project Integrations
@@ -298,6 +315,8 @@ ArcSite supports integration with various external platforms. Once project creat
 2. Project name cannot contain any of the following characters: `:` `/` `\`.
 3. Project name cannot start with `.`.
 4. Project name must be less than or equal to 200 characters.
+
+[Create Project](#create-project) adjusts a name that breaks rules 2–4 instead of rejecting it: `:` `/` `\` become spaces, a leading `.` is removed, the name is cut to 200 characters, and surrounding whitespace is trimmed. Use the `name` in the response as the stored name. [Update Project](#update-project) rejects such a name with `400`.
 
 If your organization already has a project with the same name, the request returns `400 Bad Request`:
 
@@ -316,8 +335,8 @@ Other invalid requests, such as a missing required field, also return `400`.
 | name         | String  | (optional) Customer name            |
 | phone        | String  | (optional) Customer phone           |
 | second_phone | String  | (optional) Customer secondary phone |
-| email        | String  | (optional) Customer email           |
-| second_email | String  | (optional) Customer secondary email |
+| email        | String  | (optional) Customer email. Must be a valid email address |
+| second_email | String  | (optional) Customer secondary email. Must be a valid email address |
 | address      | Address | (optional) Customer address         |
 
 ### Address
@@ -334,9 +353,13 @@ Other invalid requests, such as a missing required field, also return `400`.
 
 | Parameter | Type   | Description               |
 | --------- | ------ | ------------------------- |
-| name      | String | (optional) Customer name  |
-| email     | String | (optional) Customer email |
-| phone     | String | (optional) Customer phone |
+| name      | String | (optional) Sales rep name  |
+| email     | String | (optional) Sales rep email. Must be a valid email address |
+| phone     | String | (optional) Sales rep phone |
+
+:::note
+An email field that is present must hold a valid email address: an empty string (`""`) fails the whole request with `400`. To leave an email empty, omit the field or send `null`.
+:::
 
 ## Update Project
 
@@ -352,14 +375,15 @@ curl -X PATCH 'https://api.arcsite.com/v1/projects/<ID>' \
   -H 'Authorization: Bearer your_api_token_here' \
   -H 'Content-Type: application/json' \
   -d '{
-    "name": "hahaa",
+    "operator": "admin@example.com",
+    "name": "Backyard Fence",
     "job_number": "144111",
     "customer": {
       "name": "Jack",
       "phone": "1441",
       "second_phone": "1122",
-      "email": "c@arcsite.com",
-      "second_email": "s@arcsite.com",
+      "email": "customer@example.com",
+      "second_email": "customer2@example.com",
       "address": {
         "street": "street",
         "city": "city",
@@ -377,7 +401,7 @@ curl -X PATCH 'https://api.arcsite.com/v1/projects/<ID>' \
     },
     "sales_rep": {
       "name": "Wang",
-      "email": "h@arcsite.com",
+      "email": "sales@example.com",
       "phone": "122122-121"
     },
     "tags": ["tag1", "tag2"]
@@ -395,14 +419,15 @@ const response = await fetch("https://api.arcsite.com/v1/projects/<ID>", {
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    name: "hahaa",
+    operator: "admin@example.com",
+    name: "Backyard Fence",
     job_number: "144111",
     customer: {
       name: "Jack",
       phone: "1441",
       second_phone: "1122",
-      email: "c@arcsite.com",
-      second_email: "s@arcsite.com",
+      email: "customer@example.com",
+      second_email: "customer2@example.com",
       address: {
         street: "street",
         city: "city",
@@ -420,7 +445,7 @@ const response = await fetch("https://api.arcsite.com/v1/projects/<ID>", {
     },
     sales_rep: {
       name: "Wang",
-      email: "h@arcsite.com",
+      email: "sales@example.com",
       phone: "122122-121",
     },
     tags: ["tag1", "tag2"],
@@ -439,14 +464,15 @@ response = requests.patch(
     "https://api.arcsite.com/v1/projects/<ID>",
     headers={"Authorization": "Bearer your_api_token_here"},
     json={
-        "name": "hahaa",
+        "operator": "admin@example.com",
+        "name": "Backyard Fence",
         "job_number": "144111",
         "customer": {
             "name": "Jack",
             "phone": "1441",
             "second_phone": "1122",
-            "email": "c@arcsite.com",
-            "second_email": "s@arcsite.com",
+            "email": "customer@example.com",
+            "second_email": "customer2@example.com",
             "address": {
                 "street": "street",
                 "city": "city",
@@ -464,7 +490,7 @@ response = requests.patch(
         },
         "sales_rep": {
             "name": "Wang",
-            "email": "h@arcsite.com",
+            "email": "sales@example.com",
             "phone": "122122-121",
         },
         "tags": ["tag1", "tag2"],
@@ -480,21 +506,27 @@ data = response.json()
 
 | Parameter          | Type         | Description                                    |
 | ------------------ | ------------ | ---------------------------------------------- |
-| name               | String       | (required) Name of the project                 |
 | operator           | String       | (required) Who updates the project             |
+| name               | String       | (optional) New name of the project             |
 | customer           | Customer     | (optional) Customer profile of the project     |
 | job_number         | String       | (optional) Job number of the project           |
-| work_site_address | Address      | (optional) Worksite address of the project     |
-| sales_rep          | SalesRep     | (optional) Sales Representative of the project |
+| work_site_address  | Address      | (optional) Worksite address of the project     |
+| sales_rep          | SalesRep \| String | (optional) Sales Representative of the project. Same format as in [Create Project](#create-project). |
 | tags               | List[String] | (optional) Tags for this project               |
 
 :::note
-`operator` must be a valid ArcSite username/email belonging to the same organization.
+`operator` is the email, username, or full name (`First Last`) of a user in your organization (for enterprise accounts, of any company in the enterprise). If no user matches, the request fails with `404`.
+:::
+
+:::caution
+`customer`, `customer.address` and `work_site_address` are replaced as a whole: any sub-field you leave out of an object you send is cleared. To change one field, send the full object. `sales_rep` is merged instead (sub-fields that are missing or `null` are left unchanged), and `job_number: null` is ignored.
 :::
 
 :::note
 If `tags` is provided, the tags of the project will be replaced by the new provided tags. If the value of `tags` is set to `[]`, all existing tags on the project will be removed.
 :::
+
+The response is the updated project, in the same format as the [Create Project](#create-project) response.
 
 ## Get Project
 
@@ -542,15 +574,15 @@ data = response.json()
 {
   "id": "36029621652695040",
   "name": "project 4",
-  "created_at": "2022-01-16T04:19:23",
-  "updated_at": "2022-01-16T04:19:23",
+  "created_at": "2022-01-16T04:19:23.000000Z",
+  "updated_at": "2022-01-16T04:19:23.000000Z",
   "job_number": "144111",
   "customer": {
     "name": "Jack",
     "phone": "1441",
     "second_phone": "1122",
-    "email": "c@arcsite.com",
-    "second_email": "s@arcsite.com",
+    "email": "customer@example.com",
+    "second_email": "customer2@example.com",
     "address": {
       "street": "street",
       "city": "city",
@@ -568,12 +600,12 @@ data = response.json()
   },
   "sales_rep": {
     "name": "Wang",
-    "email": "h@arcsite.com",
+    "email": "sales@example.com",
     "phone": "122122-121"
   },
   "tags": ["tag1", "tag2"],
   "archived": false,
-  "owner": "owner@arcsite.com"
+  "owner": "owner@example.com"
 }
 ```
 
@@ -637,17 +669,17 @@ data = response.json()
 ```json title="Response"
 [
   {
-    "id": 36029621652695040,
+    "id": "36029621652695040",
     "name": "Updated project name",
-    "created_at": "2022-01-16T04:19:23",
-    "updated_at": "2022-01-16T04:19:23",
+    "created_at": "2022-01-16T04:19:23.000000Z",
+    "updated_at": "2022-01-16T04:19:23.000000Z",
     "job_number": "144111",
     "customer": {
       "name": "Jack",
       "phone": "1441",
       "second_phone": "1122",
-      "email": "c@arcsite.com",
-      "second_email": "s@arcsite.com",
+      "email": "customer@example.com",
+      "second_email": "customer2@example.com",
       "address": {
         "street": "street",
         "city": "city",
@@ -665,7 +697,7 @@ data = response.json()
     },
     "sales_rep": {
       "name": "Wang",
-      "email": "h@arcsite.com",
+      "email": "sales@example.com",
       "phone": "122122-121"
     },
     "tags": ["Tag 1"],
@@ -676,18 +708,20 @@ data = response.json()
 
 ### Parameters
 
-| Parameter    | Type         | Description                                            |
-| ------------ | ------------ | ------------------------------------------------------ |
-| project_name | String       | (optional) To filter projects which contain the value  |
-| tags         | List[String] | (optional) To filter projects by the tags list         |
+| Parameter    | Type         | Description                                                                  |
+| ------------ | ------------ | ---------------------------------------------------------------------------- |
+| project_name | String       | (optional) Return projects whose name contains this value (case-insensitive) |
+| tags         | List[String] | (optional) Return projects that have all of these tags (case-sensitive)      |
+| page         | Integer      | (optional) Page to return, starting at 1. Defaults to 1                      |
+| per_page     | Integer      | (optional) Page size. Defaults to 10, maximum 100                            |
 
 :::note
-When there are multiple `tags`, only projects that have *all* of these tags will be returned. For example, if tags are `["Tag 1", "Tag 2"]`, then the returned projects will all have both `Tag 1` and `Tag 2`.
+When there are multiple `tags`, only projects that have *all* of these tags will be returned. For example, if tags are `["Tag 1", "Tag 2"]`, then the returned projects will all have both `Tag 1` and `Tag 2`. If any of the tags doesn't exist in your organization, the result is empty.
 :::
 
 ## Get Project Collaborators
 
-Returns everyone who has access to the project — both users added directly and user groups the project is shared with. The owner never appears in this list; their email is available as `owner` in [Get Project](#get-project).
+Returns everyone who has access to the project — both users added directly and user groups the project is shared with. The owner never appears in this list; their email is available as `owner` in [Get Project](#get-project). Only active users are listed: users whose account is pending activation or deactivated are omitted.
 
 `GET https://api.arcsite.com/v1/projects/<id>/collaborators`
 
@@ -730,8 +764,8 @@ data = response.json()
 ```json title="Response"
 {
   "collaborators": [
-    { "type": "user", "email": "admin@arcsite.com", "role": "PROJECT_ADMIN" },
-    { "type": "user", "email": "dev@arcsite.com", "role": "PROJECT_COLLABORATOR" },
+    { "type": "user", "email": "admin@example.com", "role": "PROJECT_ADMIN" },
+    { "type": "user", "email": "dev@example.com", "role": "PROJECT_COLLABORATOR" },
     {
       "type": "group",
       "group_id": "36029621652695041",
@@ -760,7 +794,7 @@ Groups are not expanded here — a shared group appears as a single `group` entr
 
 ## Add Project Collaborators
 
-Adds collaborators to a project. Successfully added collaborators are in the `success_items` field of the response, and failed items are in `fail_items`. This API is idempotent, so the same collaborator can be added multiple times.
+Adds collaborators to a project. Successfully added collaborators are in the `success_items` field of the response, and failed items are in `fail_items`. This API is idempotent, so the same collaborator can be added multiple times. Adding an existing collaborator with a different role adds that role; it doesn't replace the current one. To lower a collaborator's role, remove them and add them again.
 
 `POST https://api.arcsite.com/v1/projects/<id>/add_collaborators`
 
@@ -773,8 +807,8 @@ curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/add_collaborators' \
   -H 'Content-Type: application/json' \
   -d '{
     "collaborators": [
-      { "email": "dev@arctuition.com", "role": "PROJECT_ADMIN" },
-      { "email": "haowe12@arctui1tion.com", "role": "PROJECT_ADMIN" }
+      { "email": "dev@example.com", "role": "PROJECT_ADMIN" },
+      { "email": "unknown@example.com", "role": "PROJECT_ADMIN" }
     ]
   }'
 ```
@@ -791,8 +825,8 @@ const response = await fetch("https://api.arcsite.com/v1/projects/<ID>/add_colla
   },
   body: JSON.stringify({
     collaborators: [
-      { email: "dev@arctuition.com", role: "PROJECT_ADMIN" },
-      { email: "haowe12@arctui1tion.com", role: "PROJECT_ADMIN" },
+      { email: "dev@example.com", role: "PROJECT_ADMIN" },
+      { email: "unknown@example.com", role: "PROJECT_ADMIN" },
     ],
   }),
 });
@@ -810,8 +844,8 @@ response = requests.post(
     headers={"Authorization": "Bearer your_api_token_here"},
     json={
         "collaborators": [
-            {"email": "dev@arctuition.com", "role": "PROJECT_ADMIN"},
-            {"email": "haowe12@arctui1tion.com", "role": "PROJECT_ADMIN"},
+            {"email": "dev@example.com", "role": "PROJECT_ADMIN"},
+            {"email": "unknown@example.com", "role": "PROJECT_ADMIN"},
         ],
     },
 )
@@ -825,17 +859,17 @@ data = response.json()
 {
   "success_items": [
     {
-      "email": "dev@arctuition.com",
+      "email": "dev@example.com",
       "role": "PROJECT_ADMIN"
     }
   ],
   "fail_items": [
     {
       "data": {
-        "email": "haowe12@arctui1tion.com",
+        "email": "unknown@example.com",
         "role": "PROJECT_ADMIN"
       },
-      "message": "haowe12@arctui1tion.com has not been added to your company account yet."
+      "message": "unknown@example.com has not been added to your company account yet."
     }
   ]
 }
@@ -851,7 +885,7 @@ data = response.json()
 
 | Parameter | Type          | Description                                           |
 | --------- | ------------- | ----------------------------------------------------- |
-| email     | string        | (required) The username or email of the collaborator |
+| email     | String        | (required) Email of the collaborator. Must be a valid email address; an invalid value fails the whole request with `400` |
 | role      | [Role](#role) | (required) Project role                               |
 
 ### Role
@@ -879,8 +913,8 @@ curl -X POST 'https://api.arcsite.com/v1/projects/<ID>/remove_collaborators' \
   -H 'Content-Type: application/json' \
   -d '{
     "emails": [
-      "dev@arctuition.com",
-      "haowe12@arctui1tion.com"
+      "dev@example.com",
+      "unknown@example.com"
     ]
   }'
 ```
@@ -896,7 +930,7 @@ const response = await fetch("https://api.arcsite.com/v1/projects/<ID>/remove_co
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    emails: ["dev@arctuition.com", "haowe12@arctui1tion.com"],
+    emails: ["dev@example.com", "unknown@example.com"],
   }),
 });
 const data = await response.json();
@@ -912,7 +946,7 @@ response = requests.post(
     "https://api.arcsite.com/v1/projects/<ID>/remove_collaborators",
     headers={"Authorization": "Bearer your_api_token_here"},
     json={
-        "emails": ["dev@arctuition.com", "haowe12@arctui1tion.com"],
+        "emails": ["dev@example.com", "unknown@example.com"],
     },
 )
 data = response.json()
@@ -926,6 +960,12 @@ data = response.json()
 | Parameter | Type         | Description                 |
 | --------- | ------------ | --------------------------- |
 | emails    | List[String] | (required) emails to remove |
+
+```json title="Response"
+{}
+```
+
+Emails that aren't collaborators on the project are ignored. User groups shared with the project can't be removed with this endpoint.
 
 ## Get User Group
 
@@ -977,12 +1017,12 @@ data = response.json()
     {
       "user_id": "36029621652695042",
       "name": "Bob Smith",
-      "email": "bob@arcsite.com"
+      "email": "bob@example.com"
     },
     {
       "user_id": "36029621652695043",
       "name": "Jane Doe",
-      "email": "jane@arcsite.com"
+      "email": "jane@example.com"
     }
   ]
 }
@@ -996,9 +1036,11 @@ data = response.json()
 | name    | String | Full name of the user |
 | email   | String | Email of the user     |
 
+Only active users are listed as members.
+
 ## Get Project Drawings
 
-Returns the drawings of a project.
+Returns the drawings of a project, newest first.
 
 `GET https://api.arcsite.com/v1/projects/<id>/drawings`
 
@@ -1056,27 +1098,27 @@ data = response.json()
 | Parameter | Default | In    | Description             |
 | --------- | ------- | ----- | ----------------------- |
 | page      | 1       | query | Request a specific page |
-| per_page  | 10      | query | Page size               |
+| per_page  | 10      | query | Page size (maximum 100) |
 
 ## Import PDF
 
 Your uploaded PDF will be split into multiple pages; one ArcSite drawing is created for each page.
 
-`POST https://api.arcsite.com/v1/projects/<project_id>/import_pdf`
+`POST https://api.arcsite.com/v1/projects/<id>/import_pdf`
 
 <Tabs syncKey="lang">
 <TabItem label="cURL">
 
 ```shell
 # upload a local file
-curl --location 'https://api.arcsite.com/v1/projects/<project_id>/import_pdf' \
+curl --location 'https://api.arcsite.com/v1/projects/<ID>/import_pdf' \
   -H "Authorization: Bearer your_api_token_here" \
   --form 'file=@"/<file_path>/<file_name.pdf>"'
 
 # or pass the file url directly
-curl --location 'https://api.arcsite.com/v1/projects/<project_id>/import_pdf' \
+curl --location 'https://api.arcsite.com/v1/projects/<ID>/import_pdf' \
   -H "Authorization: Bearer your_api_token_here" \
-  --form 'file_url="https://file_url.pdf"'
+  --form 'file_url="https://example.com/plan.pdf"'
 ```
 
 </TabItem>
@@ -1088,9 +1130,9 @@ const form = new FormData();
 form.append("file", fileInput.files[0]);
 
 // or pass a file URL directly:
-// form.append("file_url", "https://file_url.pdf");
+// form.append("file_url", "https://example.com/plan.pdf");
 
-const response = await fetch("https://api.arcsite.com/v1/projects/<project_id>/import_pdf", {
+const response = await fetch("https://api.arcsite.com/v1/projects/<ID>/import_pdf", {
   method: "POST",
   headers: {
     Authorization: "Bearer your_api_token_here",
@@ -1109,16 +1151,16 @@ import requests
 # upload a local file
 with open("/path/to/file.pdf", "rb") as f:
     response = requests.post(
-        "https://api.arcsite.com/v1/projects/<project_id>/import_pdf",
+        "https://api.arcsite.com/v1/projects/<ID>/import_pdf",
         headers={"Authorization": "Bearer your_api_token_here"},
         files={"file": f},
     )
 
-# or pass a file URL directly:
+# or pass a file URL directly (still sent as multipart/form-data):
 # response = requests.post(
-#     "https://api.arcsite.com/v1/projects/<project_id>/import_pdf",
+#     "https://api.arcsite.com/v1/projects/<ID>/import_pdf",
 #     headers={"Authorization": "Bearer your_api_token_here"},
-#     data={"file_url": "https://file_url.pdf"},
+#     files={"file_url": (None, "https://example.com/plan.pdf")},
 # )
 data = response.json()
 ```
@@ -1147,12 +1189,18 @@ data = response.json()
 | file_url  | Body | The URL of a publicly accessible PDF file    |
 
 :::note
-Request content type must be `multipart/form-data` to upload a PDF file. Either `file` or `file_url` must be provided, but not both.
+Request content type must be `multipart/form-data` to upload a PDF file, also when you send `file_url`. Either `file` or `file_url` must be provided, but not both.
 :::
+
+`file_url` must be an `https` URL on the public internet that returns the PDF directly: redirects and credentials in the URL aren't allowed, the file can be at most 100 MB, and the server must respond within 20 seconds.
+
+The request is processed synchronously, so it can take a while for large PDFs. A page that fails to process is skipped, so `drawings` can have fewer entries than the PDF has pages.
+
+Errors: `400` when `file` and `file_url` are both missing or both present, when the URL can't be downloaded, or when the file isn't a valid PDF (including corrupted and password-protected files). `403` when your organization has reached its limit of drawings created from PDF files.
 
 ## Archive Project
 
-Archives a project by project ID. The archived project will be hidden from the project list. You can use [Unarchive Project](#unarchive-project) to unarchive it.
+Archives a project by project ID. The archived project will be hidden from the project list in the ArcSite apps. [Query Projects](#query-projects) and [Search Projects](#search-projects) still return it, with `archived: true`. You can use [Unarchive Project](#unarchive-project) to unarchive it.
 
 `POST https://api.arcsite.com/v1/projects/<ID>/archive`
 
@@ -1311,5 +1359,7 @@ data = response.json()
 | owner     | String | (required) Email or full name (first name + last name) of new owner  |
 
 :::note
-`owner` must be a valid ArcSite user that belongs to the same organization. The value can be the user's email address or full name (first and last name).
+`owner` must be an active ArcSite user that belongs to the same organization (not another company of your enterprise). The value can be the user's email address or full name (exactly a first and a last name, e.g. `Jane Doe`).
 :::
+
+Errors: `404` if no active user in your organization matches `owner`, and `400` if the user already owns the project or the project can't be transferred.

@@ -70,12 +70,12 @@ data = response.json()
       "name": "product1",
       "description": "Product 1 description",
       "quantity": 2.26,
-      "total": 0,
-      "product_id": "19923123", // not exist for custom price items
-      "sku": "sku1", //  not exist for custom price items
-      "price": 3.5, //   not exist for custom price items
+      "total": 2.26,
+      "product_id": "19923123",
+      "sku": "sku1",
+      "price": 3.5,
       "cost": 5,
-      "unit": "FT", //   not exist for custom price items
+      "unit": "Feet",
       "price_part_items": [
         {
           "name": "Option A",
@@ -84,14 +84,14 @@ data = response.json()
           "price": 10,
           "cost": 5,
           "quantity": 2,
-          "unit": "EA"
+          "unit": "Each"
         }
       ]
     },
     {
       "name": "product2",
       "description": "Custom item description",
-      "quantity": 32.57,
+      "quantity": 1,
       "total": 128.98,
       "cost": 200
     }
@@ -104,22 +104,25 @@ data = response.json()
   "taxes": [
     {
       "name": "a",
-      "total": 20
+      "total": 20,
+      "tax_rate": 8.0
     },
     {
       "name": "b",
-      "total": 30
+      "total": 30,
+      "tax_rate": 12.0
     }
   ],
-  "total": 250
+  "total": 250,
+  "drawing_version_id": "36029621652695100"
 }
 ```
 
 ### Query Parameters
 
-| Parameter          | Default          | In    | Description                   |
-| ------------------ | ---------------- | ----- | ----------------------------- |
-| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+| Parameter          | Type              | In    | Description                   |
+| ------------------ | ----------------- | ----- | ----------------------------- |
+| drawing_version_id | String (optional) | query | The ID of the drawing version. A version of another drawing returns `404`. |
 
 :::note
 If the `drawing_version_id` is passed, the drawing line items data of the specified version will be returned. If not, the data of the latest version will be returned by default.
@@ -130,12 +133,13 @@ If the `drawing_version_id` is passed, the drawing line items data of the specif
 | Name                 | Type           | Description                                            |
 | -------------------- | -------------- | ------------------------------------------------------ |
 | line_items           | List[LineItem] | All product line items                                 |
-| subtotal             | Number         | The subtotal of all items before discounts and markups |
-| discount             | Number         | The total amount of discount applied                   |
-| discount_description | String         | Description or reason for the discount                 |
-| markup               | Number         | The total amount of markup added                       |
-| markup_description   | String         | Description or reason for the markup                   |
+| subtotal             | Number         | Sum of the line item totals (after per-product adjustments) and custom items, before order-level markups, discounts and taxes. If your organization's minimum job price is higher, this is the minimum price |
+| discount             | Number         | The total order-level discount, as a negative number (`0` if none) |
+| discount_description | String?        | Description of the discount; `null` if there is no discount. Empty when several discounts, or a fixed-amount discount, are combined |
+| markup               | Number         | The total amount of markup added (`0` if none)         |
+| markup_description   | String?        | Description of the first markup; `null` if there is no markup |
 | taxes                | List[TaxItem]  | All taxes applied                                      |
+| total                | Number         | The grand total after markups, discounts and taxes     |
 | drawing_version_id   | String         | The version id of the drawing                          |
 
 ### LineItem
@@ -144,13 +148,13 @@ If the `drawing_version_id` is passed, the drawing line items data of the specif
 | ---------------- | -------------------- | ------------------------------------------------------------------------------------------------------ |
 | name             | String               | The name of the product                                                                                |
 | description      | String?              | The description of the product (or of the custom price item)                                           |
-| quantity         | Number               | The quantity of the product                                                                            |
+| quantity         | Number               | The quantity of the product (not rounded). Always `1` for custom price items                            |
 | total            | Number               | Item total after discounts and markup applied                                                          |
 | price            | Number?              | Item total before discounts and markup applied; not provided for custom price items                    |
-| cost             | Number?              | Item cost                                                                                              |
-| sku              | String?              | The stock keeping unit of the product; not provided for custom price items                             |
-| unit             | String?              | The unit of measurement for the product's quantity; not provided for custom price items                |
-| product_id       | String?              | The ID of the product; not provided for custom price items                                             |
+| cost             | Number               | Total cost of the line (unit cost × quantity)                                                          |
+| sku              | String?              | The stock keeping unit of the product (may be `null`); not provided for custom price items             |
+| unit             | String?              | The unit of measurement for the product's quantity, e.g. `Feet`, `SQ_Feet`, `CU_Yards`, `Each`, `Hour`, or a custom unit name; not provided for custom price items |
+| product_id       | String?              | The ID of the current version of the product; not provided for custom price items                      |
 | price_part_items | List[PricePartItem]? | Detail of price part items; not provided for custom price items                                        |
 
 ### PricePartItem
@@ -159,7 +163,7 @@ If the `drawing_version_id` is passed, the drawing line items data of the specif
 | --------------- | ------ | --------------------------------------- |
 | name            | String | The name of price part option           |
 | price_part_name | String | The name of the price part              |
-| sku             | String | The sku of price part option            |
+| sku             | String? | The sku of price part option (may be `null`) |
 | price           | Number | The total price of price part option    |
 | cost            | Number | The total cost of price part option     |
 | quantity        | Number | The total quantity of price part option |
@@ -169,8 +173,9 @@ If the `drawing_version_id` is passed, the drawing line items data of the specif
 
 | Name  | Type   | Description             |
 | ----- | ------ | ----------------------- |
-| name  | String | The name of the tax     |
-| total | Number | The total amount of tax |
+| name     | String | The name of the tax     |
+| total    | Number | The total amount of tax |
+| tax_rate | Number | The tax rate in percent (e.g. `8.0` means 8%) |
 
 ## Get Excluded Line items
 
@@ -216,19 +221,19 @@ data = response.json()
 
 ### Query Parameters
 
-| Parameter          | Default          | In    | Description                   |
-| ------------------ | ---------------- | ----- | ----------------------------- |
-| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+| Parameter          | Type              | In    | Description                   |
+| ------------------ | ----------------- | ----- | ----------------------------- |
+| drawing_version_id | String (optional) | query | The ID of the drawing version. A version of another drawing returns `404`. |
 
 :::note
 If the `drawing_version_id` is passed, the excluded line items data of the specified version will be returned. If not, the data of the latest version will be returned by default.
 :::
 
-The response schema is identical to [Get Proposal Line Items](#get-proposal-line-items), where `line_items` contains only the items not included in the proposal.
+The response schema is identical to [Get Proposal Line Items](#get-proposal-line-items), where `line_items` contains only the items not included in the proposal. Custom price items are never part of this response, and `subtotal`, `markup`, `discount`, `taxes` and `total` are calculated over the excluded items only.
 
 ## Get Takeoff Line items
 
-Get takeoff items by drawing id.
+Get takeoff items by drawing id. Only items included in the proposal are returned; see [Get Excluded Line Items](#get-excluded-line-items) for the others.
 
 `GET https://api.arcsite.com/v1/drawings/<id>/takeoff_items`
 
@@ -301,7 +306,7 @@ data = response.json()
             {
               "name": "photo",
               "value": [
-                "https://cdn-files-1-test.arcsite.com/36029346774973628/282299611419718/282299611419728/F4AF22A9-F011-4214-8729-CAF3F1F9D9F6.jpg?Expires=1711452610&Signature=sQz~sNF6xPGRPTvPBKyyXgKlA6jh0VSM6mXVpJ63XgYdCE1gat-nT~ZDXtcm~jEoK46UnUWU1ZlXPAiDx5IPwV25X1-pSb~jbXwdlkcz2jPkZPUN-ZWdaCvbMgTLJRvQw-V2RiUyrF83O5GLhJMVut8lfqsGjN3dgh5AtUc53h05dGRYbW-h-d6ItuSbebOTeZSXr8PCSl~n59wgfMRa5DdEilILGNZvGpM2kMaesHYBTiXfv1Z40Fv9rmRa~TLR~tefuEPDpkJWud4aAw7t1GTCSyaeXKL23fELMu~CTWMKvQ-TOqfBsbtBiEzUkrl67qgzDUD1HGimpZ3qweyf-w__&Key-Pair-Id=APKAIZL6W5TJO2AK7DOQ"
+                "https://files.example.com/photos/F4AF22A9-F011-4214-8729-CAF3F1F9D9F6.jpg?Expires=1700000000&Signature=EXAMPLE&Key-Pair-Id=EXAMPLEKEYPAIR"
               ],
               "type": "PHOTO"
             },
@@ -320,9 +325,9 @@ data = response.json()
 
 ### Query Parameters
 
-| Parameter          | Default          | In    | Description                   |
-| ------------------ | ---------------- | ----- | ----------------------------- |
-| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+| Parameter          | Type              | In    | Description                   |
+| ------------------ | ----------------- | ----- | ----------------------------- |
+| drawing_version_id | String (optional) | query | The ID of the drawing version. A version of another drawing returns `404`. |
 
 :::note
 If the `drawing_version_id` is passed, the drawing takeoff items data of the specified version will be returned. If not, the data of the latest version will be returned by default.
@@ -341,7 +346,7 @@ If the `drawing_version_id` is passed, the drawing takeoff items data of the spe
 | name       | String            | The name of the product                            |
 | quantity   | Number            | The total quantity of the product                  |
 | unit       | String            | The unit of measurement for the product's quantity |
-| sku        | String            | The stock keeping unit of the product              |
+| sku        | String?           | The stock keeping unit of the product (may be `null`) |
 | product_id | String            | The ID of the product                              |
 | items      | List[TakeoffItem] | The takeoff items of the product                   |
 
@@ -349,18 +354,19 @@ If the `drawing_version_id` is passed, the drawing takeoff items data of the spe
 
 | Name            | Type                   | Description                                                                                                                           |
 | --------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| quantity        | Number                 | For geometric products, we use the quantity shown in the drawing. But for shape or virtual products, the quantity is always just one. |
-| sequence_number | String                 | Sequence Number for Shape product                                                                                                     |
+| quantity        | Number                 | For geometric products, we use the quantity shown in the drawing. For shape or virtual products, the quantity is one, unless the product applies a quantity modifier, in which case the modified quantity and unit are returned. |
+| sequence_number | String                 | Sequence number of the shape on the drawing; an empty string for non-shape products                                                  |
 | unit            | String                 | The input unit defined by the product                                                                                                 |
-| attributes      | List[TakeoffAttribute] | The attributes of of the item                                                                                                         |
+| attributes      | List[TakeoffAttribute] | The attributes of the item                                                                                                            |
 
 ### TakeoffAttribute
 
 | Name  | Type                          | Description                                                                                |
 | ----- | ----------------------------- | ------------------------------------------------------------------------------------------ |
-| type  | String                        | The type of the attribute. Can be one of "TEXT", "PHOTO", "CHECKBOX", or "DATE".           |
-| value | String, List[String], Boolean | (optional) The value of the attribute. The type of this field depends on the `type` field: |
-|       |                               | - If `type` is "TEXT", `value` is a string.                                                |
-|       |                               | - If `type` is "PHOTO", `value` is a list of photo URLs.                                   |
+| name  | String                        | The name of the attribute                                                                  |
+| type  | String                        | The type of the attribute. Can be one of "TEXT", "PHOTO", "CHECKBOX", or "DATE". Paragraph and dropdown attributes are reported as "TEXT". |
+| value | String, List[String], Boolean | (optional) The value of the attribute, or `null` when it isn't set. The type of this field depends on the `type` field: |
+|       |                               | - If `type` is "TEXT", `value` is a string, or a list of strings for a multi-select dropdown. |
+|       |                               | - If `type` is "PHOTO", `value` is a list of photo URLs (an empty list when there are none). The URLs expire in 24 hours. |
 |       |                               | - If `type` is "CHECKBOX", `value` is a boolean.                                           |
 |       |                               | - If `type` is "DATE", `value` is a string in ISO format.                                  |

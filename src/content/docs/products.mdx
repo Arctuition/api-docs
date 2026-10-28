@@ -64,6 +64,18 @@ data = response.json()
 | Parameter | Default   | In    | Description                                                 |
 | --------- | --------- | ----- | ----------------------------------------------------------- |
 | page      | 1         | query | Request a specific page                                     |
-| per_page  | 10        | query | Page size                                                   |
+| per_page  | 10        | query | Page size (maximum 100)                                     |
 | order_by  | create_at | query | Sort field. Options: `create_at`, `update_at`               |
 | order     | desc      | query | Sort order. Options: `asc` (ascending), `desc` (descending) |
+
+### Product
+
+| Field       | Type           | Description                              |
+| ----------- | -------------- | ---------------------------------------- |
+| id          | String         | Product ID                               |
+| name        | String         | Product name                             |
+| sku         | String         | SKU (empty string if not set)            |
+| description | String         | Description (empty string if not set)    |
+| cost        | Number \| null | Product cost; `null` if not set          |
+
+Only current, non-deleted products of your organization are returned.

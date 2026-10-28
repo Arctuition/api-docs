@@ -78,9 +78,9 @@ data = response.json()
 
 ### Query Parameters
 
-| Parameter          | Default          | In    | Description                   |
-| ------------------ | ---------------- | ----- | ----------------------------- |
-| drawing_version_id | Optional[String] | query | The ID of the drawing version |
+| Parameter          | Type              | In    | Description                   |
+| ------------------ | ----------------- | ----- | ----------------------------- |
+| drawing_version_id | String (optional) | query | The ID of the drawing version. A version of another drawing returns `404`. |
 
 :::note
 If the `drawing_version_id` is passed, the field data of the specified drawing version will be returned. If not, the field data of the latest version will be returned by default.
@@ -104,14 +104,17 @@ If the `drawing_version_id` is passed, the field data of the specified drawing v
 | Name  | Type   | Description                                                                                                                            |
 | ----- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | name  | String | The name of the field                                                                                                                  |
-| type  | String | The type of the field. Possible values: TEXT, SWITCH, SELECT, DATE, etc.                                                               |
-| value | Any    | The value of the field. The data type depends on the field type: String for TEXT/DATE, Boolean for SWITCH, Array of Strings for SELECT |
+| type  | String | The type of the field. One of `TEXT`, `PARAGRAPH`, `SELECT`, `SWITCH`, `DATETIME`.                                                     |
+| value | Any    | The value of the field. The data type depends on the field type: String for TEXT/PARAGRAPH/DATETIME, Boolean for SWITCH, Array of Strings for SELECT |
 
 :::note
 The `value` field type varies based on the `type` field:
 <ul>
-  <li>`TEXT`, `DATE`: Returns a String value</li>
+  <li>`TEXT`, `PARAGRAPH`: Returns a String value</li>
+  <li>`DATETIME`: Returns an ISO 8601 UTC String (e.g. `2024-03-25T09:36:42.031Z`)</li>
   <li>`SWITCH`: Returns a Boolean value (true/false)</li>
   <li>`SELECT`: Returns an Array of Strings (supports multiple selections)</li>
 </ul>
+
+Only these five field types are returned. Number, photo, file attachment, user info, collaborator and section fields are not included in the response.
 :::

@@ -11,7 +11,7 @@ From zero to your first response in three steps.
 
 ## Get an API token
 
-API tokens are created and managed in the ArcSite admin console. Sign in and open [the admin console](https://user.arcsiteapp.com#/admin) to generate a token, then use it as a Bearer credential on every request.
+API tokens are created and managed in the ArcSite web app. Sign in as a company admin and open **Admin → Developers → [API tokens](https://user.arcsiteapp.com/admin/apitokens)** to generate a token, then use it as a Bearer credential on every request.
 
 :::note
 Keep your token secret and never commit it to source control. Replace `your_api_token_here` in the examples below with your actual token.
@@ -25,7 +25,7 @@ All requests go to the following base URL:
 
 ## Make your first request
 
-List the caller's projects to confirm everything is wired up correctly.
+List your organization's projects to confirm everything is wired up correctly.
 
 `GET https://api.arcsite.com/v1/projects`
 
@@ -65,18 +65,18 @@ data = response.json()
 </TabItem>
 </Tabs>
 
-```json title="Response" collapse={9-17}
+```json title="Response (abridged)" collapse={9-17}
 [
   {
-    "id": 36029621652695040,
+    "id": "36029621652695040",
     "name": "project 4",
-    "created_at": "2022-01-16T04:19:23",
-    "updated_at": "2022-01-16T04:19:23",
+    "created_at": "2022-01-16T04:19:23.000000Z",
+    "updated_at": "2022-01-16T04:19:23.000000Z",
     "job_number": "144111",
     "customer": {
       "name": "Jack",
       "phone": "1441",
-      "email": "c@arcsite.com",
+      "email": "customer@example.com",
       "address": {
         "street": "street",
         "city": "city",
