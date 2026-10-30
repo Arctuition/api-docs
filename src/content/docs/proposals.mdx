@@ -262,6 +262,12 @@ data = response.json()
 | ----------- | ------ | --------------------- |
 | proposal_id | String | (required) Proposal ID |
 
+### Query Parameters
+
+| Parameter          | Default | In    | Description                                                       |
+| ------------------ | ------- | ----- | ----------------------------------------------------------------- |
+| include_short_link | false   | query | (optional) Set to `true` to include `short_link` in the response. |
+
 ### Response Schema
 
 The response is a `Proposal` object with the fields documented in the [Proposal](#proposal) schema. Online proposals also include the following field:
@@ -269,6 +275,12 @@ The response is a `Proposal` object with the fields documented in the [Proposal]
 | Parameter        | Type                 | Description                                                                                     |
 | ---------------- | -------------------- | ----------------------------------------------------------------------------------------------- |
 | proposal_options | List[ProposalOption] | (optional) Full list of proposal options for online proposals, including drawing and PDF details |
+
+When `include_short_link` is `true`, the response also includes the following field:
+
+| Parameter  | Type   | Description                                                                                                                                                                  |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| short_link | String | The link the customer opens to view and sign the proposal, the same one as Copy Short Link in ArcSite. `null` while the proposal is in `DRAFT`. Doesn't change once created. |
 
 ### ProposalOption
 
