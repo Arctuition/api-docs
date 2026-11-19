@@ -158,7 +158,7 @@ If the `drawing_version_id` is passed, the drawing line items data of the specif
 | unit             | String?              | The unit of measurement for the product's quantity, e.g. `Feet`, `SQ_Feet`, `CU_Yards`, `Each`, `Hour`, or a custom unit name; not provided for custom price items |
 | product_id       | String?              | The ID of the current version of the product; not provided for custom price items                      |
 | price_part_items | List[PricePartItem]? | Detail of price part items; not provided for custom price items                                        |
-| hide_in_proposal | Boolean              | Whether the product has **Hide on Proposals** turned on. This is the product's setting: a proposal template can override it to show all products. A hidden line still counts toward `subtotal` and `total`. Always `false` for custom price items |
+| hide_in_proposal | Boolean              | Whether **Hide on Proposals** is turned on for the product, as set on the product version this drawing uses (it can be older than `product_id`). Only the product's own setting is reflected: a bundle's Hide on Proposals and a template's option to show all products are not applied. A hidden line still counts toward `subtotal` and `total`. Always `false` for custom price items |
 
 ### PricePartItem
 
