@@ -122,8 +122,10 @@ data = response.json()
     "pdf_url": "https://files.example.com/proposals/Drawing_1_Proposal.pdf?Expires=1700000000&Signature=EXAMPLE&Key-Pair-Id=EXAMPLEKEYPAIR",
     "approved_option": {
       "id": "789",
+      "name": "Option 1",
       "drawing_id": "abc123def456",
-      "drawing_version_id": "4441f328-1a1b-4882-bd26-c86ee5a7bb0f"
+      "drawing_version_id": "4441f328-1a1b-4882-bd26-c86ee5a7bb0f",
+      "total": 15000.0
     },
     "initial_proposal_id": "111"
   }
@@ -162,11 +164,25 @@ Each item in the response array is a `Proposal` object with the following fields
 
 ### ApprovedOption
 
-| Parameter          | Type   | Description                                                               |
-| ------------------ | ------ | ------------------------------------------------------------------------- |
-| id                 | String | (optional) ID of the approved option, only for online approvals.          |
-| drawing_id         | String | ID of the associated drawing resource.                                    |
-| drawing_version_id | String | (optional) ID of the approved drawing version, only for online approvals. |
+| Parameter          | Type      | Description                                                                |
+| ------------------ | --------- | -------------------------------------------------------------------------- |
+| id                 | String    | (optional) ID of the approved option, only for online approvals.           |
+| name               | String    | (optional) Name of the approved option, only for online approvals.         |
+| drawing_id         | String    | ID of the associated drawing resource.                                     |
+| drawing_version_id | String    | (optional) ID of the approved drawing version, only for online approvals.  |
+| total              | Number    | (optional) Total amount of the approved option, only for online approvals. |
+| line_items         | LineItems | (optional) Line items of the approved option, priced with the add-ons the customer selected, in the same format as the [Get Proposal Line items](/product_items/#get-proposal-line-items) response. Returned by [Get Proposal by ID](#get-proposal-by-id) and in the `proposal.status_changed` and `proposal.approved` webhooks, not by Query Proposals. |
+
+`line_items` is present:
+
+- Always, for a [proposal made in the ArcSite app](#proposals-made-in-the-arcsite-app).
+- For other online proposals, when the customer selected add-ons on the approved option. Without add-ons, the line items of the approved drawing version (Get Proposal Line items with `drawing_version_id`) match the option.
+
+### Proposals made in the ArcSite app
+
+The ArcSite app saves a proposal to the cloud while the user edits it. Until it is first sent to the customer or signed, such a draft is not returned by Query Proposals or Get Proposal by ID, and no webhook is sent for it.
+
+Each option of such a proposal has its own drawing, which belongs to the proposal rather than to the project. The drawing endpoints do not return it: a request with its `drawing_id` or `drawing_version_id` returns 404. Read the line items of the approved option from `approved_option.line_items` instead.
 
 :::note
 The status field is an enum with the following values:

@@ -330,7 +330,7 @@ The returned `url` will expire 24 hours after ArcSite generates the payload. It'
 `proposal.sent` Triggered when a proposal is sent to customer.
 
 :::note
-A proposal option is associated with a specific drawing version in Arcsite. If you need to get the line items data of the specified drawing version, you can use the `drawing_version_id` of the option in the Get line items API.
+A proposal option is associated with a specific drawing version in Arcsite. If you need to get the line items data of the specified drawing version, you can use the `drawing_version_id` of the option in the Get line items API. This does not work for a [proposal made in the ArcSite app](/proposals/#proposals-made-in-the-arcsite-app): its line items are in `approved_option.line_items` once it is approved.
 :::
 
 :::note
@@ -381,15 +381,17 @@ The returned `url` in proposal options will expire 24 hours after ArcSite genera
 
 ### ApprovedProposalOption
 
-| Parameter          | Type   | Description                                       |
-| ------------------ | ------ | ------------------------------------------------- |
-| name               | String | Approved proposal option name                    |
-| drawing_id         | String | Associated drawing ID                            |
-| drawing_version_id | String | Associated drawing version ID                    |
-| total              | Number | Total amount of the approved option              |
-| pdf_url            | String | Download address of the approved proposal PDF    |
+| Parameter          | Type      | Description                                       |
+| ------------------ | --------- | ------------------------------------------------- |
+| id                 | String    | Approved proposal option ID                       |
+| name               | String    | Approved proposal option name                     |
+| drawing_id         | String    | Associated drawing ID                             |
+| drawing_version_id | String    | Associated drawing version ID                     |
+| total              | Number    | Total amount of the approved option               |
+| line_items         | LineItems | (optional) Line items of the approved option; see [ApprovedOption](/proposals/#approvedoption) for when it is present |
+| pdf_url            | String    | Download address of the approved proposal PDF     |
 
-The deprecated `proposal.approved` event does not include an option `id` in `approved_option`. The `pdf_url` expires 24 hours after ArcSite generates the payload.
+The `pdf_url` expires 24 hours after ArcSite generates the payload.
 
 ## Proposal Status Changed
 
@@ -413,7 +415,7 @@ It isn't sent for status changes caused by payments (use [`proposal.payment.rece
 | close_note           | String               | (optional) Note explaining why proposal was closed (Only present when status is VOID or LOST)                                                         |
 | total                | Number               | (optional) The total of the proposal (Only present when status is APPROVED, PARTIALLY_PAID, PAID or OVER_PAID). For a change order, this is the full revised amount; see [Change Orders](/proposals/#change-orders) |
 | pdf_url              | String               | (optional) Download link to the proposal PDF file. Only present when status is APPROVED, PARTIALLY_PAID, PAID or OVER_PAID. Contains the signed version if the proposal has been signed. Expires 24 hours after ArcSite generates the payload |
-| approved_option      | Object               | (optional) Contains `drawing_id` (String); online approvals also include `id` (String) and `drawing_version_id` (String). Only present when status is APPROVED, PARTIALLY_PAID, PAID or OVER_PAID |
+| approved_option      | [ApprovedOption](/proposals/#approvedoption) | (optional) The approved option, `line_items` included. Only present when status is APPROVED, PARTIALLY_PAID, PAID or OVER_PAID |
 | initial_proposal_id  | String               | (optional) ID of the first proposal in the change-order chain. Present on every proposal in a chain, including the original proposal, where it equals `proposal_id` |
 | proposal_options     | List[ProposalOption] | (optional) Full list of proposal options for online proposals. Included whenever proposal status changes.                                            |
 | template_id          | String \| null | The ID of the template used to create the proposal. Returns `null` when the proposal is signed in app.                           |
@@ -481,7 +483,7 @@ same `project_id` but a different `proposal_id`. Key your automation off `propos
 | initial_proposal_id  | String  | (optional) ID of the first proposal in the change-order chain. Present on every proposal in a chain, including the original proposal, where it equals `proposal_id` |
 | template_id          | String  | The ID of the template used to create the online proposal.                                                      |
 
-`close_note`, `total`, `pdf_url` and `approved_option` are also included under the same conditions as in [`proposal.status_changed`](#proposal-status-changed).
+`close_note`, `total`, `pdf_url` and `approved_option` are also included under the same conditions as in [`proposal.status_changed`](#proposal-status-changed), except that `approved_option` has no `line_items`.
 
 
 ## Proposal Payment Received
