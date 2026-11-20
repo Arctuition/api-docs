@@ -65,7 +65,7 @@ data = response.json()
 
 ## Query Proposals
 
-Returns a list of proposals of your organization. You can filter by project or by last activity time and paginate; proposals are sorted by most recent activity first (`last_activity_at`). For a change order chain, only the latest version is returned; see [Change Orders](#change-orders).
+Returns a list of proposals of your organization. You can filter by project and paginate; proposals are sorted by most recent activity first. For a change order chain, only the latest version is returned; see [Change Orders](#change-orders).
 
 `GET https://api.arcsite.com/v1/proposals`
 
@@ -118,7 +118,6 @@ data = response.json()
     "customer_email": "jane@example.com",
     "document_number": "PROP-2024-001",
     "template_id": "36029621652695041",
-    "last_activity_at": "2024-03-01T10:20:30.000000Z",
     "total": 15000.0,
     "pdf_url": "https://files.example.com/proposals/Drawing_1_Proposal.pdf?Expires=1700000000&Signature=EXAMPLE&Key-Pair-Id=EXAMPLEKEYPAIR",
     "approved_option": {
@@ -133,19 +132,11 @@ data = response.json()
 
 ### Query Parameters
 
-| Parameter              | Default | In    | Description                                                                                                                                |
-| ---------------------- | ------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| project_id             | -       | query | (optional) Project ID to filter proposals.                                                                                                 |
-| last_activity_at_begin | -       | query | (optional) Only return proposals whose `last_activity_at` is at or after this time, in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`).  |
-| last_activity_at_end   | -       | query | (optional) Only return proposals whose `last_activity_at` is at or before this time, in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`). |
-| page                   | 1       | query | (optional) Request a specific page.                                                                                                        |
-| per_page               | 10      | query | (optional) Page size (maximum 100).                                                                                                        |
-
-:::note
-Send `last_activity_at_begin` and `last_activity_at_end` in UTC. A timezone offset in the value is ignored, not converted. A date without a time (e.g., `2025-01-16`) means `00:00:00` on that day.
-
-To sync changed proposals regularly, send only `last_activity_at_begin`, set a few minutes before your previous sync started, and leave `last_activity_at_end` unset. Pages are read live, so a proposal with new activity during your sync can appear more than once; de-duplicate by `proposal_id`.
-:::
+| Parameter  | Default | In    | Description                                |
+| ---------- | ------- | ----- | ------------------------------------------ |
+| project_id | -       | query | (optional) Project ID to filter proposals. |
+| page       | 1       | query | (optional) Request a specific page.        |
+| per_page   | 10      | query | (optional) Page size (maximum 100).        |
 
 ### Proposal
 
@@ -163,7 +154,6 @@ Each item in the response array is a `Proposal` object with the following fields
 | customer_email       | String \| null | Customer email                                                                       |
 | document_number      | String \| null | Proposal document number                                                             |
 | template_id          | String \| null | Proposal template ID; `null` when the proposal is signed in app                      |
-| last_activity_at     | String         | Time of the proposal's latest activity (ISO 8601, UTC), the same time as the Last Activity column of the proposal list in ArcSite. It changes when the proposal is created, sent, viewed by the customer while waiting for approval, signed or approved, marked lost or void, or expires. Editing the proposal's content doesn't change it. |
 | close_note           | String         | (optional) Reason for closing the proposal. Present when status is `VOID` or `LOST`. |
 | total                | Number         | (optional) Total amount of the proposal. Present once the proposal is approved: status is `APPROVED`, `PARTIALLY_PAID`, `PAID` or `OVER_PAID`. For a change order, this is the full revised amount; see [Change Orders](#change-orders). |
 | pdf_url              | String         | (optional) URL of the proposal PDF file. Present once the proposal is approved.      |
@@ -241,7 +231,7 @@ data = response.json()
 </TabItem>
 </Tabs>
 
-```json title="Response" collapse={18-29}
+```json title="Response" collapse={17-28}
 {
   "proposal_id": "123",
   "project_id": "456",
@@ -253,7 +243,6 @@ data = response.json()
   "customer_email": "jane@example.com",
   "document_number": "PROP-2024-001",
   "template_id": "36029621652695041",
-  "last_activity_at": "2024-03-01T10:20:30.000000Z",
   "proposal_options": [
     {
       "id": "789",
