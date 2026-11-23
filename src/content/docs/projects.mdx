@@ -101,9 +101,15 @@ data = response.json()
 | per_page         | 10      | query | Page size (maximum 100)                                                                                            |
 | created_at_begin | None    | query | (optional) Only return projects created at or after this time, in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`) |
 | created_at_end   | None    | query | (optional) Only return projects created at or before this time, in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`) |
+| updated_at_begin | None    | query | (optional) Only return projects whose `updated_at` is at or after this time, in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`) |
+| updated_at_end   | None    | query | (optional) Only return projects whose `updated_at` is at or before this time, in UTC ISO 8601 format (e.g., `2025-01-16T04:19:23`) |
 
 :::note
-Send `created_at_begin` and `created_at_end` in UTC. A timezone offset in the value is ignored, not converted. A date without a time (e.g., `2025-01-16`) means `00:00:00` on that day, so `created_at_end=2025-01-16` excludes the rest of January 16.
+Send `created_at_begin`, `created_at_end`, `updated_at_begin` and `updated_at_end` in UTC. A timezone offset in the value is ignored, not converted. A date without a time (e.g., `2025-01-16`) means `00:00:00` on that day, so `created_at_end=2025-01-16` excludes the rest of January 16.
+:::
+
+:::note
+A project's `updated_at` changes when the project itself changes, such as its name, customer, sales rep, owner or archived status. It doesn't change when the project's drawings or proposals change, or when a sales rep edits their own name, email or phone.
 :::
 
 ## Create Project
