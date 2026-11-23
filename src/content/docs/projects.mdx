@@ -109,9 +109,7 @@ Send `created_at_begin`, `created_at_end`, `updated_at_begin` and `updated_at_en
 :::
 
 :::note
-A project's `updated_at` changes when the project itself changes, such as its name, customer, sales rep, owner or archived status. Changes to its drawings and proposals don't update it. When a sales rep edits their own name, email or phone, `sales_rep` on their projects changes but `updated_at` doesn't.
-
-To sync changed projects regularly, send only `updated_at_begin`, set a few minutes before your previous sync started, and leave `updated_at_end` unset. Projects are sorted by creation time and pages are read live, so a project can appear more than once across a sync; de-duplicate by `id`.
+A project's `updated_at` changes when the project itself changes, such as its name, customer, sales rep, owner or archived status. It doesn't change when the project's drawings or proposals change, or when a sales rep edits their own name, email or phone.
 :::
 
 ## Create Project
